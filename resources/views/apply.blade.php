@@ -82,6 +82,23 @@
                         </div>
                     </div><br>
 
+                            <!-- Applicationn Form -->
+                    <div class="form-group row">
+                        <label for="id_documents" class="col-md-4 col-form-label text-md-right">{{ __('Identity Documents') }}</label>
+
+                        <div class="col-md-6">
+                            <input id="id_documents" type="file" class="form-control @error('id_documents') is-invalid @enderror" name="id_documents" required>
+
+                            @error('id_documents')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div><br>
+
+
+
                     <!-- Certificates -->
                     <div class="form-group row">
                         <label for="certificates" class="col-md-4 col-form-label text-md-right">{{ __('Certificates') }}</label>
