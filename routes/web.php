@@ -26,10 +26,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/downloads', function () {
-    return view('student/downloads'); 
+    return view('student/downloads');
 });
 // Route::get('/profile.html', function () {
-//     return view('profile'); 
+//     return view('profile');
 // });
 
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->middleware(['auth'])->name('dashboard');
@@ -47,8 +47,14 @@ Route::group(['middleware' => ['auth', 'role:student']], function () {
     Route::get('/apply', 'App\Http\Controllers\ApplicationController@index');
     Route::post('/apply/submit', 'App\Http\Controllers\ApplicationController@store')->name('apply.submit');
     Route::post('/downloads', )->name('downloads');
-    
+    Route::post('/applications', [ApplicationController::class, 'store'])->name('applications.store');
+Route::get('/applications/create', [ApplicationController::class, 'create'])->name('applications.create');
+Route::get('/applications', [ApplicationController::class, 'store'])->name('applications.store');
+
+
 });
+
+
 
 
 Route::group(['middleware' => ['auth', 'role:faculty']], function () {
@@ -62,10 +68,10 @@ Route::group(['middleware' => ['auth', 'role:administrator']], function () {
 
 Route::group(['middleware' => ['auth', 'role:supervisor']], function () {
     Route::get('Supervisor', 'App\Http\Controllers\SupervisorController@index')->name('supervisor-dashboard');
-   
+
     Route::get('/students', function () { return view('students');
     });
-    
+
 
 });
 
@@ -109,16 +115,16 @@ Route::post('/email/verification-notification', function (Request $request) {
 // Route::get('/apply', [ApplicationController::class, 'index'])->name('apply');
 
 
-Route::get('send-email-using-gmail', function(){
+// Route::get('send-email-using-gmail', function(){
 
-    Mail::to('edworkprojects@gmail.com')->send(new SendEmailUsingGmail());
+//     Mail::to('edworkprojects@gmail.com')->send(new SendEmailUsingGmail());
 
-    return "Mail sent";
-});
+//     return "Mail sent";
+// });
 
 Route::get('/download/{filename}', function ($filename) {
     $path = 'C:\Users\TendaiM\Documents\laravel\PGS2\downloads\\' . $filename;
-    
+
     if (file_exists($path)) {
         return Response::download($path);
     } else {
