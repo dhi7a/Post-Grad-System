@@ -2,13 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\PersonalDetailsController;
+use App\Mail\SendEmailUsingGmail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
-use App\Mail\SendEmailUsingGmail;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Response;
 
 /*
@@ -48,8 +49,10 @@ Route::group(['middleware' => ['auth', 'role:student']], function () {
     Route::post('/apply/submit', 'App\Http\Controllers\ApplicationController@store')->name('apply.submit');
     Route::post('/downloads', )->name('downloads');
     Route::post('/applications', [ApplicationController::class, 'store'])->name('applications.store');
-Route::get('/applications/create', [ApplicationController::class, 'create'])->name('applications.create');
-Route::get('/applications', [ApplicationController::class, 'store'])->name('applications.store');
+    Route::get('/applications/create', [ApplicationController::class, 'create'])->name('applications.create');
+    Route::get('/applications', [ApplicationController::class, 'store'])->name('applications.store');
+    Route::post('/personal-details', [PersonalDetailsController::class, 'store'])->name('personal-details.store');
+
 
 
 });
