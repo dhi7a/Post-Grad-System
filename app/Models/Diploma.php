@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Diploma extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'programme',
+        'result',
+        'level',
+        'date',
+        'institution',
+    ];
 }

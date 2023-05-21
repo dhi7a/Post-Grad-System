@@ -4,7 +4,16 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\UniversityStudiesController;
+use App\Http\Controllers\DissertationController;
+use App\Http\Controllers\DiplomaController;
+use App\Http\Controllers\EmploymentExperienceController;
 use App\Http\Controllers\PersonalDetailsController;
+use App\Http\Controllers\ProposedFieldStudyController;
+use App\Http\Controllers\RefereesController;
+use App\Http\Controllers\RelevantPublicationsController;
+use App\Http\Controllers\ResearchExperienceController;
+use App\Http\Controllers\SubjectsController;
 use App\Mail\SendEmailUsingGmail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -52,6 +61,33 @@ Route::group(['middleware' => ['auth', 'role:student']], function () {
     Route::get('/applications/create', [ApplicationController::class, 'create'])->name('applications.create');
     Route::get('/applications', [ApplicationController::class, 'store'])->name('applications.store');
     Route::post('/personal-details', [PersonalDetailsController::class, 'store'])->name('personal-details.store');
+    // Route::get('/university-studies', [UniversityStudiesController::class, 'index'])->name('university-studies.index');
+    // Route::post('/university-studies', [UniversityStudiesController::class, 'store'])->name('university-studies.store');
+    Route::get('/university-studies', [UniversityStudiesController::class, 'index'])->name('university-studies.index');
+    Route::post('/university-studies', [UniversityStudiesController::class, 'store'])->name('university-studies.store');
+    // Add other routes related to university studies here...
+    Route::get('/diploma', [DiplomaController::class, 'index'])->name('diploma.index');
+    Route::post('/diploma', [DiplomaController::class, 'store'])->name('diploma.store');
+    Route::get('/dissertation', [DissertationController::class, 'index'])->name('dissertation.index');
+    Route::post('/dissertation', [DissertationController::class, 'store'])->name('dissertation.store');
+    Route::get('/employment-experience', [EmploymentExperienceController::class, 'index'])->name('employment-experience.index');
+    Route::post('/employment-experience', [EmploymentExperienceController::class, 'store'])->name('employment-experience.store');
+    Route::get('/proposed-field', [ProposedFieldStudyController::class, 'index'])->name('proposed-field.index');
+    Route::post('/proposed-field', [ProposedFieldStudyController::class, 'store'])->name('proposed-field.store');
+    Route::get('/referees', [RefereesController::class, 'index'])->name('referees.index');
+    Route::post('/referees', [RefereesController::class, 'store'])->name('referees.store');
+    Route::get('/research-experience', [ResearchExperienceController::class, 'index'])->name('research-experience.index');
+    Route::post('/research-experience', [ResearchExperienceController::class, 'store'])->name('research-experience.store');
+    Route::get('/publications', [RelevantPublicationsController::class, 'index'])->name('publications.index');
+    Route::post('/publications', [RelevantPublicationsController::class, 'store'])->name('publications.store');
+    Route::get('/publications/create', [RelevantPublicationsController::class, 'create'])->name('publications.create');
+Route::post('/publications', [RelevantPublicationsController::class, 'store'])->name('publications.store');
+    Route::get('/subjects', [SubjectsController::class, 'index'])->name('subjects.index');
+    Route::post('/subjects', [SubjectsController::class, 'store'])->name('subjects.store');
+    // Route::get('/university-studies/{id}', [UniversityStudiesController::class, 'show'])->name('university-studies.show');
+    // Route::get('/university-studies/{id}/edit', [UniversityStudiesController::class, 'edit'])->name('university-studies.edit');
+    // Route::put('/university-studies/{id}', [UniversityStudiesController::class, 'update'])->name('university-studies.update');
+    // Route::delete('/university-studies/{id}', [UniversityStudiesController::class, 'destroy'])->name('university-studies.destroy');
 
 
 

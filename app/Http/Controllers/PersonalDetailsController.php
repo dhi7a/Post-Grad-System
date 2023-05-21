@@ -34,7 +34,7 @@ class PersonalDetailsController extends Controller
             $userId = auth()->user()->id;
 
             $validatedData = $request->validate([
-                'userid' => 'required|integer',
+                'userid' => 'integer',
                 'programme' => 'required|string',
                 // 'status' => 'required|in:full-time,part-time',
                 'title' => 'required|string',
@@ -100,7 +100,9 @@ class PersonalDetailsController extends Controller
 
             // Perform any additional operations or redirect as needed
 
-            return redirect()->back()->with('success', 'Personal details saved successfully.');
+            // return redirect()->back()->with('success', 'Personal details saved successfully.');
+                return redirect()->route('university-studies.index')->with('success', 'personal details submitted successfully.');
+
         }
 
 

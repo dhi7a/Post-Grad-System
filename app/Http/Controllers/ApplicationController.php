@@ -41,8 +41,10 @@ class ApplicationController extends Controller
         $application = Application::create($validatedData);
 
         // Redirect or return a response
-        // You can modify this based on your application flow
         return redirect()->back()->with('success', 'Application submitted successfully!');
+        // return redirect()->route('diploma.index')->with('success', 'details submitted succesfully.');
+
+
     }
 
     public function show()

@@ -163,16 +163,7 @@
                                     <label for="marital_status">Marital Status:</label>
                                         <input type="text" name="marital_status" id="marital_status" class="form-control">
                                     </div><br>
-
-
-
-
                             </div>
-
-
-
-
-
 
                                 <div class="row">
                                     <div>
@@ -232,32 +223,6 @@
                                     <textarea name="contact_address" id="contact_address" class="form-control"></textarea>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="contact_address">Contact Address:</label>
-                                    <textarea name="contact_address" id="contact_address" class="form-control"></textarea>
-                                </div>
-                            </div>
-                            <input type="hidden" name="userid" value="{{ Auth::user()->id}}">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="contact_address">Contact Address:</label>
-                                    <textarea name="contact_address" id="contact_address" class="form-control"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="contact_address">Contact Address:</label>
-                                    <textarea name="contact_address" id="contact_address" class="form-control"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="contact_address">Contact Address:</label>
-                                    <textarea name="contact_address" id="contact_address" class="form-control"></textarea>
-                                </div>
-                            </div>
-
 
                         </div>
                     </div>
