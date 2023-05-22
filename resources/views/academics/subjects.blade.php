@@ -18,65 +18,82 @@
             </div><br>
             <div class="card-body">
                 <div class="form-group">
-                    <div>
+                    <div class="row">
+                        <!-- Exam Board -->
+                        <div class="col-md-6">
+                            <label for="exam_board">Exam Board: eg, ZIMSEC,CAMBRIDGE</label>
+                            <input type="text" name="exam_board" value="{{ old('exam_board') }}" class="form-control" required>
+                            @error('exam_board')
+                                <span>{{ $message }}</span>
+                            @enderror <br>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="level">A or O</label>
+                            <select name="level" class="form-control" required>
+                                <option value="" selected disabled>Select level</option>
+                                <option value="A level">A level</option>
+                                <option value="O level">O level</option>
+                            </select>
+                            @error('level')
+                                <span>{{ $message }}</span>
+                            @enderror <br>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
                         <!-- Subject -->
-                        <div>
+                        <div class="col-md-6">
                             <label for="subject">Subject:</label>
-                            <input type="text" name="subject" value="{{ old('subject') }}" class="form-control">
+                            <input type="text" name="subject" value="{{ old('subject') }}" class="form-control" required>
                             @error('subject')
                                 <span>{{ $message }}</span>
-                            @enderror
+                            @enderror <br>
                         </div>
 
                         <!-- Grade -->
-                        <div>
+                        <div class="col-md-6">
                             <label for="grade">Grade:</label>
-                            <input type="text" name="grade" value="{{ old('grade') }}" class="form-control">
+                            <input type="text" name="grade" value="{{ old('grade') }}" class="form-control" required>
                             @error('grade')
                                 <span>{{ $message }}</span>
-                            @enderror
+                            @enderror <br>
                         </div>
-
-                        <!-- Exam Board -->
-                        <div>
-                            <label for="exam_board">Exam Board:</label>
-                            <input type="text" name="exam_board" value="{{ old('exam_board') }}" class="form-control">
-                            @error('exam_board')
-                                <span>{{ $message }}</span>
-                            @enderror
-                        </div>
+                    </div>
 
                         <!-- Date -->
-                        <div>
+                        <div class="col-md-6">
                             <label for="date">Date:</label>
-                            <input type="text" name="date" value="{{ old('date') }}" class="form-control">
+                            <input type="date" name="date" value="{{ old('date') }}" class="form-control" required>
                             @error('date')
                                 <span>{{ $message }}</span>
-                            @enderror
+                            @enderror  <br>
                         </div>
 
-                        <!-- Level -->
+                        {{-- <!-- Level -->
                         <div>
                             <label for="level">Level:</label>
                             <input type="text" name="level" value="{{ old('level') }}" class="form-control">
                             @error('level')
                                 <span>{{ $message }}</span>
-                            @enderror
+                            @enderror <br>
                         </div>
                                         </div>
-                                    </div><br>
-    <!-- User ID -->
-    {{-- <div>
-        <label for="userid">User ID:</label>
-        <input type="text" name="userid" value="{{ auth()->user()->id }}" readonly>
-    </div> --}}
+                                    </div><br> --}}
+                        <!-- User ID -->
+                        {{-- <div>
+                            <label for="userid">User ID:</label>
+                            <input type="text" name="userid" value="{{ auth()->user()->id }}" readonly>
+                        </div> --}}
+                    </div>
 
-    <!-- Submit Button -->
-    <div class="form-group row mb-0">
-            <div class="col-md-6 offset-md-4">
-                <button type="submit" class="btn btn-primary">
-                    {{ __('Submit Application') }}
-                </button>
-            </div>
+                <!-- Submit Button -->
+                    <div class="form-group row mb-0">
+                        <div class="col-md-6 offset-md-4">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Submit Application') }}
+                            </button>
+                        </div>
+                    </div>
     </form>
 </x-app-layout>

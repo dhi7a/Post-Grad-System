@@ -13,7 +13,7 @@ class UniversityStudiesController extends Controller
     public function index()
     {
         //
-        return view('university_studies');
+        return view('academics.university_studies');
     }
 
     /**
@@ -33,11 +33,11 @@ class UniversityStudiesController extends Controller
         $userId = auth()->user()->id;
         //
         $validatedData = $request->validate([
-            'userid' => 'required|integer',
+            // 'userid' => 'required|integer',
             'programme' => 'required|string',
             'class' => 'required|string',
             'institution' => 'required|string',
-            'date' => 'required|date',
+            'date' => 'required',
         ]);
 
        $universityStudies = new UniversityStudies();
@@ -49,7 +49,7 @@ class UniversityStudiesController extends Controller
 
         $universityStudies->save();
 
-        return redirect()->next()->with('Success', 'University study details saved successfully.');
+        return redirect()->route('research-experience.index')->with('Success', 'University study details saved successfully.');
 
 
     }

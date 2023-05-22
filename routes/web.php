@@ -81,7 +81,7 @@ Route::group(['middleware' => ['auth', 'role:student']], function () {
     Route::get('/publications', [RelevantPublicationsController::class, 'index'])->name('publications.index');
     Route::post('/publications', [RelevantPublicationsController::class, 'store'])->name('publications.store');
     Route::get('/publications/create', [RelevantPublicationsController::class, 'create'])->name('publications.create');
-Route::post('/publications', [RelevantPublicationsController::class, 'store'])->name('publications.store');
+    Route::post('/publications', [RelevantPublicationsController::class, 'store'])->name('publications.store');
     Route::get('/subjects', [SubjectsController::class, 'index'])->name('subjects.index');
     Route::post('/subjects', [SubjectsController::class, 'store'])->name('subjects.store');
     // Route::get('/university-studies/{id}', [UniversityStudiesController::class, 'show'])->name('university-studies.show');

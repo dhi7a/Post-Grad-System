@@ -34,7 +34,6 @@ class DiplomaController extends Controller
         $userId = auth()->user()->id;
         //
         $validatedData = $request->validate([
-            'userid' => 'required|integer',
             'programme' => 'nullable|string',
             'result' => 'nullable|string',
             'level' => 'nullable|string',
@@ -53,7 +52,7 @@ class DiplomaController extends Controller
         $diploma->save();
 
         // return redirect()->next()->with('Success', 'diploma details saved successfully.');
-        return redirect()->route('university-studies.index')->with('success', 'dipolma details submitted successfully.');
+        return redirect()->route('university-studies.index')->with('Success', 'Dipolma details submitted successfully.');
 
 
 

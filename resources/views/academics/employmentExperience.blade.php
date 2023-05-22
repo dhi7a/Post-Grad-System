@@ -13,7 +13,7 @@
                             <!-- Position -->
                             <div class="col-md-6">
                                 <label for="position">Position:</label>
-                                <input type="text" name="position" value="{{ old('position') }}" class="form-control">
+                                <input type="text" name="position" value="{{ old('position') }}" class="form-control" required>
                                 @error('position')
                                     <span>{{ $message }}</span>
                                 @enderror
@@ -22,29 +22,29 @@
                             <!-- Employer -->
                             <div class="col-md-6">
                                 <label for="employer">Employer:</label>
-                                <input type="text" name="employer" value="{{ old('employer') }}" class="form-control">
+                                <input type="text" name="employer" value="{{ old('employer') }}" class="form-control" required>
                                 @error('employer')
                                     <span>{{ $message }}</span>
-                                @enderror
+                                @enderror <br>
                             </div>
                         </div>
                         <div class="row">
                             <!-- From -->
                             <div class="col-md-6">
                                 <label for="from">From:</label>
-                                <input type="text" name="from" value="{{ old('from') }}" class="form-control">
+                                <input type="date" name="from" value="{{ old('from') }}" class="form-control" required>
                                 @error('from')
                                     <span>{{ $message }}</span>
-                                @enderror
+                                @enderror <br>
                             </div>
 
                             <!-- To -->
                             <div class="col-md-6">
                                 <label for="to">To:</label>
-                                <input type="text" name="to" value="{{ old('to') }}" class="form-control">
+                                <input type="date" name="to" value="{{ old('to') }}" class="form-control" required>
                                 @error('to')
                                     <span>{{ $message }}</span>
-                                @enderror
+                                @enderror <br>
                             </div>
                         </div>
 

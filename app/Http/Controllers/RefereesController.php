@@ -34,8 +34,8 @@ class RefereesController extends Controller
         $userId = auth()->user()->id;
         //
         $validatedData = $request->validate([
-            'userid' => 'required',
-            'fullname' => 'required',
+            // 'userid' => 'required',
+            'full_name' => 'required',
             'address' => 'required',
             'phone' => 'required',
             'email' => 'required',
@@ -44,7 +44,7 @@ class RefereesController extends Controller
 
        $referees = new Referees();
        $referees->userid = auth()->user()->id;
-       $referees->fullname = $request->fullname;
+       $referees->full_name = $request->full_name;
        $referees->address = $request->address;
        $referees->phone = $request->phone;
        $referees->email = $request->email;
@@ -52,7 +52,7 @@ class RefereesController extends Controller
 
         $referees->save();
 
-        return redirect()->back()->with('Success', 'Referee details saved successfully.');
+        return redirect()->route('apply')->with('Success', 'Referee details saved successfully.');
 
 
     }

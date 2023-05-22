@@ -33,7 +33,7 @@ class ProposedFieldStudyController extends Controller
         $userId = auth()->user()->id;
         //
         $validatedData = $request->validate([
-            'userid' => 'required|integer',
+            // 'userid' => 'required|integer',
             'description' => 'required|string',
         ]);
 
@@ -43,7 +43,7 @@ class ProposedFieldStudyController extends Controller
 
         $proposedFieldStudy->save();
 
-        return redirect()->next()->with('Success', 'Proposed Field of Study has been saved successfully.');
+        return redirect()->route('dissertation.index')->with('Success', 'Proposed Field of Study has been saved successfully.');
 
 
     }

@@ -33,7 +33,7 @@ class ResearchExperienceController extends Controller
         $userId = auth()->user()->id;
         //
         $validatedData = $request->validate([
-            'userid' => 'required|integer',
+            // 'userid' => 'required|integer',
             'description' => 'required|string',
         ]);
 
@@ -44,7 +44,7 @@ class ResearchExperienceController extends Controller
 
         $researchExperience->save();
 
-        return redirect()->next()->with('Success', 'Research details saved successfully.');
+        return redirect()->route('publications.index')->with('Success', 'Research details saved successfully.');
 
     }
 

@@ -44,7 +44,7 @@ class DissertationController extends Controller
 
         $dissertation->save();
 
-        return redirect()->route('diploma.index')->with('Success', 'dissertation details saved successfully.');
+        return redirect()->route('referees.index')->with('Success', 'Dissertation details saved successfully.');
 
 
     }

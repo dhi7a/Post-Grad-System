@@ -13,22 +13,16 @@
                         @endif
 
                         <p>Welcome, {{ Auth::user()->name }}!</p>
-                        <p>You have the following permissions:</p>
-                        <ul>
-                            @foreach(Auth::user()->roles as $role)
-                                @foreach($role->permissions as $permission)
-                                    <li>{{ ucfirst($permission->name) }}</li>
-                                @endforeach
-                            @endforeach
-                        </ul>
 
-                        <p>Here is your profile information:</p>
-                        <ul>
-                            <li>Name: {{ Auth::user()->name }}</li>
-                            <li>Email: {{ Auth::user()->email }}</li>
-                            <li>Phone: {{ Auth::user()->phone }}</li>
-                            <li>Address: {{ Auth::user()->address }}</li>
-                        </ul>
+                        <div>
+                            <p>To <b>start</b> your <b>APPLICATION PROCESS</b>, please fill in your details by pressing the button below</p>
+                        </div>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-12 offset-md-4">
+                            <a class="btn btn-success btn-lg" data-toggle="button" href="http://127.0.0.1:8000/applications/create" role="button">START</a>
+                             </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

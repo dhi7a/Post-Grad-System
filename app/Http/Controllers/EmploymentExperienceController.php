@@ -33,7 +33,7 @@ class EmploymentExperienceController extends Controller
         $userId = auth()->user()->id;
         //
         $validatedData = $request->validate([
-            'userid' => 'required|integer',
+            // 'userid' => 'required|integer',
             'position' => 'required|string',
             'employer' => 'required|string',
             'from' => 'required|string',
@@ -49,7 +49,7 @@ class EmploymentExperienceController extends Controller
 
         $employmentExerience->save();
 
-        return redirect()->next()->with('Success', 'Employment details saved successfully.');
+        return redirect()->route('proposed-field.index')->with('Success', 'Employment details saved successfully.');
 
 
     }
