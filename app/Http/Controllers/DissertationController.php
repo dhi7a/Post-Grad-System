@@ -33,7 +33,7 @@ class DissertationController extends Controller
         $userId = auth()->user()->id;
         //
         $validatedData = $request->validate([
-            'userid' => 'required|integer',
+            //'userid' => 'required|integer',
             'description' => 'required|string',
         ]);
 
@@ -44,7 +44,7 @@ class DissertationController extends Controller
 
         $dissertation->save();
 
-        return redirect()->next()->with('Success', 'dissertation details saved successfully.');
+        return redirect()->route('diploma.index')->with('Success', 'dissertation details saved successfully.');
 
 
     }
