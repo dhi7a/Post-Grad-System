@@ -11,8 +11,8 @@
     <form action="{{ route('university-studies.store') }}" method="POST">
         @csrf
 
-        <div class="col-md-12">
-            <div class="card">
+        {{-- <div class="col-md-12"> --}}
+            {{-- <div class="card">
                 <div class="card-header">
                     <legend>University details</legend>
                 </div>
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <br>
-                    </div>
+
                     <div class="row">
                     <!-- Institution -->
                     <div class="col-md-6">
@@ -61,8 +61,11 @@
                         @enderror
                     </div>
                     <br>
-                </div></div>
-                <br>
+                </div>
+            </div> --}}
+            @livewire('degrees-component')
+
+
                 <!-- Submit Button -->
                 <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-4">
@@ -70,8 +73,7 @@
                             {{ __('Submit Application') }}
                         </button>
                     </div>
-                </div>
-            </div>
+                </div><br>
         </div>
     </form>
 </x-app-layout>

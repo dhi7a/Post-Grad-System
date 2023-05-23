@@ -23,6 +23,8 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/style.css')}}" rel="stylesheet">
+
+  @livewireStyles()
 </head>
 
 <body>
@@ -37,7 +39,7 @@
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    
+
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
@@ -55,10 +57,10 @@
 
             <li class="nav-item dropdown">
 
-            
 
-            
-            </li><!-- End Messages Nav --> 
+
+
+            </li><!-- End Messages Nav -->
 
             <li class="nav-item dropdown pe-3">
 
@@ -134,7 +136,7 @@
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
-    
+
     <div class="credits">
         Designed by <b>PGS</b>
     </div>
@@ -143,6 +145,7 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
+  @livewireScripts()
   <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js')}}"></script>
   <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
   <script src="{{ asset('assets/vendor/echarts/echarts.min.js')}}"></script>
