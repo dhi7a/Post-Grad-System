@@ -69,7 +69,7 @@
                         @enderror
                     </div><br>
 
-                </div><br>
+                </div>
                  <!-- Submit Button -->
                  <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-4">
@@ -77,6 +77,6 @@
                             {{ __('Submit Application') }}
                         </button>
                     </div>
-                </div>
+                </div><br>
         </form>
     </x-app-layout>
