@@ -27,16 +27,22 @@
                                 <span>{{ $message }}</span>
                             @enderror <br>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-2">
                             <label for="level">A or O</label>
                             <select name="level" class="form-control" required>
                                 <option value="" selected disabled>Select level</option>
                                 <option value="A level">A level</option>
                                 <option value="O level">O level</option>
+                                <option value="Other">Other</option>
                             </select>
+
                             @error('level')
                                 <span>{{ $message }}</span>
                             @enderror <br>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="level">Specify other:eg, Matric</label>
+                            <input type="text" name="other" class="form-control">
                         </div>
 
                     </div>
@@ -64,28 +70,14 @@
                         <!-- Date -->
                         <div class="col-md-6">
                             <label for="date">Date:</label>
-                            <input type="date" name="date" value="{{ old('date') }}" class="form-control" required>
+                            <input type="date" name
+                            ="date" value="{{ old('date') }}" class="form-control" required>
                             @error('date')
                                 <span>{{ $message }}</span>
                             @enderror  <br>
                         </div>
 
-                        {{-- <!-- Level -->
-                        <div>
-                            <label for="level">Level:</label>
-                            <input type="text" name="level" value="{{ old('level') }}" class="form-control">
-                            @error('level')
-                                <span>{{ $message }}</span>
-                            @enderror <br>
-                        </div>
-                                        </div>
-                                    </div><br> --}}
-                        <!-- User ID -->
-                        {{-- <div>
-                            <label for="userid">User ID:</label>
-                            <input type="text" name="userid" value="{{ auth()->user()->id }}" readonly>
-                        </div> --}}
-                    </div>
+
 
                 <!-- Submit Button -->
                     <div class="form-group row mb-0">
@@ -95,5 +87,9 @@
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </form>
 </x-app-layout>

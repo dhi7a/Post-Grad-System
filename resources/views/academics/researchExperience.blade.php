@@ -5,7 +5,7 @@
     <div class="col-md-12">
         <div class="card">
            <div class="card-header">
-                <legend>Research and Teeaching Experince</legend>
+                <legend>Research Experience</legend>
            </div><br>
            <div class="card-body">
                <div class="form-group">
@@ -13,7 +13,7 @@
                     <!-- Description -->
                     <div>
                         <label for="description">Description:</label>
-                        <textarea name="description" class="form-control" required>{{ old('description') }}</textarea>
+                        <textarea name="description" class="form-control">{{ old('description') }}</textarea>
                         @error('description')
                             <span>{{ $message }}</span>
                         @enderror <br>

@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" id="DoctoralFellow" name="degree[]" value="DoctoralFellow" required>
-                                        <label class="form-check-label" for="DoctoralFellow">Doctoral Fellow</label>
+                                        <label class="form-check-label" for="DoctoralFellow">Post Doctoral Fellow</label>
                                     </div>
                                 </div><br>
 
@@ -149,7 +149,7 @@
                                                 <option value="">Select Gender</option>
                                                 <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
                                                 <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
-                                                <option value="other" {{ old('gender') == 'other' ? 'selected' : '' }}>Other</option>
+                                                {{-- <option value="other" {{ old('gender') == 'other' ? 'selected' : '' }}>Other</option> --}}
                                             </select>
                                             @error('gender')
                                                 <span class="invalid-feedback" role="alert">

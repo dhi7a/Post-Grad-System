@@ -14,7 +14,7 @@
     <div class="col-md-12">
          <div class="card">
             <div class="card-header">
-                 <legend>Diploma Details</legend>
+                 <legend>Diploma details or other qualifications held</legend>
             </div><br>
             <div class="card-body">
                 <div class="form-group">
@@ -30,7 +30,7 @@
 
                      <!-- Result -->
                      <div class="col-md-6">
-                        <label for="result">Result:</label>
+                        <label for="result">Result/Class:</label>
                         <input type="text" name="result" value="{{ old('result') }}" class="form-control" required>
                         @error('result')
                             <span>{{ $message }}</span>

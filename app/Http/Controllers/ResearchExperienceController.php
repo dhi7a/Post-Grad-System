@@ -34,7 +34,7 @@ class ResearchExperienceController extends Controller
         //
         $validatedData = $request->validate([
             // 'userid' => 'required|integer',
-            'description' => 'required|string',
+            'description' => 'nullable|string',
         ]);
 
        $researchExperience = new ResearchExperience();
