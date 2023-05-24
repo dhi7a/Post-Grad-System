@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\EmploymentExperience;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class EmploymentExperienceController extends Controller
 {
@@ -13,6 +15,11 @@ class EmploymentExperienceController extends Controller
     public function index()
     {
         //
+        $exist = EmploymentExperience::where('userid', Auth::user()->id)->first();
+        if(!is_null($exist))
+        {
+            return redirect()->route('proposed-field.index');
+        }
         return view('academics.employmentExperience');
     }
 

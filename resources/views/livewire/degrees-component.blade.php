@@ -1,4 +1,10 @@
 <div>
+    @if(Session::has('success'))
+    <div class="alert alert-success">
+        {{ Session::get('success')}}
+    </div>
+    @endif
+
     <form action="{{ route('university-studies.store') }}" method="POST" enctype="multipart/form-data">
         <div class="col-md-12">
             {{-- Success is as dangerous as failure. --}}

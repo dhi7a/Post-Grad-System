@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('userid');
-            $table->string('name');
+            // $table->string('name');
+            $table->text('certificates');
+            $table->text('id_documents');
+            $table->text('dissertation_proposal');
             $table->timestamps();
         });
     }

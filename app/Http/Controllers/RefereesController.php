@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Referees;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class RefereesController extends Controller
 {
@@ -13,6 +15,11 @@ class RefereesController extends Controller
     public function index()
     {
         //
+        $exist = Referees::where('userid', Auth::user()->id)->first();
+        if(!is_null($exist))
+        {
+            return redirect()->route('documents.index');
+        }
         return view('academics.referees');
 
     }

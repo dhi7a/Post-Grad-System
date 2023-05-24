@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Subjects;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class SubjectsController extends Controller
 {
@@ -13,6 +15,11 @@ class SubjectsController extends Controller
     public function index()
     {
         //
+        $exist = Subjects::where('userid', Auth::user()->id)->first();
+        if(!is_null($exist))
+        {
+            return redirect()->route('diploma.index');
+        }
         return view('academics.subjects');
     }
 

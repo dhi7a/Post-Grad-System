@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dissertation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DissertationController extends Controller
 {
@@ -12,7 +13,12 @@ class DissertationController extends Controller
      */
     public function index()
     {
-        //
+        // 
+        $exist = Dissertation::where('userid', Auth::user()->id)->first();
+        if(!is_null($exist))
+        {
+            return redirect()->route('referees.index');
+        }
         return view('academics.dissertation');
     }
 

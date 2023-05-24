@@ -4,7 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\PhdEnrollment;
 use App\Models\Application;
-
+use App\Models\Diploma;
+use App\Models\Dissertation;
+use App\Models\Documents;
+use App\Models\EmploymentExperience;
+use App\Models\ProposedFieldStudy;
+use App\Models\Referees;
+use App\Models\RelevantPublications;
+use App\Models\ResearchExperience;
+use App\Models\Subjects;
+use App\Models\UniversityStudies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,6 +21,8 @@ class ApplicationController extends Controller
 {
     public function index()
     {
+        
+
         return view('apply');
     }
 

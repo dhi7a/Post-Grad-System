@@ -7,7 +7,13 @@
             @endforeach
         </ul>
     </div>
-@endif
+    @endif
+    @if(Session::has('success'))
+    <div class="alert alert-success">
+        {{ Session::get('success')}}
+    </div>
+    @endif
+
     <form action="{{ route('dissertation.store') }}" method="POST">
         @csrf
 

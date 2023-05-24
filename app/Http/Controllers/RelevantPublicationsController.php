@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\RelevantPublications;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class RelevantPublicationsController extends Controller
 {
@@ -13,6 +15,11 @@ class RelevantPublicationsController extends Controller
     public function index()
     {
         //
+        $exist = RelevantPublications::where('userid', Auth::user()->id)->first();
+        if(!is_null($exist))
+        {
+            return redirect()->route('employment-experience.index');
+        }
         return view('academics.relevantPublications');
 
     }

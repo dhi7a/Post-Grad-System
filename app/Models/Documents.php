@@ -13,6 +13,5 @@ class Documents extends Model
         'id_documents',
         'certificates',
         'proposal',
-
     ];
 }

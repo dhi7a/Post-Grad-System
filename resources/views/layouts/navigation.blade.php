@@ -123,12 +123,12 @@
                     <span>Apply</span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href=" {{ route('downloads') }}">
                     <i class="bi bi-list-check"></i>
                     <span>Downloads</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#">
                     <i class="bi bi-list-check"></i>

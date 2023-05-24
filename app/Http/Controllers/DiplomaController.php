@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Diploma;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DiplomaController extends Controller
 {
@@ -14,6 +15,11 @@ class DiplomaController extends Controller
     public function index()
     {
         //
+        $exist = Diploma::where('userid', Auth::user()->id)->first();
+        if(!is_null($exist))
+        {
+            return redirect()->route('university-studies.index');
+        }
         return view('academics.diploma');
     }
 

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\ResearchExperience;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class ResearchExperienceController extends Controller
 {
@@ -13,6 +16,11 @@ class ResearchExperienceController extends Controller
     public function index()
     {
         //
+        $exist = ResearchExperience::where('userid', Auth::user()->id)->first();
+        if(!is_null($exist))
+        {
+            return redirect()->route('publications.index');
+        }
         return view('academics.researchExperience');
     }
 

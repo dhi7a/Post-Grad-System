@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\UniversityStudies;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UniversityStudiesController extends Controller
 {
@@ -13,6 +14,11 @@ class UniversityStudiesController extends Controller
     public function index()
     {
         //
+        $exist = UniversityStudies::where('userid', Auth::user()->id)->first();
+        if(!is_null($exist))
+        {
+            return redirect()->route('research-experience.index');
+        }
         return view('academics.university_studies');
     }
 

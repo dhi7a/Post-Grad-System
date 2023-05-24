@@ -8,6 +8,7 @@
             </ul>
         </div>
     @endif
+    
     @livewire('subject-component')
     
 </x-app-layout>

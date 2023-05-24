@@ -1,13 +1,19 @@
 <x-app-layout>
 @if($errors->any())
-        <div class="alert alert-danger" role="alert">
-            <ul>
-                @foreach($errors->all() as $err)
-                    <li>{{$err}}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+    <div class="alert alert-danger" role="alert">
+        <ul>
+            @foreach($errors->all() as $err)
+                <li>{{$err}}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+@if(Session::has('success'))
+    <div class="alert alert-success">
+        {{ Session::get('success')}}
+    </div>
+@endif
+
     <form action="{{ route('diploma.store') }}" method="POST">
     @csrf
 

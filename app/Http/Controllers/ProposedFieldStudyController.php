@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ProposedFieldStudy;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProposedFieldStudyController extends Controller
 {
@@ -13,6 +15,11 @@ class ProposedFieldStudyController extends Controller
     public function index()
     {
         //
+        $exist = ProposedFieldStudy::where('userid', Auth::user()->id)->first();
+        if(!is_null($exist))
+        {
+            return redirect()->route('dissertation.index');
+        }
         return view('academics.proposedFieldStudy');
     }
 

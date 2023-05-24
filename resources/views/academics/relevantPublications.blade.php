@@ -1,4 +1,11 @@
 <x-app-layout>
+    <div>
+    @if(Session::has('success'))
+    <div class="alert alert-success">
+        {{ Session::get('success')}}
+    </div>
+    @endif
+
 <form action="{{ route('publications.store') }}" method="POST">
     @csrf
 
@@ -31,5 +38,7 @@
                         </button>
                     </div>
                 </div>
-
+            </div>
+           </div>
+        </div>
 </x-app-layout>

@@ -1,4 +1,10 @@
 <x-app-layout>
+    @if(Session::has('success'))
+    <div class="alert alert-success">
+        {{ Session::get('success')}}
+    </div>
+    @endif
+
     <form action="{{ route('employment-experience.store') }}" method="POST">
         @csrf
 

@@ -10,6 +10,7 @@ class CreateApplicationsTable extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('userid');
             $table->string('programme');
             $table->enum('status', ['full-time', 'part-time']);
             $table->string('title');
