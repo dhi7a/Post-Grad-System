@@ -101,7 +101,7 @@ class PersonalDetailsController extends Controller
             // Perform any additional operations or redirect as needed
 
             // return redirect()->back()->with('success', 'Personal details saved successfully.');
-                return redirect()->route('university-studies.index')->with('success', 'personal details submitted successfully.');
+                return redirect()->route('subjects.index')->with('success', 'personal details submitted successfully.');
 
         }
 

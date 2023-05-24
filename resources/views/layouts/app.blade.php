@@ -39,7 +39,7 @@
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    
+
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
@@ -57,10 +57,10 @@
 
             <li class="nav-item dropdown">
 
-            
 
-            
-            </li><!-- End Messages Nav --> 
+
+
+            </li><!-- End Messages Nav -->
 
             <li class="nav-item dropdown pe-3">
 
@@ -136,7 +136,7 @@
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
-    
+
     <div class="credits">
         Designed by <b>PGS</b>
     </div>

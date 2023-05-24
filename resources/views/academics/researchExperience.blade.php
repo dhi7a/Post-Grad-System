@@ -1,17 +1,31 @@
-<form action="{{ route('research.store') }}" method="POST">
+<x-app-layout>
+    <form action="{{ route('research-experience.store') }}" method="POST">
     @csrf
 
-    <!-- Description -->
-    <div>
-        <label for="description">Description:</label>
-        <textarea name="description">{{ old('description') }}</textarea>
-        @error('description')
-            <span>{{ $message }}</span>
-        @enderror
-    </div>
+    <div class="col-md-12">
+        <div class="card">
+           <div class="card-header">
+                <legend>Research Experience</legend>
+           </div><br>
+           <div class="card-body">
+               <div class="form-group">
+                   <div class="row">
+                    <!-- Description -->
+                    <div>
+                        <label for="description">Description:</label>
+                        <textarea name="description" class="form-control">{{ old('description') }}</textarea>
+                        @error('description')
+                            <span>{{ $message }}</span>
+                        @enderror <br>
+                    </div><br>
 
-    <!-- Submit Button -->
-    <div>
-        <button type="submit">Save</button>
-    </div>
+                <!-- Submit Button -->
+                <div class="form-group row mb-0">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" class="btn btn-primary">
+                            {{ __('Submit Application') }}
+                        </button>
+                    </div>
+                </div>
 </form>
+</x-app-layout>

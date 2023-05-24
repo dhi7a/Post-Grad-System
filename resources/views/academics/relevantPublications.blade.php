@@ -7,6 +7,7 @@
         <div class="card">
            <div class="card-header">
                 <legend>Publications</legend>
+                <p>(Where Applicable)</p>
            </div><br>
            <div class="card-body">
                <div class="form-group">

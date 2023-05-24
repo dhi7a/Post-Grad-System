@@ -35,7 +35,7 @@ class RelevantPublicationsController extends Controller
         $userId = auth()->user()->id;
         //
         $validatedData = $request->validate([
-            'userid' => 'required|integer',
+            // 'userid' => 'required|integer',
             'description' => 'required|string',
         ]);
 
@@ -46,7 +46,7 @@ class RelevantPublicationsController extends Controller
 
         $relevantPublications->save();
 
-        return redirect()->route('research')->with('Success', 'Publication details saved successfully.');
+        return redirect()->route('employment-experience.index')->with('Success', 'Publication details saved successfully.');
 
 
     }

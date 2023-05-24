@@ -14,17 +14,15 @@
     <div class="col-md-12">
          <div class="card">
             <div class="card-header">
-                 <legend>Diploma Details</legend>
+                 <legend>Diploma details or other qualifications held</legend>
             </div><br>
             <div class="card-body">
                 <div class="form-group">
-                    {{-- <label for="programme">Programme:</label>
-                    <input type="text" id="programme" name="programme" class="form-control" style="color:black" required> --}}
                     <div class="row">
                     <!-- Programme -->
                      <div class="col-md-6">
                         <label for="programme">Programme:</label>
-                        <input type="text" name="programme" value="{{ old('programme') }}" class="form-control">
+                        <input type="text" name="programme" value="{{ old('programme') }}" class="form-control" required>
                         @error('programme')
                             <span>{{ $message }}</span>
                         @enderror
@@ -32,8 +30,8 @@
 
                      <!-- Result -->
                      <div class="col-md-6">
-                        <label for="result">Result:</label>
-                        <input type="text" name="result" value="{{ old('result') }}" class="form-control">
+                        <label for="result">Result/Class:</label>
+                        <input type="text" name="result" value="{{ old('result') }}" class="form-control" required>
                         @error('result')
                             <span>{{ $message }}</span>
                         @enderror
@@ -44,7 +42,7 @@
                     <!-- Level -->
                     <div class="col-md-6">
                         <label for="level">Level:</label>
-                        <input type="text" name="level" value="{{ old('level') }}" class="form-control">
+                        <input type="text" name="level" value="{{ old('level') }}" class="form-control" required>
                         @error('level')
                             <span>{{ $message }}</span>
                         @enderror
@@ -53,7 +51,7 @@
                     <!-- Date -->
                     <div class="col-md-6">
                         <label for="date">Date:</label>
-                        <input type="text" name="date" value="{{ old('date') }}" class="form-control">
+                        <input type="date" name="date" value="{{ old('date') }}" class="form-control" required>
                         @error('date')
                             <span>{{ $message }}</span>
                         @enderror
@@ -63,7 +61,7 @@
                     <!-- Institution -->
                     <div>
                         <label for="institution">Institution:</label>
-                        <input type="text" name="institution" value="{{ old('institution') }}" class="form-control">
+                        <input type="text" name="institution" value="{{ old('institution') }}" class="form-control" required>
                         @error('institution')
                             <span>{{ $message }}</span>
                         @enderror

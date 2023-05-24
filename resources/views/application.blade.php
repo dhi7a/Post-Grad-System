@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" id="DoctoralFellow" name="degree[]" value="DoctoralFellow" required>
-                                        <label class="form-check-label" for="DoctoralFellow">Doctoral Fellow</label>
+                                        <label class="form-check-label" for="DoctoralFellow">Post Doctoral Fellow</label>
                                     </div>
                                 </div><br>
 
@@ -149,7 +149,7 @@
                                                 <option value="">Select Gender</option>
                                                 <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
                                                 <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
-                                                <option value="other" {{ old('gender') == 'other' ? 'selected' : '' }}>Other</option>
+                                                {{-- <option value="other" {{ old('gender') == 'other' ? 'selected' : '' }}>Other</option> --}}
                                             </select>
                                             @error('gender')
                                                 <span class="invalid-feedback" role="alert">
@@ -281,100 +281,13 @@
                         </div>
                     </div>
 
-                    {{-- <div class="col-md-12">
-                        <div class="card">
-                    <div class="form-group row">
-                        <label for="research_interests" class="col-md-4 col-form-label text-md-right">{{ __('Research Interests') }}</label>
 
-                        <div class="col-md-6">
-                            <textarea id="research_interests" class="form-control @error('research_interests') is-invalid @enderror" name="research_interests" required>{{ old('research_interests') }}</textarea>
-
-                            @error('research_interests')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                    <div class="form-group row mb-0">
+                        <div class="col-md-6 offset-md-4">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Submit Application') }}
+                            </button>
                         </div>
-                    </div><br>
-
-                    <!-- Identity Documents -->
-            <div class="form-group row">
-                <label for="id_documents" class="col-md-4 col-form-label text-md-right">{{ __('Identity Documents') }}</label>
-
-                <div class="col-md-6">
-                    <input id="id_documents" type="file" class="form-control @error('id_documents') is-invalid @enderror" name="id_documents" required>
-
-                    @error('id_documents')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div><br>
-
-                    <!-- Applicationn Form -->
-            <div class="form-group row">
-                <label for="id_documents" class="col-md-4 col-form-label text-md-right">{{ __('Identity Documents') }}</label>
-
-                <div class="col-md-6">
-                    <input id="id_documents" type="file" class="form-control @error('id_documents') is-invalid @enderror" name="id_documents" required>
-
-                    @error('id_documents')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div><br>
-
-
-
-            <!-- Certificates -->
-            <div class="form-group row">
-                <label for="certificates" class="col-md-4 col-form-label text-md-right">{{ __('Certificates') }}</label>
-
-                <div class="col-md-6">
-                    <input id="certificates" type="file" class="form-control @error('certificates') is-invalid @enderror" name="certificates" required>
-
-                    @error('certificates')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div><br>
-
-            <!-- Dissertation Proposal -->
-            <div class="form-group row">
-                <label for="proposal" class="col-md-4 col-form-label text-md-right">{{ __('Dissertation Proposal') }}</label>
-
-                <div class="col-md-6">
-                    <input id="proposal" type="file" class="form-control @error('proposal') is-invalid @enderror" name="dissertation_proposal" required>
-
-                    @error('proposal')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-            </div><br>
-
-
-
-
-                </div>
-            </div></div> --}}
-
-
-
-
-
-        <div class="form-group row mb-0">
-            <div class="col-md-6 offset-md-4">
-                <button type="submit" class="btn btn-primary">
-                    {{ __('Submit Application') }}
-                </button>
-            </div>
-        </div>
+                    </div>
   </form>
 </x-app-layout>
