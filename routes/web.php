@@ -40,37 +40,29 @@ Route::get('/', function () {
 Route::get('/downloads', function () {
     return view('student/downloads');
 });
-// Route::get('/profile.html', function () {
-//     return view('profile');
-// });
 
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->middleware(['auth'])->name('dashboard');
 
 
-
+// Routes for User Role
 Route::group(['middleware' => ['auth', 'role:user']], function () {
     Route::get('User_dashboard', 'App\Http\Controllers\UserController@index')->name('user-dashboard');
     Route::get('/apply', 'App\Http\Controllers\ApplicationController@index');
     Route::post('/apply/submit', 'App\Http\Controllers\ApplicationController@store')->name('apply.submit');
 });
 
+// Routes for Student Role
 Route::group(['middleware' => ['auth', 'role:student']], function () {
     Route::get('/Student', 'App\Http\Controllers\StudentController@index')->name('student-dashboard');
     Route::get('/apply', 'App\Http\Controllers\ApplicationController@index');
     Route::post('/apply/submit', 'App\Http\Controllers\ApplicationController@store')->name('apply.submit');
-    // Route::get('/documents', 'App\Http\Controllers\DocumentsController@index')->name('documents.index');
-    // Route::post('/documents', 'App\Http\Controllers\DocumentsController@store')->name('documents.store');
-    // Route::post('/downloads', )->name('downloads');
     Route::get('/documents', [DocumentsController::class, 'index'])->name('documents.index');
     Route::post('/documents', [DocumentsController::class, 'store'])->name('documents.store');
     Route::get('/applications/create', [ApplicationController::class, 'create'])->name('applications.create');
     Route::get('/applications', [ApplicationController::class, 'store'])->name('applications.store');
     Route::post('/personal-details', [PersonalDetailsController::class, 'store'])->name('personal-details.store');
-    // Route::get('/university-studies', [UniversityStudiesController::class, 'index'])->name('university-studies.index');
-    // Route::post('/university-studies', [UniversityStudiesController::class, 'store'])->name('university-studies.store');
     Route::get('/university-studies', [UniversityStudiesController::class, 'index'])->name('university-studies.index');
     Route::post('/university-studies', [UniversityStudiesController::class, 'store'])->name('university-studies.store');
-    // Add other routes related to university studies here...
     Route::get('/diploma', [DiplomaController::class, 'index'])->name('diploma.index');
     Route::post('/diploma', [DiplomaController::class, 'store'])->name('diploma.store');
     Route::get('/dissertation', [DissertationController::class, 'index'])->name('dissertation.index');
@@ -96,16 +88,18 @@ Route::group(['middleware' => ['auth', 'role:student']], function () {
 
 
 
-
+// Routes for Faculty Role
 Route::group(['middleware' => ['auth', 'role:faculty']], function () {
     Route::get('Faculty_dashboard', 'App\Http\Controllers\FacultyController@index')->name('faculty-dashboard');
 });
 
+// Routes for Administrator Role
 Route::group(['middleware' => ['auth', 'role:administrator']], function () {
     Route::get('admin', 'App\Http\Controllers\AdminController@index')->name('admin-dashboard');
 
 });
 
+// Routes for Supervisor Role
 Route::group(['middleware' => ['auth', 'role:supervisor']], function () {
     Route::get('Supervisor', 'App\Http\Controllers\SupervisorController@index')->name('supervisor-dashboard');
 
@@ -128,6 +122,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Email Verification
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');

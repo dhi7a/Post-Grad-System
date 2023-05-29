@@ -22,7 +22,8 @@
         @endif
          <div class="card">
             <div class="card-header">
-                 <legend>Diploma details or other qualifications held</legend>
+                 <legend>Diploma Details or Other Qualifications Held</legend>
+                 <p>e.g CIS, IMM etc</p>
             </div><br>
             <div class="card-body">
                 <div class="form-group">
@@ -38,11 +39,21 @@
 
                      <!-- Result -->
                      <div class="col-md-6">
-                        <label for="result">Result/Class:</label>
+                     {{--    <label for="result">Result/Class:</label>
                         <input type="text" name="result" value="{{ old('result') }}" class="form-control" required>
                         @error('result')
                             <span>{{ $message }}</span>
-                        @enderror
+                        @enderror --}}
+
+                        <label for="result">Grade/Class</label>
+                            <select name="result" class="form-control" required>
+                                <option value="" selected disabled>Select Grade</option>
+                                <option value="Distinction">Distinction</option>
+                                <option value="Credit">Credit</option>
+                                <option value="Pass">Pass</option>
+                                <option value="Fail">Fail</option>
+                                {{-- <option value="Other">Other</option> --}}
+                            </select>
                     </div>
                     </div><br>
                 </div>

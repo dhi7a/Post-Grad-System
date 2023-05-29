@@ -21,7 +21,7 @@
                 <i class="bi bi-cart4"></i>
                 <span>dos</span>
                 </a>
-            </li><!-- End F.A.Q Page Nav -->
+            </li><!-- End F.A.Q Page Nav --> 
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#">
@@ -117,12 +117,12 @@
                     <span>Home</span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href=" {{ route('apply') }}">
                     <i class="bi bi-list-check"></i>
-                    <span>Apply</span>
+                    <span>Apply</span> 
                 </a>
-            </li>
+            </li> --}}
             {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href=" {{ route('downloads') }}">
                     <i class="bi bi-list-check"></i>
@@ -148,5 +148,4 @@
         </li><!-- End Blank Page Nav -->
 
     </ul>
-
   </aside>

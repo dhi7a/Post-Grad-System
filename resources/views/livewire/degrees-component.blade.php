@@ -17,7 +17,7 @@
                         <div class="row">
                             <!-- Programme -->
                             <div class="col-md-6">
-                                <label for="programme">Programme:</label>
+                                <label for="programme">Degree Programme:</label>
                                 <input type="text" wire:model="programme" value="{{ old('programme') }}" class="form-control" required>
                                 @error('programme')
                                     <span>{{ $message }}</span>
@@ -33,9 +33,18 @@
                                     <span>{{ $message }}</span>
                                 @enderror
                             </div>
-                        </div>
+                            {{-- new class selection --}}
+                                    {{-- <label for="level">Degree class </label>
+                                                <select wire:model="level" class="form-control" required>
+                                                    <option value="" selected disabled>Select Grade</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2.1">2.1</option>
+                                                    <option value="2.2">2.2</option>
+                                                    <option value="3">3</option> --}}
+                                                    {{-- <option value="Other">Other</option> --}}
+                                                {{-- </select> --}}
+                        </div> 
                         <br>
-
                     <div class="row">
                     <!-- Institution -->
                     <div class="col-md-6">
@@ -49,7 +58,7 @@
 
                     <!-- Date -->
                     <div class="col-md-6">
-                        <label for="date">Date:</label>
+                        <label for="date">Date Of Award:</label>
                         <input type="date" wire:model="date" value="{{ old('date') }}" class="form-control" required>
                         @error('date')
                             <span>{{ $message }}</span>
@@ -68,4 +77,4 @@
             </div>
         </div>
     </form>
-</div>
+</div> 

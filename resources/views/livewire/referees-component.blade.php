@@ -4,7 +4,9 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <legend>({{$count}}) Referees</legend>
+                    <legend style="color: black;">({{$count}}) Referees</legend>
+                    <p style="color: black;">Give names and addresses of two persons, atleast one from your previous University,
+                         who are familiar with your academic ability perfomance. </p>
                 </div><br>
                 <div class="card-body">
                     <div class="form-group">
