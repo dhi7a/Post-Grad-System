@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Response;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/welcome');
 });
 Route::get('/downloads', function () {
     return view('student/downloads');
@@ -55,7 +55,7 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 });
 
 Route::group(['middleware' => ['auth', 'role:student']], function () {
-    Route::get('Student', 'App\Http\Controllers\StudentController@index')->name('student-dashboard');
+    Route::get('/Student', 'App\Http\Controllers\StudentController@index')->name('student-dashboard');
     Route::get('/apply', 'App\Http\Controllers\ApplicationController@index');
     Route::post('/apply/submit', 'App\Http\Controllers\ApplicationController@store')->name('apply.submit');
     // Route::get('/documents', 'App\Http\Controllers\DocumentsController@index')->name('documents.index');
@@ -90,11 +90,6 @@ Route::group(['middleware' => ['auth', 'role:student']], function () {
     Route::get('/subjects', [SubjectsController::class, 'index'])->name('subjects.index');
     Route::post('/subjects', [SubjectsController::class, 'store'])->name('subjects.store');
     Route::get('/finished', [ApplicationFinishedController::class, 'index'])->name('finished.index');
-    // Route::get('/university-studies/{id}', [UniversityStudiesController::class, 'show'])->name('university-studies.show');
-    // Route::get('/university-studies/{id}/edit', [UniversityStudiesController::class, 'edit'])->name('university-studies.edit');
-    // Route::put('/university-studies/{id}', [UniversityStudiesController::class, 'update'])->name('university-studies.update');
-    // Route::delete('/university-studies/{id}', [UniversityStudiesController::class, 'destroy'])->name('university-studies.destroy');
-
 
 
 });
@@ -119,10 +114,6 @@ Route::group(['middleware' => ['auth', 'role:supervisor']], function () {
 
 
 });
-
-// Route::get('/phd-enrollment', 'PhdEnrollmentController@index');
-// Route::post('/phd-enrollment', 'PhdEnrollmentController@store');
-
 
 
 

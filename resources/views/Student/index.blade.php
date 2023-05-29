@@ -19,7 +19,7 @@
                         </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-12 offset-md-4">
-                            <a class="btn btn-success btn-lg" data-toggle="button" href="http://127.0.0.1:8000/applications/create" role="button">START</a>
+                            <a class="btn btn-primary btn-lg" data-toggle="button" href="http://127.0.0.1:8000/applications/create" role="button">START</a>
                              </div>
                         </div>
 

@@ -20,3 +20,4 @@ class PhdEnrollment extends Model
         // Add more fields here
     ];
 }
+

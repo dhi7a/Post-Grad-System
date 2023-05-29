@@ -10,6 +10,7 @@ class Referees extends Model
     use HasFactory;
 
     protected $fillable = [
+        'userid',
         'full_name',
         'address',
         'phone',

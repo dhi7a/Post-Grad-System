@@ -6,9 +6,15 @@
     @endif
     <form action="{{ route('subjects.store') }}" method="POST" enctype="multipart/form-data">
         <div class="col-md-12">
+            @if (Session::has('success'))
+                <div class="alert alert-success" role="alert">
+                    {{Session::get('Success')}}
+                </div>
+            @endif
             <div class="card">
                 <div class="card-header">
-                    <legend>"O" and "A" Level Subjects {{$count}}</legend>
+                    <legend>School Examinations For Which Reults Are known {{$count}}</legend>
+                    <p>Indicate 'O' Level Mathematics And English Subjects Only, Then 'A' Level Subjects</p>
                 </div><br>
                 <div class="card-body">
                     <div class="form-group">
@@ -72,13 +78,13 @@
                     </div>
                 </div>
     
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="button" wire:click.submit="addSubject" class="btn btn-primary">
-                                    {{ __('Submit Application') }}
-                                </button>
-                            </div>
+                    <div class="form-group row mb-0">
+                        <div class="col-md-6 offset-md-4">
+                            <button type="button" wire:click.submit="addSubject" class="btn btn-primary">
+                                {{ __('Submit Application') }}
+                            </button>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

@@ -8,6 +8,7 @@ use App\Models\Diploma;
 use App\Models\Dissertation;
 use App\Models\Documents;
 use App\Models\EmploymentExperience;
+use App\Models\PersonalDetails;
 use App\Models\ProposedFieldStudy;
 use App\Models\Referees;
 use App\Models\RelevantPublications;
@@ -23,7 +24,7 @@ class StudentController extends Controller
    
     public function index()
     {
-        $exist1 = Application::where('userid', Auth::user()->id)->first();
+        $exist1 = PersonalDetails::where('userid', Auth::user()->id)->first();
         $exist2 = Diploma::where('userid', Auth::user()->id)->first();
         $exist3 = Dissertation::where('userid', Auth::user()->id)->first();
         $exist4 = Documents::where('userid', Auth::user()->id)->first();
@@ -34,6 +35,7 @@ class StudentController extends Controller
         $exist9 = ResearchExperience::where('userid', Auth::user()->id)->first();
         $exist10 = Subjects::where('userid', Auth::user()->id)->first();
         $exist11 = UniversityStudies::where('userid', Auth::user()->id)->first();
+        //dd($exist1, $exist2, $exist3, $exist4, $exist5, $exist6, $exist7, $exist8, $exist9, $exist10, $exist11);
         if(!is_null($exist1) && !is_null($exist2) && !is_null($exist3) && !is_null($exist4) && !is_null($exist5) && !is_null($exist6) && !is_null($exist7) && !is_null($exist8) && !is_null($exist9) && !is_null($exist10) && !is_null($exist11))
         {
             return redirect()->route('finished.index');

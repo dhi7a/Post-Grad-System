@@ -10,20 +10,20 @@ use Illuminate\Support\Facades\Auth;
 class DocumentsController extends Controller
 {
     //
-    
+
     public function index()
     {
         $exist = Documents::where('userid', Auth::user()->id)->first();
         if(!is_null($exist))
         {
-            return redirect()->route('student-dashboard');
+            return redirect()->route('finished.index');
         }
         return view('academics.documents');
     }
 
     public function store(Request $request)
     {
-        $userId = auth ()->user()->id; 
+        $userId = auth ()->user()->id;
 
         $validatedData = $request->validate([
             'id_documents' => 'required',
@@ -32,7 +32,7 @@ class DocumentsController extends Controller
         ]);
 
         // create a new record in the database
-        
+
 
         // save data to database
         $documents = new Documents();
@@ -43,7 +43,7 @@ class DocumentsController extends Controller
 
         $documents->save();
 
-            return redirect()->route('student-dashboard')->with('Message', 'Thank you for applying with Midlands State University');
+            return redirect()->route('finished.index')->with('Message', 'Thank you for applying with Midlands State University');
     }
 
 }

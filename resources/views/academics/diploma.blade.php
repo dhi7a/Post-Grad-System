@@ -8,16 +8,18 @@
         </ul>
     </div>
 @endif
-@if(Session::has('success'))
-    <div class="alert alert-success">
-        {{ Session::get('success')}}
-    </div>
-@endif
+
+
 
     <form action="{{ route('diploma.store') }}" method="POST">
     @csrf
 
     <div class="col-md-12">
+        @if(Session::has('success'))
+            <div class="alert alert-success">
+                {{ Session::get('success')}}
+            </div>
+        @endif
          <div class="card">
             <div class="card-header">
                  <legend>Diploma details or other qualifications held</legend>

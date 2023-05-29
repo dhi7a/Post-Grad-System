@@ -59,7 +59,7 @@ class RefereesController extends Controller
 
         $referees->save();
 
-        return redirect()->route('apply')->with('Success', 'Referee details saved successfully.');
+        return redirect()->route('documents.index')->with('Success', 'Referee details saved successfully.');
 
 
     }

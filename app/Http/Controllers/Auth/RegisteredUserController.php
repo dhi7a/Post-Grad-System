@@ -39,7 +39,7 @@ class RegisteredUserController extends Controller
         ]);
 
         // Assign the 'user' role to the new user
-        $user->addRole('user');
+        $user->addRole('student');
         
 
         event(new Registered($user));

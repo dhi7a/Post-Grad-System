@@ -98,9 +98,6 @@ class DegreesComponent extends Component
         $this->programme = null;
         $this->institution = null; 
         
-
-                        
-
     }
 
 }

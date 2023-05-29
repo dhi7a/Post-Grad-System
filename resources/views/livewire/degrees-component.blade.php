@@ -7,7 +7,6 @@
 
     <form action="{{ route('university-studies.store') }}" method="POST" enctype="multipart/form-data">
         <div class="col-md-12">
-            {{-- Success is as dangerous as failure. --}}
             <div class="card">
                 <div class="card-header">
                     <legend>({{$count}}) {{$label}} </legend>
