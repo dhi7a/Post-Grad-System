@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\PhoneNumbers;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -13,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Foundation\Auth\VerifiesEmails;
+
 
 class RegisteredUserController extends Controller
 {
@@ -23,7 +27,7 @@ class RegisteredUserController extends Controller
     {
         return view('auth.register');
     }
-    
+
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -40,7 +44,7 @@ class RegisteredUserController extends Controller
 
         // Assign the 'user' role to the new user
         $user->addRole('student');
-        
+
 
         event(new Registered($user));
 
@@ -53,11 +57,21 @@ class RegisteredUserController extends Controller
             'address' => $request->address,
         ]);
 
-        
+        PhoneNumbers::create(
+            [
+                'userid' => $user->id,
+                'phone_number' => $request->phone_number,
+                'is_verified' => False
+            ]
+        );
 
-        Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+
+        // Auth::login($user);
+
+        // return redirect(RouteServiceProvider::HOME);
+
+        return redirect()->route('verification.notice');
 
     }
 }

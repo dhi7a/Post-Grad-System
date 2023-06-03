@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -184,5 +184,11 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
+
+
+    'twilio' => [
+        'TWILIO_AUTH_TOKEN'  => env('d5cf3fbfc3637d2edc95005a703b1c43'),
+        'TWILIO_ACCOUNT_SID' => env('AC2ac03e291418b4a2483bd1fb35a65520')
+    ],
 
 ];

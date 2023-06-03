@@ -9,7 +9,7 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
   <!-- Google Fonts -->
-  
+
   <!-- Vendor CSS Files -->
   <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
@@ -34,7 +34,7 @@
 
                     <div class="d-flex justify-content-center py-4">
                         <a href="/" class="logo d-flex align-items-center w-auto">
-                            <img src="{{ asset('assets/img/logo.png') }}" alt="">
+                            <img src="{{ asset('assets/img/msu1.jpg') }}" alt="">
                             <span class="d-none d-lg-block">PGS</span>
                         </a>
                     </div><!-- End Logo -->
@@ -115,7 +115,7 @@
                                         <input type="tel" name="phone_number" class="form-control" id="phone_number"  placeholder="0712 345 678" required>
                                         <!-- pattern="[0-9]{4}-[0-9]{3}-[0-9]{4}" -->
                                         <div class="invalid-feedback">Please enter your phone number.</div>
-                                    
+
                                     </div>
                                 </div>
 

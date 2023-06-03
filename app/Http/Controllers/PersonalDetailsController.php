@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\PersonalDetails;
+use App\Models\PhoneNumbers;
 use Illuminate\Http\Request;
 
 class PersonalDetailsController extends Controller
@@ -98,6 +99,12 @@ class PersonalDetailsController extends Controller
 
             $personalDetails->save();
 
+            $phoneNumbers = new PhoneNumbers();
+            $phoneNumbers->userid = auth()->user()->id;
+            $phoneNumbers->phone_number = $request->contact_number;
+            $phoneNumbers->is_verified = $request->is_verified;
+
+            $phoneNumbers->save();
             // Perform any additional operations or redirect as needed
 
             // return redirect()->back()->with('success', 'Personal details saved successfully.');

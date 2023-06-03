@@ -16,6 +16,8 @@ use App\Http\Controllers\RefereesController;
 use App\Http\Controllers\RelevantPublicationsController;
 use App\Http\Controllers\ResearchExperienceController;
 use App\Http\Controllers\SubjectsController;
+use App\Http\Controllers\VerifyEmailController;
+use App\Http\Controllers\VerificationController;
 use App\Mail\SendEmailUsingGmail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -35,11 +37,21 @@ use Illuminate\Support\Facades\Response;
 */
 
 Route::get('/', function () {
-    return view('/welcome');
+    return view('/auth/login');
 });
 Route::get('/downloads', function () {
     return view('student/downloads');
 });
+
+Route::get('/verify-phone', function () {
+    return view('auth.verify-phone');
+})->name('verify.phone');
+
+//Route::get('/verify-phone', [VerificationController::class, 'showVerificationForm'])->name('verify.phone');
+//Route::post('/verify-phone', [VerificationController::class, 'handleVerification']);
+
+Route::get('/verify-code', [VerificationController::class, 'showVerificationCodeForm']);
+Route::post('/verify-code', [VerificationController::class, 'handleVerificationCode']);
 
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->middleware(['auth'])->name('dashboard');
 
@@ -52,8 +64,42 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 });
 
 // Routes for Student Role
-Route::group(['middleware' => ['auth', 'role:student']], function () {
-    Route::get('/Student', 'App\Http\Controllers\StudentController@index')->name('student-dashboard');
+// Route::group(['middleware' => ['auth', 'role:student']], function () {
+//     Route::get('/Student', 'App\Http\Controllers\StudentController@index')->name('student-dashboard');
+//     Route::get('/apply', 'App\Http\Controllers\ApplicationController@index');
+//     Route::post('/apply/submit', 'App\Http\Controllers\ApplicationController@store')->name('apply.submit');
+//     Route::get('/documents', [DocumentsController::class, 'index'])->name('documents.index');
+//     Route::post('/documents', [DocumentsController::class, 'store'])->name('documents.store');
+//     Route::get('/applications/create', [ApplicationController::class, 'create'])->name('applications.create');
+//     Route::get('/applications', [ApplicationController::class, 'store'])->name('applications.store');
+//     Route::post('/personal-details', [PersonalDetailsController::class, 'store'])->name('personal-details.store');
+//     Route::get('/university-studies', [UniversityStudiesController::class, 'index'])->name('university-studies.index');
+//     Route::post('/university-studies', [UniversityStudiesController::class, 'store'])->name('university-studies.store');
+//     Route::get('/diploma', [DiplomaController::class, 'index'])->name('diploma.index');
+//     Route::post('/diploma', [DiplomaController::class, 'store'])->name('diploma.store');
+//     Route::get('/dissertation', [DissertationController::class, 'index'])->name('dissertation.index');
+//     Route::post('/dissertation', [DissertationController::class, 'store'])->name('dissertation.store');
+//     Route::get('/employment-experience', [EmploymentExperienceController::class, 'index'])->name('employment-experience.index');
+//     Route::post('/employment-experience', [EmploymentExperienceController::class, 'store'])->name('employment-experience.store');
+//     Route::get('/proposed-field', [ProposedFieldStudyController::class, 'index'])->name('proposed-field.index');
+//     Route::post('/proposed-field', [ProposedFieldStudyController::class, 'store'])->name('proposed-field.store');
+//     Route::get('/referees', [RefereesController::class, 'index'])->name('referees.index');
+//     Route::post('/referees', [RefereesController::class, 'store'])->name('referees.store');
+//     Route::get('/research-experience', [ResearchExperienceController::class, 'index'])->name('research-experience.index');
+//     Route::post('/research-experience', [ResearchExperienceController::class, 'store'])->name('research-experience.store');
+//     Route::get('/publications', [RelevantPublicationsController::class, 'index'])->name('publications.index');
+//     Route::post('/publications', [RelevantPublicationsController::class, 'store'])->name('publications.store');
+//     Route::get('/publications/create', [RelevantPublicationsController::class, 'create'])->name('publications.create');
+//     Route::post('/publications', [RelevantPublicationsController::class, 'store'])->name('publications.store');
+//     Route::get('/subjects', [SubjectsController::class, 'index'])->name('subjects.index');
+//     Route::post('/subjects', [SubjectsController::class, 'store'])->name('subjects.store');
+//     Route::get('/finished', [ApplicationFinishedController::class, 'index'])->name('finished.index');
+
+
+// });
+// Routes for Student Role
+Route::group(['middleware' => ['auth', 'role:student', 'verified', 'verified.number']], function () {
+    Route::get('/Student', 'App\Http\Controllers\StudentController@index')->middleware(['verified.number'])->name('student-dashboard');
     Route::get('/apply', 'App\Http\Controllers\ApplicationController@index');
     Route::post('/apply/submit', 'App\Http\Controllers\ApplicationController@store')->name('apply.submit');
     Route::get('/documents', [DocumentsController::class, 'index'])->name('documents.index');
@@ -82,9 +128,8 @@ Route::group(['middleware' => ['auth', 'role:student']], function () {
     Route::get('/subjects', [SubjectsController::class, 'index'])->name('subjects.index');
     Route::post('/subjects', [SubjectsController::class, 'store'])->name('subjects.store');
     Route::get('/finished', [ApplicationFinishedController::class, 'index'])->name('finished.index');
-
-
 });
+
 
 
 
@@ -122,6 +167,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
 // Email Verification
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -146,12 +192,16 @@ Route::post('/email/verification-notification', function (Request $request) {
 // Route::get('/apply', [ApplicationController::class, 'index'])->name('apply');
 
 
-// Route::get('send-email-using-gmail', function(){
+Route::get('send-email-using-gmail', function(){
 
-//     Mail::to('edworkprojects@gmail.com')->send(new SendEmailUsingGmail());
+    Mail::to('edworkprojects@gmail.com')->send(new SendEmailUsingGmail());
 
-//     return "Mail sent";
-// });
+    return "Mail sent";
+});
+
+// Route::get('/verify-phone', [VerificationController::class, 'showVerificationForm']);
+// Route::post('/verify-phone', [VerificationController::class, 'showVerificationForm']);
+
 
 Route::get('/download/{filename}', function ($filename) {
     $path = 'C:\Users\TendaiM\Documents\laravel\PGS2\downloads\\' . $filename;

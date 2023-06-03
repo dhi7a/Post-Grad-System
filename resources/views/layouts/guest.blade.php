@@ -37,8 +37,8 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center">
-        <img src="{{ asset('assets/img/logo.png') }}" alt="">
-        <span class="d-none d-lg-block">Shipment Sys</span>
+        <img src="{{ asset('assets/img/msu1.jpg') }}" alt="">
+        <span class="d-none d-lg-block">PGS</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -59,52 +59,7 @@
                 </a>
             </li><!-- End Search Icon-->
 
-            <li class="nav-item dropdown">
-                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                    <i class="bi bi-cart"></i>
-                    <span class="badge bg-danger badge-number">
-                        @php
-                            $cartcount = \App\Models\Cart::where('user_id', Auth::id())->count();
-                            echo $cartcount;
-                        @endphp
-                    </span>
-                </a><!-- End Messages Icon -->
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                    <li class="dropdown-header">
-                    Total items {{ $cartcount }}
-                    <a href="{{ route('user-checkout') }}"><span class="badge rounded-pill bg-primary p-2 ms-2">Checkout</span></a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    @php
-                        $cartitem = \App\Models\Cart::join('products', 'products.id', '=', 'carts.product_id')
-                            ->join('product_images', 'product_images.product_id', '=', 'carts.product_id')
-                            ->select('carts.id', 'carts.qty', 'products.category_id', 'products.name', 'products.price', 'product_images.img')
-                            ->where('user_id', Auth::id())
-                            ->get();
-                    @endphp
 
-                    @foreach ($cartitem as $cart)
-                        <li class="message-item">
-                            <a href="#">
-                                <img src="{{ asset('images') }}/{{ $cart->img }}" alt="" class="rounded-circle">
-                                <div>
-                                    <p>{{ $cart->name }}</p>
-                                    <p>${{ $cart->price }} x{{ $cart->qty }}</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                    @endforeach
-                    <li class="dropdown-footer">
-                        <a href="{{ route('user-cart') }}">visit cart</a>
-                    </li>
-
-                </ul><!-- End Messages Dropdown Items -->
-            </li><!-- End Messages Nav -->
 
             <li class="nav-item dropdown pe-3">
 
@@ -180,12 +135,7 @@
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
-    <div class="copyright">
-      &copy; Copyright <strong><span>Prof-Virus</span></strong>. All Rights Reserved
-    </div>
-    <div class="credits">
-        Designed by <a href="https://faraimunashe.me" target="_blank">Faraimunashe</a>
-    </div>
+
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

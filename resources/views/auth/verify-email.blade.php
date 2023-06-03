@@ -14,10 +14,19 @@
             @csrf
 
             <div>
-                <x-primary-button>
+                {{-- <x-primary-button>
                     {{ __('Resend Verification Email') }}
-                </x-primary-button>
+                </x-primary-button> --}}
+                <div class="form-group row mb-0">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" class="btn btn-primary">
+                            {{ __('Resend Verification Email') }}
+                        </button>
+                    </div>
+                </div>
             </div>
+
+
         </form>
 
         <form method="POST" action="{{ route('logout') }}">
