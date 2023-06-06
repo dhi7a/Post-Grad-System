@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Twilio\Rest\Client;
+
 
 
 class RegisteredUserController extends Controller
@@ -49,6 +51,7 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Profile::create([
+            // 'userid' => $user->id,Auth::user()->name
             'userid' => $user->id,
             'firstnames' => $request->firstnames,
             'lastname' => $request->lastname,
@@ -59,7 +62,7 @@ class RegisteredUserController extends Controller
 
         PhoneNumbers::create(
             [
-                'userid' => $user->id,
+                'user_id' => $user->id,
                 'phone_number' => $request->phone_number,
                 'is_verified' => False
             ]
@@ -67,11 +70,42 @@ class RegisteredUserController extends Controller
 
 
 
-        // Auth::login($user);
+        Auth::login($user);
 
-        // return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::HOME);
 
-        return redirect()->route('verification.notice');
+        // return redirect()->route('verify.phone');
 
+    }
+
+    public function register(Request $request)
+    {
+        // Validate registration form data and create the user
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            // ...
+        ]);
+
+        // Generate verification code
+        $verificationCode = mt_rand(100000, 999999);
+
+        // Send verification code to the user's phone number
+        $twilio = new Client(env('TWILIO_SID'), env('TWILIO_AUTH_TOKEN'));
+        $twilio->messages->create(
+            $user->phone_number,
+            [
+                'from' => env('TWILIO_PHONE_NUMBER'),
+                'body' => "Your verification code is: $verificationCode"
+            ]
+        );
+
+        // Associate verification code with the user
+        $user->verification_code = $verificationCode;
+        $user->save();
+
+        // Redirect the user to the verification form
+        return redirect()->route('verification')->with('phone_number', $user->phone_number);
     }
 }

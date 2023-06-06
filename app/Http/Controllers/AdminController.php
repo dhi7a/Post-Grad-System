@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PhdEnrollment;
+use App\Models\PersonalDetails;
 
 class AdminController extends Controller
 {
@@ -14,8 +15,9 @@ class AdminController extends Controller
     {
         // code to show dashboard for administrator role
         $applications = phdEnrollment::all();
-        return view('user.index',[
+        return view('admin.index',[
             'applications' => $applications
+            // 'personalDetails' => $personalDetails
         ]);
     }
 

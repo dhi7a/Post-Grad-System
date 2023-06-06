@@ -10,8 +10,9 @@ class PhoneNumbers extends Model
     use HasFactory;
 
     protected $fillable = [
-        'userid',
+        'user_id',
         'phone_number',
+        'code',
         'is_verified',
         // Add more fields here
     ];

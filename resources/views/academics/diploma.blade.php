@@ -35,16 +35,10 @@
                         @error('programme')
                             <span>{{ $message }}</span>
                         @enderror
-                    </div><br>
+                    </div>
 
                      <!-- Result -->
                      <div class="col-md-6">
-                     {{--    <label for="result">Result/Class:</label>
-                        <input type="text" name="result" value="{{ old('result') }}" class="form-control" required>
-                        @error('result')
-                            <span>{{ $message }}</span>
-                        @enderror --}}
-
                         <label for="result">Grade/Class</label>
                             <select name="result" class="form-control" required>
                                 <option value="" selected disabled>Select Grade</option>
@@ -65,7 +59,7 @@
                         @error('level')
                             <span>{{ $message }}</span>
                         @enderror
-                    </div><br>
+                    </div>
 
                     <!-- Date -->
                     <div class="col-md-6">

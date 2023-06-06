@@ -23,27 +23,22 @@
                                     <span>{{ $message }}</span>
                                 @enderror
                             </div>
-                            <br>
-
                             <!-- Class -->
                             <div class="col-md-6">
-                                <label for="class">Class:</label>
-                                <input type="number" wire:model="class" value="{{ old('class') }}" class="form-control" required>
-                                @error('class')
+                                <label for="level">Degree class:</label>
+                                <select wire:model="class" class="form-control" required>
+                                    <option value="" selected>Select Grade</option>
+                                    <option value="1">1</option>
+                                    <option value="2.1">2.1</option>
+                                    <option value="2.2">2.2</option>
+                                    <option value="3">3</option>
+                                    <option value="n/a">n/a</option>
+                                </select>
+                                @error('level')
                                     <span>{{ $message }}</span>
-                                @enderror
+                                @enderror <br>
                             </div>
-                            {{-- new class selection --}}
-                                    {{-- <label for="level">Degree class </label>
-                                                <select wire:model="level" class="form-control" required>
-                                                    <option value="" selected disabled>Select Grade</option>
-                                                    <option value="1">1</option>
-                                                    <option value="2.1">2.1</option>
-                                                    <option value="2.2">2.2</option>
-                                                    <option value="3">3</option> --}}
-                                                    {{-- <option value="Other">Other</option> --}}
-                                                {{-- </select> --}}
-                        </div> 
+
                         <br>
                     <div class="row">
                     <!-- Institution -->
@@ -54,7 +49,7 @@
                             <span>{{ $message }}</span>
                         @enderror
                     </div>
-                    <br>
+
 
                     <!-- Date -->
                     <div class="col-md-6">
@@ -77,4 +72,4 @@
             </div>
         </div>
     </form>
-</div> 
+</div>

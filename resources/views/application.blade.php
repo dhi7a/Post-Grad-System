@@ -93,8 +93,7 @@
                                     <div class="col-md-6">
                                         <label for="surname">Surname:</label>
                                         <input type="text" name="surname" id="surname" class="form-control">
-                                    </div><br>
-
+                                    </div>
                                     <div class="col-md-6">
                                         <label for="forenames">Forenames:</label>
                                         <input type="text" name="forenames" id="forenames" class="form-control">
@@ -105,7 +104,7 @@
                                     <div class="col-md-6">
                                         <label for="national_id">National ID No:</label>
                                         <input type="text" name="national_id" id="national_id" class="form-control">
-                                    </div><br>
+                                    </div>
 
                                     <div class="col-md-6">
                                         <label for="passport_no">Passport No:</label>
@@ -118,7 +117,7 @@
                                     <div class="col-md-6">
                                         <label for="permanent_residence">Country of Permanent Residence:</label>
                                         <input type="text" name="permanent_residence" id="permanent_residence" class="form-control">
-                                    </div><br>
+                                    </div>
 
                                     <div class="col-md-6">
                                         <label for="nationality">Nationality:</label>
@@ -130,7 +129,7 @@
                                     <div class="col-md-6">
                                         <label for="date_of_birth">Date of Birth:</label>
                                         <input type="date" name="date_of_birth" id="date_of_birth" class="form-control">
-                                    </div><br>
+                                    </div>
 
                                     <div class="col-md-6">
                                         <label for="place_of_birth">Place of Birth:</label>

@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header" style="margin-left: 20px;">{{ __('User Dashboard') }}</div>
+                    <div class="card-header" style="margin-left: 20px;">{{ __('Admin Dashboard') }}</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -31,13 +31,13 @@
                             <li><strong>Address:</strong> {{ Auth::user()->address }}</li> -->
                         </ul>
 
-                        
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container" style="margin-left: 20px;"> 
+    <div class="container" style="margin-left: 20px;">
     <tbody>
         @foreach($applications as $application)
         <div class="row">
@@ -66,7 +66,7 @@
 </div>
 
     </div>
-    
-	
-    
+
+
+
 </x-app-layout>

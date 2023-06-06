@@ -18,7 +18,7 @@
                                 @error('full_name')
                                     <span>{{ $message }}</span>
                                 @enderror <br>
-                            </div><br>
+                            </div>
                             <!-- Address -->
                             <div class="col-md-6">
                                 <label for="address">Address:</label>
@@ -36,7 +36,7 @@
                                 @error('phone')
                                     <span>{{ $message }}</span>
                                 @enderror <br>
-                            </div><br>
+                            </div>
                             <!-- Email -->
                             <div class="col-md-6">
                                 <label for="email">Email:</label>

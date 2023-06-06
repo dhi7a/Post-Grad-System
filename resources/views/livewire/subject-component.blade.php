@@ -35,7 +35,7 @@
                                             <option value="O level">O level</option>
                                             {{-- <option value="Other">Other</option> --}}
                                         </select>
-    
+
                                         @error('level')
                                             <span>{{ $message }}</span>
                                         @enderror <br>
@@ -46,7 +46,7 @@
                                 </div>
                         </div>
                         <div class="row">
-    
+
                             <!-- Subject -->
                             <div class="col-md-6">
                                 <label for="subject">Subject:</label>
@@ -55,7 +55,7 @@
                                     <span>{{ $message }}</span>
                                 @enderror <br>
                             </div>
-    
+
                             <!-- Grade -->
                             <div class="col-md-6">
                              {{--    <label for="grade">Grade:</label>
@@ -75,7 +75,7 @@
                                 {{-- <option value="Other">Other</option> --}}
                             </select>
                         </div>
-    
+
                             <!-- Date -->
                             <div class="col-md-6">
                                 <label for="date">Date:</label>
@@ -87,7 +87,7 @@
                         </div>
                     </div>
                 </div>
-    
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="button" wire:click.submit="addSubject" class="btn btn-primary">

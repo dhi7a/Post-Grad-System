@@ -15,8 +15,9 @@ class CreatePhoneNumbersTable extends Migration
     {
         Schema::create('phone_numbers', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('userid');
+            $table->bigInteger('user_id');
             $table->string('phone_number');
+            $table->bigInteger('code')->nullable();
             $table->boolean('is_verified')->default(false);
             $table->timestamps();
 

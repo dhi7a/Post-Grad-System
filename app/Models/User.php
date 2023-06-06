@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 
 
 
+
 class User extends Authenticatable implements MustVerifyEmail, LaratrustUser
 // class User extends Authenticatable implements MustVerifyEmail
 {

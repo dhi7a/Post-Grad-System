@@ -100,9 +100,10 @@ class PersonalDetailsController extends Controller
             $personalDetails->save();
 
             $phoneNumbers = new PhoneNumbers();
-            $phoneNumbers->userid = auth()->user()->id;
+            $phoneNumbers->user_id = auth()->user()->id;
             $phoneNumbers->phone_number = $request->contact_number;
-            $phoneNumbers->is_verified = $request->is_verified;
+            // $phoneNumbers->is_verified = $request->is_verified;
+            $phoneNumbers->is_verified = auth()->user()->id;
 
             $phoneNumbers->save();
             // Perform any additional operations or redirect as needed

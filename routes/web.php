@@ -15,7 +15,9 @@ use App\Http\Controllers\ProposedFieldStudyController;
 use App\Http\Controllers\RefereesController;
 use App\Http\Controllers\RelevantPublicationsController;
 use App\Http\Controllers\ResearchExperienceController;
+use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SubjectsController;
+use App\Http\Controllers\WizardController;
 use App\Http\Controllers\VerifyEmailController;
 use App\Http\Controllers\VerificationController;
 use App\Mail\SendEmailUsingGmail;
@@ -43,15 +45,25 @@ Route::get('/downloads', function () {
     return view('student/downloads');
 });
 
-Route::get('/verify-phone', function () {
-    return view('auth.verify-phone');
-})->name('verify.phone');
+// Route::get('/verify-phone', function () {
+//     return view('auth.verify-phone');
+// })->name('verify.phone');
+// Route::post('/verify-phone', function () {
+//     return view('auth.verify-phone');
+// })->name('verify.phone');
 
-//Route::get('/verify-phone', [VerificationController::class, 'showVerificationForm'])->name('verify.phone');
-//Route::post('/verify-phone', [VerificationController::class, 'handleVerification']);
+Route::get('/verify-phone', [VerificationController::class, 'showVerificationForm'])->name('verify.phone');
+Route::post('/verify-phone', [VerificationController::class, 'handleVerification']);
 
-Route::get('/verify-code', [VerificationController::class, 'showVerificationCodeForm']);
+// Route::get('/verify-code', [VerificationController::class, 'showVerificationCodeForm']);
+// Route::post('/verify-code', [VerificationController::class, 'handleVerificationCode']);
+
+Route::get('/verify-phone', [VerificationController::class, 'showVerificationForm'])->name('verify.phone');
+Route::post('/verify-phone', [VerificationController::class, 'handleVerification']);
+Route::get('/verify-code', [VerificationController::class, 'showVerificationCodeForm'])->name('verify.code');
 Route::post('/verify-code', [VerificationController::class, 'handleVerificationCode']);
+
+
 
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->middleware(['auth'])->name('dashboard');
 
@@ -98,8 +110,10 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 
 // });
 // Routes for Student Role
-Route::group(['middleware' => ['auth', 'role:student', 'verified', 'verified.number']], function () {
-    Route::get('/Student', 'App\Http\Controllers\StudentController@index')->middleware(['verified.number'])->name('student-dashboard');
+// Route::group(['middleware' => ['auth', 'role:student', 'verified', 'verified.number']], function () {
+Route::group(['middleware' => ['auth', 'role:student', 'verified']], function () {
+    // Route::get('/Student', 'App\Http\Controllers\StudentController@index')->middleware(['verified.number'])->name('student-dashboard');
+    Route::get('/Student', 'App\Http\Controllers\StudentController@index')->name('student-dashboard');
     Route::get('/apply', 'App\Http\Controllers\ApplicationController@index');
     Route::post('/apply/submit', 'App\Http\Controllers\ApplicationController@store')->name('apply.submit');
     Route::get('/documents', [DocumentsController::class, 'index'])->name('documents.index');
@@ -212,5 +226,17 @@ Route::get('/download/{filename}', function ($filename) {
         abort(404);
     }
 })->name('download.file');
+
+Route::post('/wizard/submit', 'WizardController@submit')->name('wizard.submit');
+Route::get('/wizard/submit', 'WizardController@submit')->name('wizard.submit');
+
+Route::get('/register', [RegisteredUserController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisteredUserController::class, 'register']);
+
+Route::get('/verification', [RegisteredUserController::class, 'showVerificationForm'])->name('verification');
+Route::post('/verification', [RegisteredUserController::class, 'verify']);
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
 
 require __DIR__.'/auth.php';
