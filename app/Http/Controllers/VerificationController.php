@@ -50,7 +50,7 @@ class VerificationController extends Controller
         $phone->save();
 
         // Redirect the user to the verify-code named route
-        return redirect()->route('verify.code');
+        return redirect()->route('verify.code')->with('phone_number', $request->contact_number);
 
     }
 
@@ -66,9 +66,23 @@ class VerificationController extends Controller
             'verification_code' => 'required',
         ]);
 
-        // Perform the necessary actions to verify the code
+       // Find the associated verification code for the user
+       $phone = PhoneNumbers::where('user_id', Auth::id())
+       ->where('phone_number', $request->session()->get('phone_number'))
+       ->where('code', $request->verification_code)
+       ->first();
+
+   if ($phone) {
+       // Mark the phone number as verified
+       $phone->is_verified = true;
+       $phone->save();
 
         // Redirect the user to a different page or provide feedback
         return redirect('/Student');
     }
+        // Verification failed
+        return back()->withErrors(['verification_code' => 'Invalid verification code. Please try again.']);
+    }
+
+
 }

@@ -39,7 +39,6 @@ class PhoneNumbersController extends Controller
 
        $phoneNumbers = new PhoneNumbers();
        $phoneNumbers->userid = auth()->user()->id;
-       //    $phoneNumbers->phone_number = $request->phone_number;
        $phoneNumbers->phone_number = auth()->user()->phone_number; // Prefill with the user's phone number
        $phoneNumbers->is_verified = $request->is_verified;
 
