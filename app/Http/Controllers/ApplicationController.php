@@ -35,9 +35,18 @@ class ApplicationController extends Controller
         // !is_null($exist1) &&
         if(!is_null($exist2) && !is_null($exist3) && !is_null($exist4) && !is_null($exist5) && !is_null($exist6) && !is_null($exist7) && !is_null($exist8) && !is_null($exist9) && !is_null($exist10) && !is_null($exist11))
         {
+            $applied = Application::where('userid',Auth::id())->first();
+            if(is_null($applied)){
+                $newApplication = new Application();
+                $newApplication->userid=Auth::id();
+                $newApplication->status=0;
+
+                $newApplication->save();
+            }
+
             return redirect()->route('finished.index');
         }
-        
+
         return view('student.index');
 
         // return view('apply');
@@ -48,21 +57,9 @@ class ApplicationController extends Controller
     {
         // Validate the form data
         $validatedData = $request->validate([
-            'programme' => 'required',
+            'userid' => 'required',
             'status' => 'required',
-            'title' => 'required',
-            'surname' => 'required',
-            'forenames' => 'required',
-            'marital_status' => 'required',
-            'nationality' => 'required',
-            'national_id' => 'required',
-            'permanent_residence' => 'required',
-            'passport_no' => 'required',
-            'date_of_birth' => 'required|date',
-            'place_of_birth' => 'required',
-            'contact_address' => 'required',
-            'contact_number' => 'required',
-            'email' => 'required|email',
+
         ]);
 
         // Create a new application record in the database
