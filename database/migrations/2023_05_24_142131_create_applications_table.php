@@ -11,7 +11,8 @@ class CreateApplicationsTable extends Migration
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('userid');
-            $table->integer('status');
+            // $table->integer('status');
+            $table->string('status')->default('Pending');
             $table->timestamps();
         });
     }

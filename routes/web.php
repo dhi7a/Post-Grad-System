@@ -147,7 +147,13 @@ Route::group(['middleware' => ['auth', 'role:administrator']], function () {
     // Route::get('/applications.show', function () {
     //     return view('user/application/show');
     // });
+    Route::post('/application/{id}/accept', [ApplicationController::class, 'accept'])->name('application.accept');
+    Route::post('/application/{id}/recommend', [ApplicationController::class, 'recommend'])->name('application.recommend');
+    Route::post('/application/{id}/reject', [ApplicationController::class, 'reject'])->name('application.reject');
+    Route::post('/recommendation', 'ApplicationController@sendRecommendation')->name('recommendation.send');
+
 });
+
 
 // Routes for Supervisor Role
 Route::group(['middleware' => ['auth', 'role:supervisor']], function () {

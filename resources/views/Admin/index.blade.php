@@ -30,6 +30,7 @@
                                     <th>Surname</th>
                                     <th>Description</th>
                                     <th>Actions</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,6 +44,7 @@
                                             <a href="{{ route('application.show',$application->id)}}">View Full Application</a>
                                         {{-- <a href="{{ route('apply', ['id' => $application->id]) }}">View Full Application</a> --}}
                                         </td>
+                                        <td>{{ $application->status }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
