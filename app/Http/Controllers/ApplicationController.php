@@ -72,20 +72,32 @@ class ApplicationController extends Controller
 
     }
 
-    public function show()
-    {
-        // Retrieve the application by the authenticated user ID
-        $application = Application::where('user_id', Auth::id())->first();
+    public function show($id)
+{
+    // Retrieve the application by the authenticated user ID
+    $application = Application::where('userid', Auth::id())->first();
 
-        // Check if the application exists
-        if ($application) {
-            // Return a view with the application data
-            return view('user.application.show', ['application' => $application]);
-        } else {
-            // Redirect to a page with an error message
-            return redirect()->route('dashboard')->with('error', 'Application not found.');
+    // Check if the application exists
+    if ($application) {
+        // Retrieve the associated personal details
+        $personalDetails = $application->personalDetails;
+
+        // Check if personal details exist
+        if ($personalDetails) {
+            // Return a view with the application and personal details data
+            return view('application.show', [
+                'application' => $application,
+                'personalDetails' => $personalDetails
+            ]);
         }
     }
+
+    // Redirect to a page with an error message
+    return redirect()->route('dashboard')->with('error', 'Application not found.');
+}
+
+
+
 
     public function create()
     {

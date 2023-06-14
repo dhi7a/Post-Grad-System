@@ -34,4 +34,10 @@ class PersonalDetails extends Model
     protected $dates = [
         'date_of_birth',
     ];
+
+    public function personalDetails()
+    {
+        return $this->hasOne(PersonalDetails::class);
+    }
+
 }

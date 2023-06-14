@@ -20,7 +20,7 @@ class AdminController extends Controller
         ->join('proposed_field_studies','proposed_field_studies.userid','=','applications.userid')
         ->select('applications.id as id','personal_details.forenames','personal_details.surname','proposed_field_studies.description')
         ->get();
-        //dd($applications);
+        // dd($applications);
         return view('admin.index',[
             'applications' => $applications
 

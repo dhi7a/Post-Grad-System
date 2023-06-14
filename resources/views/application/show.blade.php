@@ -41,7 +41,7 @@
                         <p><strong>MSU Staff Member:</strong> {{ $personalDetails->msu_staff_member }}</p>
                     </div>
 
-                    <h4>Subjects Detail</h4>
+                    <h4>Subjects Details</h4>
                             <p><strong>Subject Name:</strong> {{ $subjects->subject }}</p>
                             {{-- <p><strong>Subject Code:</strong> {{ $subject->code }}</p> --}}
                             <p><strong>Subject Grade:</strong> {{ $subjects->grade }}</p>
