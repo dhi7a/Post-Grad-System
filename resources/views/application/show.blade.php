@@ -191,10 +191,15 @@
                                         @csrf
                                         <button type="submit" class="btn btn-success">Accept</button>
                                     </form>
+{{--
+                                    <form method="POST" action="{{ route('application.recommend', $application->id) }}" class="d-inline-block">
+                                        @csrf
+                                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#recommendModal">Recommend1</button>
+                                    </form> --}}
 
                                     <form method="POST" action="{{ route('application.recommend', $application->id) }}" class="d-inline-block">
                                         @csrf
-                                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#recommendModal">Recommend</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recommendModal">Recommend</button>
                                     </form>
 
                                     <form method="POST" action="{{ route('application.reject', $application->id) }}" class="d-inline-block">
@@ -242,34 +247,53 @@
     </div>
 </div>
 
-<script>
+{{-- new --}}
+<div class="modal fade" id="recommendModal" tabindex="-1" role="dialog" aria-labelledby="recommendModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="recommendModalLabel">Recommendation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <textarea id="recommendationText" class="form-control" rows="3" placeholder="Enter your recommendation"></textarea>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="sendRecommendation()">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
     $(document).ready(function() {
-        $('#recommendModal').modal({
-            backdrop: 'static',
-            keyboard: false
-        });
+      $('#recommendModal').modal({
+        backdrop: 'static',
+        keyboard: false
+      });
     });
 
     // Event handler for the "Send" button in the modal
     function sendRecommendation() {
-        var recommendation = document.getElementById('recommendationText').value;
+      var recommendation = document.getElementById('recommendationText').value;
 
-        // Make an AJAX request to send the recommendation to the applicant
-        // Replace the placeholder URL with the actual endpoint to send the recommendation
-        // You can use Axios or other libraries for the AJAX request
-        axios.post('/recommendation', { recommendation: recommendation })
-            .then(function (response) {
-                // Display a success message or perform any other actions
-                alert('Recommendation sent successfully');
-                // Close the modal
-                $('#recommendModal').modal('hide');
-            })
-            .catch(function (error) {
-                // Handle errors if necessary
-                console.error(error);
-            });
+      // Replace the AJAX request with your own code to send the recommendation to the applicant
+      // Here, we'll simulate the request using a setTimeout function
+      setTimeout(function() {
+        // Display a success message or perform any other actions
+        alert('Recommendation sent successfully');
+
+        // Clear the recommendation text area
+        document.getElementById('recommendationText').value = '';
+
+        // Close the modal
+        $('#recommendModal').modal('hide');
+      }, 1000); // Simulating a delay of 1 second
     }
-</script>
+  </script>
 
 
 
