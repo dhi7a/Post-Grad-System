@@ -62,24 +62,22 @@ class VerificationController extends Controller
     public function handleVerificationCode(Request $request)
     {
         // Validate the request data
-        $validatedData = $request->validate([
+        $request->validate([
             'verification_code' => 'required',
         ]);
 
        // Find the associated verification code for the user
        $phone = PhoneNumbers::where('user_id', Auth::id())
-       ->where('phone_number', $request->session()->get('phone_number'))
        ->where('code', $request->verification_code)
        ->first();
 
-   if ($phone) {
-       // Mark the phone number as verified
-       $phone->is_verified = true;
-       $phone->save();
+        if ($phone) {
+            // Mark the phone number as verified
+            $phone->is_verified = true;
+            $phone->save();
 
-        // Redirect the user to a different page or provide feedback
-        return redirect('/Student');
-    }
+            return redirect('/Student');
+        }
         // Verification failed
         return back()->withErrors(['verification_code' => 'Invalid verification code. Please try again.']);
     }
