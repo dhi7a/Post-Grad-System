@@ -4,6 +4,10 @@
         {{ Session::get('success')}}
     </div>
     @endif
+    <div class="alert alert-primary alert-dismissible fade show" role="alert" style="padding: 1.5rem; border-radius: 0.5rem;">
+        <strong>Step 2 of 11:</strong> This is the second step of the application process.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <form action="{{ route('subjects.store') }}" method="POST" enctype="multipart/form-data">
         <div class="col-md-12">
             <div class="card">
@@ -12,6 +16,7 @@
                         {{Session::get('Success')}}
                     </div>
                 @endif
+
                 <div class="card-header">
                     <legend>School Examinations For Which Reults Are known {{$count}}</legend>
                     <p>Indicate 'O' Level Mathematics And English Subjects Only, Then 'A' Level Subjects</p>
@@ -33,7 +38,7 @@
                                             <option value="" selected disabled>Select level</option>
                                             <option value="A level">A level</option>
                                             <option value="O level">O level</option>
-                                            {{-- <option value="Other">Other</option> --}}
+                                            <option value="Other">Other</option>
                                         </select>
 
                                         @error('level')
@@ -68,10 +73,14 @@
                             <label for="level">Grade/Class</label>
                             <select wire:model="grade" class="form-control" required>
                                 <option value="" selected disabled>Select Grade</option>
-                                <option value="Distinction">Distinction</option>
-                                <option value="Credit">Credit</option>
-                                <option value="Pass">Pass</option>
-                                <option value="Fail">Fail</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                {{-- <option value="F">F</option>
+                                <option value="O">O</option>
+                                <option value="U">U</option> --}}
                                 {{-- <option value="Other">Other</option> --}}
                             </select>
                         </div>

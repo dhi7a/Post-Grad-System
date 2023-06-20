@@ -4,6 +4,10 @@
         {{ Session::get('success')}}
     </div>
     @endif
+    <div class="alert alert-primary alert-dismissible fade show" role="alert" style="padding: 1.5rem; border-radius: 0.5rem;">
+        <strong>Step 5 of 11:</strong> This is the fifth step in your application process.You are now halfway towards successfully completing your application.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 
     <form action="{{ route('university-studies.store') }}" method="POST" enctype="multipart/form-data">
         <div class="col-md-12">

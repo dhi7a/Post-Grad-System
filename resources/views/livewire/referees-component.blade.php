@@ -1,5 +1,9 @@
 <div>
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
+    <div class="alert alert-primary alert-dismissible fade show" role="alert" style="padding: 1.5rem; border-radius: 0.5rem;">
+        <strong>Step 10 of 11:</strong> This is the tenth step of the application process. The last stretch.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <form wire:submit.prevent="addReferee">
         <div class="col-md-12">
             <div class="card">

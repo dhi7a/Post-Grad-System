@@ -27,6 +27,11 @@
                         @endif
                     </div>
                     <div class="col-md-12">
+
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert" style="padding: 1.5rem; border-radius: 0.5rem;">
+                            <strong>Step 1 of 11:</strong> This is the first step of the application process.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                         <div class="card">
                             <div class="card-header">
                                 <legend>Programme Details</legend>

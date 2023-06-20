@@ -151,6 +151,9 @@ class ApplicationController extends Controller
         // Find the application by ID
         $application = Application::findOrFail($id);
 
+        $application->status = 'Rejected';
+        $application->save();
+
         // Perform actions to reject the application
         // For example, update the application status, notify the applicant, etc.
 
@@ -158,15 +161,20 @@ class ApplicationController extends Controller
         return redirect()->back()->with('success', 'Application rejected successfully.');
     }
 
-    public function sendRecommendation(Request $request)
-{
-    // Retrieve the recommendation from the request
-    $recommendation = $request->input('recommendation');
+    public function sendRecommendation(Request $request, $id)
+    {
+        // Retrieve the recommendation from the request
+        $recommendation = $request->input('recommendation');
 
-    // Send the recommendation to the applicant (you can use email, notifications, etc.)
+        // Find the application by ID
+        $application = Application::findOrFail($id);
 
-    // Return a response indicating the recommendation was sent successfully
-    return response()->json(['message' => 'Recommendation sent'], 200);
-}
+        // Perform actions to send the recommendation
+        // For example, update the application status, save the recommendation, notify the applicant, etc.
+
+        // Return a response indicating the recommendation was sent successfully
+        return response()->json(['message' => 'Recommendation sent'], 200);
+    }
+
 
 }

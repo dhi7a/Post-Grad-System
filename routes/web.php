@@ -150,7 +150,8 @@ Route::group(['middleware' => ['auth', 'role:administrator']], function () {
     Route::post('/application/{id}/accept', [ApplicationController::class, 'accept'])->name('application.accept');
     Route::post('/application/{id}/recommend', [ApplicationController::class, 'recommend'])->name('application.recommend');
     Route::post('/application/{id}/reject', [ApplicationController::class, 'reject'])->name('application.reject');
-    Route::post('/recommendation', 'ApplicationController@sendRecommendation')->name('recommendation.send');
+    Route::post('/application/{id}/recommendation', [ApplicationController::class, 'sendRecommendation'])->name('application.recommendation.send');
+
 
 });
 
