@@ -6,7 +6,7 @@
     </div>
     @endif
     <div class="alert alert-primary alert-dismissible fade show" role="alert" style="padding: 1.5rem; border-radius: 0.5rem;">
-        <strong>Step 7 of 11:</strong> This is the seventh step of the application process.
+        <strong>Step 6 of 11:</strong> This is the sixth step of the application process.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
@@ -17,8 +17,8 @@
     <div class="col-md-12">
         <div class="card">
            <div class="card-header">
-                <legend>Publications</legend>
-                <p>(Where Applicable)</p>
+                <legend style="color: black;"s>Publications</legend>
+                <p style="color: black;">(Where Applicable)</p>
            </div><br>
            <div class="card-body">
                <div class="form-group">

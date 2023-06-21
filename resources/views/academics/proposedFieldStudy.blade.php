@@ -16,8 +16,8 @@
         <div class="col-md-12">
             <div class="card">
                <div class="card-header">
-                    <legend>Proposed Field of Study</legend>
-                    <p>(Dissertation/Thesis Proposal)</p>
+                    <legend style="color: black;">Proposed Field of Study</legend>
+                    <p style="color: black;">(Dissertation/Thesis Proposal)</p>
                </div><br>
                <div class="card-body">
                    <div class="form-group">

@@ -108,7 +108,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="national_id">National ID No:</label>
-                                        <input type="text" name="national_id" id="national_id" class="form-control">
+                                        <input type="text" name="national_id" id="national_id" class="form-control" pattern="\d{2}-\d{7}-[A-Za-z]-\d{2}" title="Please enter a National ID in the format 00-0000000-A-00">
                                     </div>
 
                                     <div class="col-md-6">
@@ -133,7 +133,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="date_of_birth">Date of Birth:</label>
-                                        <input type="date" name="date_of_birth" id="date_of_birth" class="form-control">
+                                        <input type="date" name="date_of_birth" id="date_of_birth" class="form-control" max="{{ date('Y-m-d', strtotime('-21 years')) }}">
                                     </div>
 
                                     <div class="col-md-6">
@@ -149,7 +149,7 @@
                                     <div class="form-group row">
                                         <label for="gender" class="col-sm-4">Gender:</label>
                                         <div class="col-sm-4">
-                                            <select id="gender" class="form-control @error('gender') is-invalid @enderror" name="gender" required autocomplete="gender" class="form-control">
+                                            <select id="gender" @error('gender') is-invalid @enderror" name="gender" required autocomplete="gender" class="form-control">
                                                 <option value="">Select Gender</option>
                                                 <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
                                                 <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
@@ -195,9 +195,10 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="contact_number">Contact Number:</label>
-                                    <input type="text" name="contact_number" id="contact_number" class="form-control">
+                                    <input type="text" name="contact_number" id="contact_number" class="form-control" pattern="\+\d{1,3}\s?\(\d{1,3}\)\s?\d{3}-\d{4}" title="Please enter a phone number in the format +XXX (XXX) XXX-XXXX" required>
                                 </div>
                             </div>
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="email">Email:</label>
@@ -209,7 +210,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="home_phone">Home Telephone:</label>
-                                    <input type="text" name="home_phone" id="home_phone" class="form-control">
+                                    <input type="text" name="home_phone" id="home_phone" class="form-control" pattern="\+\d{1,3}\s?\(\d{1,3}\)\s?\d{3}-\d{4}" title="Please enter a phone number in the format +XXX (XXX) XXX-XXXX">
                                 </div>
                             </div>
 
@@ -221,7 +222,7 @@
                             </div>
                         </div><br>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="contact_address">Contact Address:</label>
                                     <textarea name="contact_address" id="contact_address" class="form-control"></textarea>
@@ -245,7 +246,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-10">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="prospective_sponsors">Prospective Sponsors:</label>
                                     <textarea name="prospective_sponsors" id="prospective_sponsors" class="form-control"></textarea>

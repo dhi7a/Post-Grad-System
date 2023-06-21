@@ -5,7 +5,7 @@
     </div>
     @endif
     <div class="alert alert-primary alert-dismissible fade show" role="alert" style="padding: 1.5rem; border-radius: 0.5rem;">
-        <strong>Step 5 of 11:</strong> This is the fifth step in your application process.You are now halfway towards successfully completing your application.
+        <strong>Step 4 of 11:</strong> This is the fourth step in your application process.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
@@ -13,7 +13,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <legend>({{$count}}) {{$label}} </legend>
+                    <legend style="color: black;"> {{$label}} </legend>
+                    <p style="color: black;">Degrees indicated: <b>{{$count}}</b></p>
                 </div>
                 <br>
                 <div class="card-body">

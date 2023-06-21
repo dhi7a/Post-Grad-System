@@ -25,8 +25,8 @@
         @endif
          <div class="card">
             <div class="card-header">
-                 <legend>Diploma Details or Other Qualifications Held</legend>
-                 <p>e.g CIS, IMM etc</p>
+                 <legend style="color: black;">Diploma Details or Other Qualifications Held</legend>
+                 <p style="color: black;">e.g CIS, IMM etc</p>
             </div><br>
             <div class="card-body">
                 <div class="form-group">

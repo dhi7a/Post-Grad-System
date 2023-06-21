@@ -17,7 +17,7 @@ class DegreesComponent extends Component
     public $institution;
     public $date;
     public $level;
-    public $label = "Honours";
+    public $label = "Honours Degree";
 
 
     public function mount()
@@ -36,7 +36,7 @@ class DegreesComponent extends Component
         }
         elseif($this->count == 2)
         {
-            $this->label = 'PHD';
+            $this->label = 'PHD (if applicable)';
 
         }elseif($this->count >= 3){
             return redirect()->route('research-experience.index')->with('message', 'You have reached the minimum limit of degrees.');

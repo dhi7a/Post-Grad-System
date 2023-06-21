@@ -18,8 +18,9 @@
                 @endif
 
                 <div class="card-header">
-                    <legend>School Examinations For Which Reults Are known {{$count}}</legend>
-                    <p>Indicate 'O' Level Mathematics And English Subjects Only, Then 'A' Level Subjects</p>
+                    <legend style="color: black;">School Examinations For Which Reults Are known </legend>
+                    <p style="color: black;">Indicate 'O' Level Mathematics And English Subjects Only, Then indicate 'A' Level Subjects
+                        <br> <b>(Subjects indicated:{{$count}})</b></p>
                 </div><br>
                 <div class="card-body">
                     <div class="form-group">
