@@ -3,13 +3,17 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ApplicationFinishedController;
 use App\Http\Controllers\UniversityStudiesController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers;
 use App\Http\Controllers\DissertationController;
 use App\Http\Controllers\DiplomaController;
 use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\EmploymentExperienceController;
+use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\PersonalDetailsController;
 use App\Http\Controllers\ProposedFieldStudyController;
 use App\Http\Controllers\RefereesController;
@@ -80,23 +84,6 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 });
 
 // Routes for Student Role
-Route::group(['middleware' => ['auth', 'role:student']], function () {
-    Route::post('wizard/step1', 'NewWizardController@step1')->name('step1');
-    Route::post('wizard/step2', 'NewWizardController@step2')->name('step2');
-    Route::post('wizard/step3', 'NewWizardController@step3')->name('step3');
-    Route::post('wizard/step4', 'NewWizardController@step4')->name('step4');
-    Route::post('wizard/step5', 'NewWizardController@step5')->name('step5');
-    Route::post('wizard/step6', 'NewWizardController@step6')->name('step6');
-    Route::post('wizard/step7', 'NewWizardController@step7')->name('step7');
-    Route::post('wizard/step8', 'NewWizardController@step8')->name('step8');
-    Route::post('wizard/step9', 'NewWizardController@step9')->name('step9');
-    Route::post('wizard/step10', 'NewWizardController@step10')->name('step10');
-    Route::post('wizard/step11', 'NewWizardController@step11')->name('step11');
-    // Route::post('wizard/step12', 'WizardController@step2')->name('step2');
-    // Add routes for the remaining stages
-});
-
-// Routes for Student Role
 // Route::group(['middleware' => ['auth', 'role:student', 'verified', 'verified.number']], function () {
 Route::group(['middleware' => ['auth', 'role:student', 'verified']], function () {
     // Route::get('/Student', 'App\Http\Controllers\StudentController@index')->middleware(['verified.number'])->name('student-dashboard');
@@ -129,6 +116,10 @@ Route::group(['middleware' => ['auth', 'role:student', 'verified']], function ()
     Route::get('/subjects', [SubjectsController::class, 'index'])->name('subjects.index');
     Route::post('/subjects', [SubjectsController::class, 'store'])->name('subjects.store');
     Route::get('/finished', [ApplicationFinishedController::class, 'index'])->name('finished.index');
+    Route::get('/documents', [DocumentsController::class, 'index'])->name('documents.index');
+    Route::post('/documents', [DocumentsController::class, 'store'])->name('documents.store');
+    // Route::get('/documents/download/{filename}', [DocumentsController::class, 'download'])->name('documents.download');
+
 });
 
 
@@ -136,24 +127,44 @@ Route::group(['middleware' => ['auth', 'role:student', 'verified']], function ()
 
 // Routes for Faculty Role
 Route::group(['middleware' => ['auth', 'role:faculty']], function () {
-    Route::get('Faculty_dashboard', 'App\Http\Controllers\FacultyController@index')->name('faculty-dashboard');
+    Route::get('/faculty-dashboard', [FacultyController::class, 'index'])->name('faculty-dashboard');
+    // Route::get('/applications/{id}', [FacultyController::class, 'show'])->name('applications.show');
+    Route::post('/faculty/{id}/accept', [FacultyController::class, 'accept'])->name('faculty.accept');
+    Route::post('/faculty/{id}/recommend', [FacultyController::class, 'recommend'])->name('faculty.recommend');
+    Route::post('/faculty/{id}/reject', [FacultyController::class, 'reject'])->name('faculty.reject');
+    Route::get('faculty/show/{id}', 'App\Http\Controllers\FacultyController@show')->name('faculty.show');
+
+
 });
+// Route::prefix('faculty')->name('faculty.')->group(function () {
+
+// });
 
 // Routes for Administrator Role
 Route::group(['middleware' => ['auth', 'role:administrator']], function () {
     Route::get('admin', 'App\Http\Controllers\AdminController@index')->name('admin-dashboard');
-    Route::get('application/show/{id}', 'App\Http\Controllers\ApplicationController@show')->name('application.show');
-    // Route::get('/applications.show', [ApplicationController::class, 'show'])->name('application.show');
-    // Route::get('/applications.show', function () {
-    //     return view('user/application/show');
-    // });
-    Route::post('/application/{id}/accept', [ApplicationController::class, 'accept'])->name('application.accept');
-    Route::post('/application/{id}/recommend', [ApplicationController::class, 'recommend'])->name('application.recommend');
-    Route::post('/application/{id}/reject', [ApplicationController::class, 'reject'])->name('application.reject');
-    Route::post('/application/{id}/recommendation', [ApplicationController::class, 'sendRecommendation'])->name('application.recommendation.send');
+    Route::get('application/show/{id}', 'App\Http\Controllers\AdminController@show')->name('application.show');
+    Route::get('/application/{id}/accept', [AdminController::class, 'accept'])->name('application.accept');
+    Route::post('/application/{id}/recommend', [AdminController::class, 'recommend'])->name('application.recommend');
+    Route::post('/application/{id}/reject', [AdminController::class, 'reject'])->name('application.reject');
+    Route::post('/application/{id}/recommendation', [AdminController::class, 'sendRecommendation'])->name('application.recommendation.send');
 
-
+    // Route::get('/documents', [DocumentsController::class, 'index'])->name('documents.index');
+    // Route::post('/documents', [DocumentsController::class, 'store'])->name('documents.store');
+    Route::get('/documents/download/{filename}', 'DocumentsController@download')->name('documents.download');
 });
+
+// Routes for Department Role
+// Route::prefix('department')->name('department')->group(function () {
+    Route::group(['middleware' => ['auth', 'role:department']], function () {
+        Route::get('/department-dashboard', [DepartmentController::class, 'index'])->name('department-dashboard');
+        Route::get('department/show/{id}', 'App\Http\Controllers\DepartmentController@show')->name('department.show');
+
+        Route::post('/department-accept/{id}', 'App\Http\Controllers\DepartmentController@accept')->name('department.accept');
+        Route::post('/department.recommend/{id}', 'App\Http\Controllers\DepartmentController@recommend')->name('department.recommend');
+        Route::post('/department.reject/{id}', 'App\Http\Controllers\DepartmentController@reject')->name('department.reject');
+    });
+
 
 
 // Routes for Supervisor Role

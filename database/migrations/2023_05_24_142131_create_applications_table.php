@@ -13,6 +13,7 @@ class CreateApplicationsTable extends Migration
             $table->bigInteger('userid');
             // $table->integer('status');
             $table->string('status')->default('Pending');
+            // $table->string('flag')
             $table->timestamps();
         });
     }

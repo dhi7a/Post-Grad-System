@@ -205,7 +205,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <br>
-                                    <form method="POST" action="{{ route('application.accept', $application->id) }}" class="d-inline-block">
+                                    <form method="POST" action="{{ route('faculty.accept', $application->id) }}" class="d-inline-block">
                                         @csrf
                                         <button type="submit" class="btn btn-success">Accept</button>
                                     </form>
@@ -215,12 +215,12 @@
                                         <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#recommendModal">Recommend1</button>
                                     </form> --}}
 
-                                    <form method="POST" action="{{ route('application.recommend', $application->id) }}" class="d-inline-block">
+                                    <form method="POST" action="{{ route('faculty.recommend', $application->id) }}" class="d-inline-block">
                                         @csrf
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recommendModal">Recommend</button>
                                     </form>
 
-                                    <form method="POST" action="{{ route('application.reject', $application->id) }}" class="d-inline-block">
+                                    <form method="POST" action="{{ route('faculty.reject', $application->id) }}" class="d-inline-block">
                                         @csrf
                                         <button type="submit" class="btn btn-danger">Reject</button>
                                     </form>

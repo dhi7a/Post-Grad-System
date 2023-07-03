@@ -33,5 +33,6 @@ class Application extends Model
         'prospective_sponsors',
         'msu_staff_dependant',
         'msu_staff_member',
+        
     ];
 }

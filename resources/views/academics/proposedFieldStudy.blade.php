@@ -8,8 +8,8 @@
     <form action="{{ route('proposed-field.store') }}" method="POST">
         @csrf
         <div class="alert alert-primary alert-dismissible fade show" role="alert" style="padding: 1.5rem; border-radius: 0.5rem;">
-            <strong>Step 9 of 11:</strong> This is the ninth step in your application process.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <strong>Step 8 of 11:</strong> This is the eighth step of the application process. Almost there.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 
 

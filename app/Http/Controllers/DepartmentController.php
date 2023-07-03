@@ -2,46 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Application;
-use App\Models\PhdEnrollment;
+use App\Models\PersonalDetails;
 use App\Models\Diploma;
 use App\Models\Dissertation;
 use App\Models\Documents;
 use App\Models\EmploymentExperience;
 use App\Models\ProposedFieldStudy;
-use App\Models\PersonalDetails;
 use App\Models\Referees;
 use App\Models\RelevantPublications;
 use App\Models\ResearchExperience;
 use App\Models\Subjects;
 use App\Models\UniversityStudies;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
-class AdminController extends Controller
+class DepartmentController extends Controller
 {
-    //
-
     public function index()
     {
-        // code to show dashboard for administrator role
 
-        $applications = Application::join('personal_details','personal_details.userid','=','applications.userid')
-        ->join('proposed_field_studies','proposed_field_studies.userid','=','applications.userid')
-        ->select('applications.id as id','personal_details.forenames','personal_details.surname','proposed_field_studies.description')
+        $acceptedApplications = DB::table('applications')
+        ->join('personal_details', 'personal_details.userid', '=', 'applications.userid')
+        ->join('proposed_field_studies', 'proposed_field_studies.userid', '=', 'applications.userid')
+        ->select('applications.id as id', 'personal_details.forenames', 'personal_details.surname', 'proposed_field_studies.description')
+        ->where('applications.flagid', '1')
+        // ->where('applications.status', 'Accepted')
         ->get();
-        // dd($applications);
-        return view('admin.index',[
-            'applications' => $applications
 
 
-        ]);
+
+        return view('department.index', ['acceptedApplications' => $acceptedApplications]);
     }
 
-      public function show($id)
+    public function show($id)
     {
         // Retrieve the application by the authenticated user ID
         $application = Application::find($id);
@@ -64,7 +59,7 @@ class AdminController extends Controller
             // Check if personal details exist
             if ($personalDetails) {
                 // Return a view with the application and personal details data
-                return view('application.show', [
+                return view('department.show', [
                     'application' => $application,
                     'personalDetails' => $personalDetails,
                     'subjects' => $subjects,
@@ -88,26 +83,27 @@ class AdminController extends Controller
 
     public function accept($id)
     {
-       // Find the application by ID
-    $application = Application::findOrFail($id);
+        // Find the application by ID
+        $acceptedApplications = Application::findOrFail($id);
 
-    // Perform actions to accept the application
-    // For example, update the application status, notify the applicant, etc.
-    // $application->status = 'Accepted';
-    // $application->save();
-    $application->status = 'Accepted';
-    DB::table('applications')->where('id', $id)->increment('flagid');
-    //$acceptedApplications->flagid += 1;
-    $application->save();
+        // Perform actions to accept the application
+        // For example, update the application status, notify the applicant, etc.
+        $acceptedApplications->status = 'Accepted';
+         DB::table('applications')->where('id', $id)->increment('flagid');
+        //$acceptedApplications->flagid += 1;
+        $acceptedApplications->save();
 
-    // Redirect back or to a specific page
-    return redirect()->back()->with('success', 'Application accepted successfully.');
-}
+
+        return redirect()->back()->with('success', 'Application accepted successfully.');
+
+        // Redirect back or to a specific page
+
+    }
 
     public function recommend($id)
     {
         // Find the application by ID
-        $application = Application::findOrFail($id);
+        $acceptedApplications = Application::findOrFail($id);
 
         // Perform actions to recommend the application
         // For example, update the application status, notify the applicant, etc.
@@ -119,46 +115,16 @@ class AdminController extends Controller
     public function reject($id)
     {
         // Find the application by ID
-        $application = Application::findOrFail($id);
-
-        $application->status = 'Rejected';
-        $application->save();
+        $acceptedApplications = Application::findOrFail($id);
 
         // Perform actions to reject the application
         // For example, update the application status, notify the applicant, etc.
+        $acceptedApplications->status = 'Rejected';
+        $acceptedApplications->save();
 
         // Redirect back or to a specific page
         return redirect()->back()->with('success', 'Application rejected successfully.');
     }
-
-    public function sendRecommendation(Request $request, $id)
-    {
-        // Retrieve the recommendation from the request
-        $recommendation = $request->input('recommendation');
-
-        // Find the application by ID
-        $application = Application::findOrFail($id);
-
-        // Perform actions to send the recommendation
-        // For example, update the application status, save the recommendation, notify the applicant, etc.
-
-        // Return a response indicating the recommendation was sent successfully
-        return response()->json(['message' => 'Recommendation sent'], 200);
-    }
-
-
-    public function manageUsers()
-    {
-        // code to show/manage users for administrator role
-    }
-
-    public function managePayments()
-    {
-        // code to show/manage payments for administrator role
-    }
-
-    public function editProfile()
-    {
-        // code to edit profile for administrator role
-    }
 }
+
+

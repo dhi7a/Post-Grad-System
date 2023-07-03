@@ -7,6 +7,7 @@
     </x-slot> --}}
     <div class="container">
         <div class="row justify-content-center">
+            <div class="legend">Department Show</div>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">{{ __('Application Details') }}</div>
@@ -205,22 +206,22 @@
                             <div class="card">
                                 <div class="card-body">
                                     <br>
-                                    <form method="POST" action="{{ route('application.accept', $application->id) }}" class="d-inline-block">
+                                    <form method="POST" action="{{ route('department.accept', $application->id) }}" class="d-inline-block">
                                         @csrf
                                         <button type="submit" class="btn btn-success">Accept</button>
                                     </form>
-{{--
+                                    {{--
                                     <form method="POST" action="{{ route('application.recommend', $application->id) }}" class="d-inline-block">
                                         @csrf
                                         <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#recommendModal">Recommend1</button>
                                     </form> --}}
 
-                                    <form method="POST" action="{{ route('application.recommend', $application->id) }}" class="d-inline-block">
+                                    <form method="POST" action="{{ route('department.recommend', $application->id) }}" class="d-inline-block">
                                         @csrf
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recommendModal">Recommend</button>
                                     </form>
 
-                                    <form method="POST" action="{{ route('application.reject', $application->id) }}" class="d-inline-block">
+                                    <form method="POST" action="{{ route('department.reject', $application->id) }}" class="d-inline-block">
                                         @csrf
                                         <button type="submit" class="btn btn-danger">Reject</button>
                                     </form>

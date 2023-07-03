@@ -85,6 +85,31 @@
                     <span>Notifications</span>
                 </a>
             </li>
+        @elseif (Auth::user()->hasRole('department'))
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#">
+                    <i class="bi bi-house"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#">
+                    <i class="bi bi-truck"></i>
+                    <span>Department1</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#">
+                    <i class="bi bi-flag"></i>
+                    <span>Downloads</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#">
+                    <i class="bi bi-pin-map-fill"></i>
+                    <span>Notifications</span>
+                </a>
+            </li>
         @elseif (Auth::user()->hasRole('supervisor'))
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#">
