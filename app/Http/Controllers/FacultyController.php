@@ -35,50 +35,6 @@ class FacultyController extends Controller
 
 
 
-
-    // public function show($id)
-    // {
-    //     // Retrieve the application by the authenticated user ID
-    //     $application = Application::find($id);
-
-    //     // Check if the application exists
-    //     if ($application) {
-    //         // Retrieve the associated personal details
-    //         $personalDetails = PersonalDetails::where('userid', $application->userid)->first();
-    //         $subjects = Subjects::where('userid', $application->userid)->get();
-    //         $diplomas = Diploma::where('userid', $application->userid)->first();
-    //         $dissertations = Dissertation::where('userid', $application->userid)->first();
-    //         $universityStudies = UniversityStudies::where('userid', $application->userid)->first();
-    //         $researchExperiences = ResearchExperience::where('userid', $application->userid)->first();
-    //         $relevantPublications = RelevantPublications::where('userid', $application->userid)->first();
-    //         $employmentExperiences = EmploymentExperience::where('userid', $application->userid)->first();
-    //         $proposedFieldStudies = ProposedFieldStudy::where('userid', $application->userid)->first();
-    //         $referees = Referees::where('userid', $application->userid)->get();
-    //         $documents = Documents::where('userid', $application->userid)->get();
-
-    //         // Check if personal details exist
-    //         if ($personalDetails) {
-    //             // Return a view with the application and personal details data
-    //             return view('application.show', [
-    //                 'application' => $application,
-    //                 'personalDetails' => $personalDetails,
-    //                 'subjects' => $subjects,
-    //                 'diplomas' => $diplomas,
-    //                 'dissertations' => $dissertations,
-    //                 'universityStudies' => $universityStudies,
-    //                 'researchExperiences' => $researchExperiences,
-    //                 'relevantPublications' => $relevantPublications,
-    //                 'employmentExperiences' => $employmentExperiences,
-    //                 'proposedFieldStudies' => $proposedFieldStudies,
-    //                 'referees' => $referees,
-    //                 'documents' => $documents,
-    //             ]);
-    //         }
-    //     }
-
-    //     // Redirect to a page with an error message
-    //     return redirect()->route('dashboard')->with('error', 'Application not found.');
-    // }
     public function show($id)
     {
         // Retrieve the application by the authenticated user ID
@@ -139,6 +95,20 @@ class FacultyController extends Controller
 
         // Redirect back or to a specific page
         return redirect()->back()->with('success', 'Application accepted successfully.');
+    }
+
+    public function proceed($id)
+    {
+        // Find the application by ID
+        $application = Application::findOrFail($id);
+
+        $application->status = 'Proceed';
+        DB::table('applications')->where('id', $id)->increment('flagid');
+        //$acceptedApplications->flagid += 1;
+        $application->save();
+
+        // Redirect back or to a specific page
+        return redirect()->back()->with('success', 'Application fowarded successfully.');
     }
 
     public function recommend($id)

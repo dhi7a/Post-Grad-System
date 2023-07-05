@@ -205,19 +205,14 @@
                             <div class="card">
                                 <div class="card-body">
                                     <br>
-                                    <form method="POST" action="{{ route('application.accept', $application->id) }}" class="d-inline-block">
+                                    <form method="POST" action="{{ route('application.proceed', $application->id) }}" class="d-inline-block">
                                         @csrf
-                                        <button type="submit" class="btn btn-success">Accept</button>
+                                        <button type="submit" class="btn btn-success">Recommend Accepting</button>
                                     </form>
-{{--
-                                    <form method="POST" action="{{ route('application.recommend', $application->id) }}" class="d-inline-block">
-                                        @csrf
-                                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#recommendModal">Recommend1</button>
-                                    </form> --}}
 
                                     <form method="POST" action="{{ route('application.recommend', $application->id) }}" class="d-inline-block">
                                         @csrf
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recommendModal">Recommend</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recommendModal">Revise and resubmit</button>
                                     </form>
 
                                     <form method="POST" action="{{ route('application.reject', $application->id) }}" class="d-inline-block">
@@ -249,7 +244,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="recommendModalLabel">Recommendation</h5>
+                <h5 class="modal-title" id="recommendModalLabel">What to change</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

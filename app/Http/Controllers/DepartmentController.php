@@ -100,6 +100,20 @@ class DepartmentController extends Controller
 
     }
 
+    public function proceed($id)
+    {
+    // Find the application by ID
+    $application = Application::findOrFail($id);
+
+    $application->status = 'Proceed';
+    DB::table('applications')->where('id', $id)->increment('flagid');
+    //$acceptedApplications->flagid += 1;
+    $application->save();
+
+    // Redirect back or to a specific page
+    return redirect()->back()->with('success', 'Application fowarded successfully.');
+    }
+
     public function recommend($id)
     {
         // Find the application by ID

@@ -208,17 +208,12 @@
                                     <br>
                                     <form method="POST" action="{{ route('department.accept', $application->id) }}" class="d-inline-block">
                                         @csrf
-                                        <button type="submit" class="btn btn-success">Accept</button>
+                                        <button type="submit" class="btn btn-success">Recommend Accepting</button>
                                     </form>
-                                    {{--
-                                    <form method="POST" action="{{ route('application.recommend', $application->id) }}" class="d-inline-block">
-                                        @csrf
-                                        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#recommendModal">Recommend1</button>
-                                    </form> --}}
 
                                     <form method="POST" action="{{ route('department.recommend', $application->id) }}" class="d-inline-block">
                                         @csrf
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recommendModal">Recommend</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recommendModal">Revise and resubmit</button>
                                     </form>
 
                                     <form method="POST" action="{{ route('department.reject', $application->id) }}" class="d-inline-block">

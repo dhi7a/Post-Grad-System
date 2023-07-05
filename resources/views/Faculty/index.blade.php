@@ -48,7 +48,7 @@
                                                             <a href="{{ route('faculty.show',$application->id)}}">View Full Application</a>
                                                         {{-- <a href="{{ route('apply', ['id' => $application->id]) }}">View Full Application</a> --}}
                                                         </td>
-                                                        <td>{{ $application->status }}</td>
+                                                        {{-- <td>{{ $application->status }}</td> --}}
                                                     </tr>
                                                 @endforeach
                                             </tbody>
