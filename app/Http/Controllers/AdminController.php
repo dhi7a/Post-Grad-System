@@ -14,6 +14,8 @@ use App\Models\PersonalDetails;
 use App\Models\Referees;
 use App\Models\RelevantPublications;
 use App\Models\ResearchExperience;
+use App\Models\Revision;
+use App\Models\Rejections;
 use App\Models\Subjects;
 use App\Models\UniversityStudies;
 use Illuminate\Http\Request;
@@ -95,7 +97,7 @@ class AdminController extends Controller
     // For example, update the application status, notify the applicant, etc.
     // $application->status = 'Accepted';
     // $application->save();
-    $application->status = 'Accepted';
+    $application->status = '';
     DB::table('applications')->where('id', $id)->increment('flagid');
     //$acceptedApplications->flagid += 1;
     $application->save();
@@ -107,58 +109,75 @@ class AdminController extends Controller
 
     public function proceed($id)
     {
-    // Find the application by ID
-    $application = Application::findOrFail($id);
+        // Find the application by ID
+        $application = Application::findOrFail($id);
 
-    $application->status = 'Proceed';
-    DB::table('applications')->where('id', $id)->increment('flagid');
-    //$acceptedApplications->flagid += 1;
-    $application->save();
+        $application->status = 'Proceed';
+        $application->flagid = 1; // Set the flagid to 2
 
-    // Redirect back or to a specific page
-    return redirect()->back()->with('success', 'Application fowarded successfully.');
+        $application->save();
+
+        // Redirect back or to a specific page
+        return redirect()->back()->with('success', 'Application forwarded successfully.');
     }
+
 
     public function recommend($id)
     {
         // Find the application by ID
         $application = Application::findOrFail($id);
 
-        // Perform actions to recommend the application
-        // For example, update the application status, notify the applicant, etc.
+        $application->status = 'recommend';
+        DB::table('applications')->where('id', $id)->decrement('flagid');
+        //$acceptedApplications->flagid += 1;
+        $application->save();
 
         // Redirect back or to a specific page
         return redirect()->back()->with('success', 'Application recommended successfully.');
     }
 
-    public function reject($id)
+    public function revise(Request $request, $id)
+    {
+        // Find the application by ID
+        $application = Application::findOrFail($id);
+
+        $application->status = 'revise';
+        DB::table('applications')->where('id', $id)->decrement('flagid');
+        //$acceptedApplications->flagid += 1;
+        $application->save();
+
+        // Save the revision message
+        $message = $request->input('message');
+
+        $revision = new Revision();
+        $revision->applicationid = $application->id;
+        $revision->message = $message;
+        $revision->save();
+
+        // Redirect back or to a specific page
+        return redirect()->back()->with('success', 'Application recommended successfully.');
+    }
+
+    public function reject(Request $request, $id)
     {
         // Find the application by ID
         $application = Application::findOrFail($id);
 
         $application->status = 'Rejected';
+        DB::table('applications')->where('id', $id)->update(['flagid' => 0]);
+        //$acceptedApplications->flagid += 1;
         $application->save();
 
-        // Perform actions to reject the application
-        // For example, update the application status, notify the applicant, etc.
+        // Save the rejection message
+        $message = $request->input('message');
+
+        $reject = new Rejections();
+        $reject->application_id = $application->id;
+        $reject->message = $message;
+        $reject->save();
 
         // Redirect back or to a specific page
-        return redirect()->back()->with('success', 'Application rejected successfully.');
-    }
-
-    public function sendRecommendation(Request $request, $id)
-    {
-        // Retrieve the recommendation from the request
-        $recommendation = $request->input('recommendation');
-
-        // Find the application by ID
-        $application = Application::findOrFail($id);
-
-        // Perform actions to send the recommendation
-        // For example, update the application status, save the recommendation, notify the applicant, etc.
-
-        // Return a response indicating the recommendation was sent successfully
-        return response()->json(['message' => 'Recommendation sent'], 200);
+        return redirect()->back()->with('success', 'Application rejected.');
     }
 
 

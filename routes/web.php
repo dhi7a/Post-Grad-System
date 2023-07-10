@@ -133,6 +133,8 @@ Route::group(['middleware' => ['auth', 'role:faculty']], function () {
     Route::get('/faculty/{id}/proceed', [FacultyController::class, 'proceed'])->name('faculty.proceed');
     Route::post('/faculty/{id}/proceed', [FacultyController::class, 'proceed'])->name('faculty.proceed');
     Route::post('/faculty/{id}/recommend', [FacultyController::class, 'recommend'])->name('faculty.recommend');
+    Route::post('/faculty/{id}/revise', [FacultyController::class, 'revise'])->name('faculty.revise');
+    Route::get('/faculty/{id}/revise', [FacultyController::class, 'revise'])->name('faculty.revise');
     Route::post('/faculty/{id}/reject', [FacultyController::class, 'reject'])->name('faculty.reject');
     Route::get('faculty/show/{id}', 'App\Http\Controllers\FacultyController@show')->name('faculty.show');
 
@@ -149,6 +151,8 @@ Route::group(['middleware' => ['auth', 'role:administrator']], function () {
     Route::get('/application/{id}/accept', [AdminController::class, 'accept'])->name('application.accept');
     Route::get('/application/{id}/proceed', [AdminController::class, 'proceed'])->name('application.proceed');
     Route::post('/application/{id}/proceed', [AdminController::class, 'proceed'])->name('application.proceed');
+    Route::post('/application/{id}/revise', [AdminController::class, 'revise'])->name('application.revise');
+    Route::get('/application/{id}/revise', [AdminController::class, 'revise'])->name('application.revise');
     Route::post('/application/{id}/recommend', [AdminController::class, 'recommend'])->name('application.recommend');
     Route::post('/application/{id}/reject', [AdminController::class, 'reject'])->name('application.reject');
     Route::post('/application/{id}/recommendation', [AdminController::class, 'sendRecommendation'])->name('application.recommendation.send');
@@ -165,6 +169,8 @@ Route::group(['middleware' => ['auth', 'role:administrator']], function () {
         Route::get('department/show/{id}', 'App\Http\Controllers\DepartmentController@show')->name('department.show');
         Route::get('/department/{id}/proceed', [DepartmentController::class, 'proceed'])->name('department.proceed');
         Route::post('/department/{id}/proceed', [DepartmentController::class, 'proceed'])->name('department.proceed');
+        Route::post('/department/{id}/revise', [DepartmentController::class, 'revise'])->name('department.revise');
+        Route::get('/department/{id}/revise', [DepartmentController::class, 'revise'])->name('department.revise');
         Route::post('/department-accept/{id}', 'App\Http\Controllers\DepartmentController@accept')->name('department.accept');
         Route::post('/department.recommend/{id}', 'App\Http\Controllers\DepartmentController@recommend')->name('department.recommend');
         Route::post('/department.reject/{id}', 'App\Http\Controllers\DepartmentController@reject')->name('department.reject');

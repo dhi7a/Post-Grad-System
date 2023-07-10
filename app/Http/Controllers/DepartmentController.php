@@ -12,10 +12,14 @@ use App\Models\ProposedFieldStudy;
 use App\Models\Referees;
 use App\Models\RelevantPublications;
 use App\Models\ResearchExperience;
+use App\Models\Revision;
+use App\Models\Rejections;
 use App\Models\Subjects;
 use App\Models\UniversityStudies;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 
 
 class DepartmentController extends Controller
@@ -102,42 +106,144 @@ class DepartmentController extends Controller
 
     public function proceed($id)
     {
-    // Find the application by ID
-    $application = Application::findOrFail($id);
+        // Find the application by ID
+        $application = Application::findOrFail($id);
 
-    $application->status = 'Proceed';
-    DB::table('applications')->where('id', $id)->increment('flagid');
-    //$acceptedApplications->flagid += 1;
-    $application->save();
+        $application->status = 'Proceed';
+        $application->flagid = 2; // Set the flagid to 2
 
-    // Redirect back or to a specific page
-    return redirect()->back()->with('success', 'Application fowarded successfully.');
+        $application->save();
+
+        // Redirect back or to a specific page
+        return redirect()->back()->with('success', 'Application forwarded successfully.');
     }
+
 
     public function recommend($id)
     {
         // Find the application by ID
-        $acceptedApplications = Application::findOrFail($id);
+        $application = Application::findOrFail($id);
 
-        // Perform actions to recommend the application
-        // For example, update the application status, notify the applicant, etc.
+        $application->status = 'recommend';
+        DB::table('applications')->where('id', $id)->decrement('flagid');
+        //$acceptedApplications->flagid += 1;
+        $application->save();
 
         // Redirect back or to a specific page
         return redirect()->back()->with('success', 'Application recommended successfully.');
     }
 
-    public function reject($id)
+    // public function revise(Request $request, $id)
+    // {
+    //     // Find the application by ID
+    //     $application = Application::findOrFail($id);
+
+    //     $application->status = 'revise';
+    //     DB::table('applications')->where('id', $id)->decrement('flagid');
+    //     //$acceptedApplications->flagid += 1;
+    //     $application->save();
+
+    //     // Save the revision message, user name, and role
+    //     $message = $request->input('message');
+    //     $userName = $request->user()->name; // Assuming the user model has a 'name' attribute
+    //     $userRole = $request->user()->role; // Assuming the user model has a 'role' attribute
+
+    //     $revision = new Revision();
+    //     $revision->application_id = $application->id;
+    //     $revision->message = $message;
+    //     $revision->user_name = $userName;
+    //     $revision->user_role = $userRole;
+
+    //     // Ensure the user_role field is assigned before saving
+    //     $revision->user_role = $userRole ?? Auth::user()->roles->first()->name;
+
+    //     $revision->save();
+
+    //     // Redirect back or to a specific page
+    //     return redirect()->back()->with('success', 'Application recommended successfully.');
+    // }
+
+    public function revise(Request $request, $id)
+{
+    // Find the application by ID
+    $application = Application::findOrFail($id);
+
+    $application->status = 'revise';
+    DB::table('applications')->where('id', $id)->decrement('flagid');
+    //$acceptedApplications->flagid += 1;
+    $application->save();
+
+    // Save the revision message, user name, and role
+    $message = $request->input('message');
+    $userName = $request->user()->name; // Assuming the user model has a 'name' attribute
+    $userRole = $request->user()->role; // Assuming the user model has a 'role' attribute
+
+    $revision = new Revision();
+    $revision->application_id = $application->id;
+    $revision->message = $message;
+    $revision->user_name = $userName;
+    $revision->user_role = $userRole;
+
+    // Ensure the user_role field is assigned before saving
+    $revision->user_role = $userRole ?? Auth::user()->roles->first()->name;
+
+    $revision->save();
+
+    // Retrieve the revision message
+    $revisionMessage = $revision->message;
+
+    // Redirect back or to a specific page
+    return redirect()->back()->with([
+        'success' => 'Revisions sent successfully.'
+    ])->with(compact('revisionMessage'));
+}
+
+    // public function reject(Request $request, $id)
+    // {
+    //     // Find the application by ID
+    //     $application = Application::findOrFail($id);
+
+    //     $application->status = 'Rejected';
+    //     DB::table('applications')->where('id', $id)->update(['flagid' => 0]);
+    //     //$acceptedApplications->flagid += 1;
+    //     $application->save();
+
+    //     // Save the rejection message
+    //     $message = $request->input('message');
+
+    //     $reject = new Rejections();
+    //     $reject->application_id = $application->id;
+    //     $reject->message = $message;
+    //     $reject->save();
+
+    //     // Redirect back or to a specific page
+    //     return redirect()->back()->with('success', 'Application rejected.');
+    // }
+
+    public function reject(Request $request, $id)
     {
         // Find the application by ID
-        $acceptedApplications = Application::findOrFail($id);
+        $application = Application::findOrFail($id);
 
-        // Perform actions to reject the application
-        // For example, update the application status, notify the applicant, etc.
-        $acceptedApplications->status = 'Rejected';
-        $acceptedApplications->save();
+        $application->status = 'Rejected';
+        DB::table('applications')->where('id', $id)->update(['flagid' => 0]);
+        //$acceptedApplications->flagid += 1;
+        $application->save();
+
+        // Save the rejection message
+        $message = $request->input('message');
+
+        $reject = new Rejections();
+        $reject->application_id = $application->id;
+        $reject->message = $message;
+        $reject->save();
+
+        // Retrieve the rejection message
+        $rejectionMessage = $reject->message;
 
         // Redirect back or to a specific page
-        return redirect()->back()->with('success', 'Application rejected successfully.');
+        return redirect()->back()->with('success', 'Application rejected.')
+            ->with('rejectionMessage', $rejectionMessage);
     }
 }
 

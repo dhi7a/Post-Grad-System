@@ -39,6 +39,19 @@
                             <p><strong>Application Status:</strong> Unknown</p>
                         @endif
                     </div>
+                    <div>
+                        @if($application->status === 'Rejected')
+                            <h4>Rejection Message</h4>
+                            <p>{{ $rejectionMessage ?? 'No rejection message available.' }}</p>
+                        @endif
+
+                        @if($application->status === 'revise')
+                            <h4>Revision Message</h4>
+                            <p>{{ session('revisionMessage') ?? 'No revision message available.' }}</p>
+                        @endif
+
+                    </div>
+
 
 
                     <div class="card">
@@ -217,7 +230,8 @@
 
                                     <form method="POST" action="{{ route('application.reject', $application->id) }}" class="d-inline-block">
                                         @csrf
-                                        <button type="submit" class="btn btn-danger">Reject</button>
+                                        {{-- <button type="submit" class="btn btn-danger">Reject</button> --}}
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#rejectModal">Reject</button>
                                     </form>
                                 </div>
                             </div>
@@ -249,13 +263,17 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <textarea id="recommendationText" class="form-control" rows="3" placeholder="Enter your recommendation"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="sendRecommendation()">Send</button>
-            </div>
+            <form action="{{route ('application.revise', $application->id) }}" method="post">
+                @csrf
+                <div class="modal-body">
+                    <textarea id="recommendationText" name="message" class="form-control" rows="3" placeholder="Enter your recommendation"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    {{-- <button type="button" class="btn btn-primary" onclick="sendRecommendation()">Send</button> --}}
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+              </form>
         </div>
     </div>
 </div>
@@ -281,91 +299,28 @@
     </div>
   </div>
 
-  <script>
-    $(document).ready(function() {
-      $('#recommendModal').modal({
-        backdrop: 'static',
-        keyboard: false
-      });
-    });
-
-    // Event handler for the "Send" button in the modal
-    function sendRecommendation() {
-      var recommendation = document.getElementById('recommendationText').value;
-
-      // Replace the AJAX request with your own code to send the recommendation to the applicant
-      // Here, we'll simulate the request using a setTimeout function
-      setTimeout(function() {
-        // Display a success message or perform any other actions
-        alert('Recommendation sent successfully');
-
-        // Clear the recommendation text area
-        document.getElementById('recommendationText').value = '';
-
-        // Close the modal
-        $('#recommendModal').modal('hide');
-      }, 1000); // Simulating a delay of 1 second
-    }
-  </script>
-  <script>
-  const nodemailer = require('nodemailer');
-
-// Function to send the recommendation as an email
-function sendRecommendationToApplicant(recommendation, recipientEmail) {
-  return new Promise(function(resolve, reject) {
-    // Create a Nodemailer transporter using your email service provider's credentials
-    let transporter = nodemailer.createTransport({
-      host: process.env.MAIL_HOST,
-      port: process.env.MAIL_PORT,
-      secure: true,
-      auth: {
-        user: process.env.MAIL_USERNAME,
-        pass: process.env.MAIL_PASSWORD
-      }
-    });
-
-    // Define the email message
-    let mailOptions = {
-      from: process.env.MAIL_FROM_ADDRESS,
-      to: recipientEmail,
-      subject: 'Recommendation',
-      text: recommendation
-    };
-
-    // Send the email
-    transporter.sendMail(mailOptions, function(error, info) {
-      if (error) {
-        reject(error);
-      } else {
-        resolve();
-      }
-    });
-  });
-}
-
-// Event handler for the "Send" button in the modal
-function sendRecommendation() {
-  var recommendation = document.getElementById('recommendationText').value;
-  var recipientEmail = 'recipient@example.com'; // Replace with the recipient's email address
-
-  sendRecommendationToApplicant(recommendation, recipientEmail)
-    .then(function() {
-      // Display a success message or perform any other actions
-      alert('Recommendation sent successfully');
-
-      // Clear the recommendation text area
-      document.getElementById('recommendationText').value = '';
-
-      // Close the modal
-      $('#recommendModal').modal('hide');
-    })
-    .catch(function(error) {
-      console.error('Error sending recommendation email:', error);
-    });
-}
-
-  </script>
-
+  <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rejectModalLabel">Reject Application</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('faculty.reject', $application->id) }}" method="post">
+                @csrf
+                <div class="modal-body">
+                    <textarea id="rejectText" name="message" class="form-control" rows="3" placeholder="Enter your rejection reason"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Reject</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 <!-- Include jQuery -->

@@ -52,7 +52,7 @@
                             <!-- To -->
                             <div class="col-md-6">
                                 <label for="to">To:</label>
-                                <input type="date" name="to" value="{{ old('to') }}" class="form-control" required>
+                                <input type="date" name="to" value="{{ old('to') }}" class="form-control">
                                 @error('to')
                                     <span>{{ $message }}</span>
                                 @enderror <br>

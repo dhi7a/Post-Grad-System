@@ -42,6 +42,7 @@ class ApplicationController extends Controller
                 $newApplication = new Application();
                 $newApplication->userid=Auth::id();
                 $newApplication->status=0;
+                $newApplication->flagid=0;
 
                 $newApplication->save();
             }
@@ -61,12 +62,14 @@ class ApplicationController extends Controller
         $validatedData = $request->validate([
             'userid' => 'required',
             'status' => 'required',
+            'flagid' => 'required',
 
         ]);
 
         // Create a new application record in the database
         $application = Application::create($validatedData);
 
+        $application->flagid = 0;
         // Redirect or return a response
         return redirect()->route('subjects.index')->with('success', 'Personal details submitted successfully!');
         // return redirect()->route('diploma.index')->with('success', 'details submitted succesfully.');

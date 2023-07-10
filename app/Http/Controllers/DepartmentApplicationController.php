@@ -59,8 +59,10 @@ class DepartmentApplicationController extends Controller
         // Find the application by ID
         $application = Application::findOrFail($id);
 
-        // Perform actions to recommend the application
-        // For example, update the application status, notify the applicant, etc.
+        $application->status = 'recommend';
+        DB::table('applications')->where('id', $id)->decrement('flagid');
+        //$acceptedApplications->flagid += 1;
+        $application->save();
 
         // Redirect back or to a specific page
         return redirect()->back()->with('success', 'Application recommended successfully.');

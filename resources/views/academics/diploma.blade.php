@@ -49,6 +49,7 @@
                                 <option value="Credit">Credit</option>
                                 <option value="Pass">Pass</option>
                                 <option value="Fail">Fail</option>
+                                <option value="None">None</option>
                                 {{-- <option value="Other">Other</option> --}}
                             </select>
                     </div>
