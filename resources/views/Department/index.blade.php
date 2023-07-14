@@ -1,7 +1,5 @@
 <!-- resources/views/department/index.blade.php -->
 <x-app-layout>
-<p class="welcome-message">Welcome, {{ Auth::user()->name }}!</p>
-    <h1>Accepted Applications from PostGrad</h1>
             <div class="card">
                 <div class="container">
                     <div class="row justify-content-center">

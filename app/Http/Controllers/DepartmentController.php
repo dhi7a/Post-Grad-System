@@ -30,7 +30,7 @@ class DepartmentController extends Controller
         $acceptedApplications = DB::table('applications')
         ->join('personal_details', 'personal_details.userid', '=', 'applications.userid')
         ->join('proposed_field_studies', 'proposed_field_studies.userid', '=', 'applications.userid')
-        ->select('applications.id as id', 'personal_details.forenames', 'personal_details.surname', 'proposed_field_studies.description')
+        ->select('applications.id as id', 'personal_details.forenames', 'personal_details.surname', 'proposed_field_studies.description','applications.status')
         ->where('applications.flagid', '1')
         // ->where('applications.status', 'Accepted')
         ->get();
@@ -59,6 +59,10 @@ class DepartmentController extends Controller
             $proposedFieldStudies = ProposedFieldStudy::where('userid', $application->userid)->first();
             $referees = Referees::where('userid', $application->userid)->get();
             $documents = Documents::where('userid', $application->userid)->get();
+            $rejectionMessage = DB::table('rejections')->get();
+            $revisionMessages = DB::table('revisions')->get();
+
+
 
             // Check if personal details exist
             if ($personalDetails) {
@@ -76,6 +80,8 @@ class DepartmentController extends Controller
                     'proposedFieldStudies' => $proposedFieldStudies,
                     'referees' => $referees,
                     'documents' => $documents,
+                    'rejectionMessage' => $rejectionMessage,
+                    'revisionMessages' => $revisionMessages,
                 ]);
             }
         }
@@ -115,7 +121,8 @@ class DepartmentController extends Controller
         $application->save();
 
         // Redirect back or to a specific page
-        return redirect()->back()->with('success', 'Application forwarded successfully.');
+        // return redirect()->back()->with('success', 'Application forwarded successfully.');
+        return redirect()->route('dashboard');
     }
 
 
@@ -130,95 +137,44 @@ class DepartmentController extends Controller
         $application->save();
 
         // Redirect back or to a specific page
-        return redirect()->back()->with('success', 'Application recommended successfully.');
+        // return redirect()->back()->with('success', 'Application recommended successfully.');
+        return redirect()->route('dashboard');
     }
 
-    // public function revise(Request $request, $id)
-    // {
-    //     // Find the application by ID
-    //     $application = Application::findOrFail($id);
-
-    //     $application->status = 'revise';
-    //     DB::table('applications')->where('id', $id)->decrement('flagid');
-    //     //$acceptedApplications->flagid += 1;
-    //     $application->save();
-
-    //     // Save the revision message, user name, and role
-    //     $message = $request->input('message');
-    //     $userName = $request->user()->name; // Assuming the user model has a 'name' attribute
-    //     $userRole = $request->user()->role; // Assuming the user model has a 'role' attribute
-
-    //     $revision = new Revision();
-    //     $revision->application_id = $application->id;
-    //     $revision->message = $message;
-    //     $revision->user_name = $userName;
-    //     $revision->user_role = $userRole;
-
-    //     // Ensure the user_role field is assigned before saving
-    //     $revision->user_role = $userRole ?? Auth::user()->roles->first()->name;
-
-    //     $revision->save();
-
-    //     // Redirect back or to a specific page
-    //     return redirect()->back()->with('success', 'Application recommended successfully.');
-    // }
 
     public function revise(Request $request, $id)
-{
-    // Find the application by ID
-    $application = Application::findOrFail($id);
+    {
+        // Find the application by ID
+        $application = Application::findOrFail($id);
 
-    $application->status = 'revise';
-    DB::table('applications')->where('id', $id)->decrement('flagid');
-    //$acceptedApplications->flagid += 1;
-    $application->save();
+        $application->status = 'Revise and resubmit';
+        DB::table('applications')->where('id', $id)->decrement('flagid');
+        //$acceptedApplications->flagid += 1;
+        $application->save();
 
-    // Save the revision message, user name, and role
-    $message = $request->input('message');
-    $userName = $request->user()->name; // Assuming the user model has a 'name' attribute
-    $userRole = $request->user()->role; // Assuming the user model has a 'role' attribute
+        // Save the revision message
+        $message = $request->input('message');
+        $userName = $request->user()->name; 
+        $userRole = $request->user()->role;
 
-    $revision = new Revision();
-    $revision->application_id = $application->id;
-    $revision->message = $message;
-    $revision->user_name = $userName;
-    $revision->user_role = $userRole;
+        $revision = new Revision();
+        $revision->application_id = $application->id;
+        $revision->message = $message;
+        $revision->user_name = $userName;
+        $revision->user_role = $userRole;
+        $revision->save();
 
-    // Ensure the user_role field is assigned before saving
-    $revision->user_role = $userRole ?? Auth::user()->roles->first()->name;
+        // Retrieve the revision messages
+        $revisionMessages = DB::table('revisions')->get();
 
-    $revision->save();
+        // Redirect back or to a specific page
+        return redirect()->back()->with([
+            'success' => 'Application recommended successfully.',
+            'revisionMessages' => $revisionMessages
+        ]);
+    }
 
-    // Retrieve the revision message
-    $revisionMessage = $revision->message;
 
-    // Redirect back or to a specific page
-    return redirect()->back()->with([
-        'success' => 'Revisions sent successfully.'
-    ])->with(compact('revisionMessage'));
-}
-
-    // public function reject(Request $request, $id)
-    // {
-    //     // Find the application by ID
-    //     $application = Application::findOrFail($id);
-
-    //     $application->status = 'Rejected';
-    //     DB::table('applications')->where('id', $id)->update(['flagid' => 0]);
-    //     //$acceptedApplications->flagid += 1;
-    //     $application->save();
-
-    //     // Save the rejection message
-    //     $message = $request->input('message');
-
-    //     $reject = new Rejections();
-    //     $reject->application_id = $application->id;
-    //     $reject->message = $message;
-    //     $reject->save();
-
-    //     // Redirect back or to a specific page
-    //     return redirect()->back()->with('success', 'Application rejected.');
-    // }
 
     public function reject(Request $request, $id)
     {
@@ -232,18 +188,24 @@ class DepartmentController extends Controller
 
         // Save the rejection message
         $message = $request->input('message');
+        $userName = $request->user()->name; 
+        $userRole = $request->user()->role;
 
         $reject = new Rejections();
         $reject->application_id = $application->id;
         $reject->message = $message;
+        $reject->user_name = $userName;
+        $reject->user_role = $userRole;
         $reject->save();
 
         // Retrieve the rejection message
-        $rejectionMessage = $reject->message;
+        $rejectionMessage = DB::table('rejections')->get();
 
-        // Redirect back or to a specific page
-        return redirect()->back()->with('success', 'Application rejected.')
-            ->with('rejectionMessage', $rejectionMessage);
+        return redirect()->back()->with([
+            'success' => 'Application rejected.',
+            'rejectionMessage' => $rejectionMessage
+        ]);
+
     }
 }
 

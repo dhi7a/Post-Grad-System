@@ -29,6 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail, LaratrustUser
         'name',
         'email',
         'password',
+        'is_verified',
     ];
 
     /**
@@ -53,4 +54,6 @@ class User extends Authenticatable implements MustVerifyEmail, LaratrustUser
     {
         return $this->hasOne(Profile::class);
     }
+
+
 }

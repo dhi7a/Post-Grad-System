@@ -33,7 +33,7 @@ class AdminController extends Controller
 
         $applications = Application::join('personal_details','personal_details.userid','=','applications.userid')
         ->join('proposed_field_studies','proposed_field_studies.userid','=','applications.userid')
-        ->select('applications.id as id','personal_details.forenames','personal_details.surname','proposed_field_studies.description')
+        ->select('applications.id as id','personal_details.forenames','personal_details.surname','proposed_field_studies.description','applications.status')
         ->get();
         // dd($applications);
         return view('admin.index',[
@@ -62,6 +62,10 @@ class AdminController extends Controller
             $proposedFieldStudies = ProposedFieldStudy::where('userid', $application->userid)->first();
             $referees = Referees::where('userid', $application->userid)->get();
             $documents = Documents::where('userid', $application->userid)->get();
+            $rejectionMessage = DB::table('rejections')->get();
+            $revisionMessages = DB::table('revisions')->get();
+
+
 
             // Check if personal details exist
             if ($personalDetails) {
@@ -79,6 +83,10 @@ class AdminController extends Controller
                     'proposedFieldStudies' => $proposedFieldStudies,
                     'referees' => $referees,
                     'documents' => $documents,
+                    'rejectionMessage' => $rejectionMessage,
+                    'revisionMessages' => $revisionMessages,
+
+
                 ]);
             }
         }
@@ -91,19 +99,19 @@ class AdminController extends Controller
     public function accept($id)
     {
        // Find the application by ID
-    $application = Application::findOrFail($id);
+        $application = Application::findOrFail($id);
 
-    // Perform actions to accept the application
-    // For example, update the application status, notify the applicant, etc.
-    // $application->status = 'Accepted';
-    // $application->save();
-    $application->status = '';
-    DB::table('applications')->where('id', $id)->increment('flagid');
-    //$acceptedApplications->flagid += 1;
-    $application->save();
+        // Perform actions to accept the application
+        // For example, update the application status, notify the applicant, etc.
+        // $application->status = 'Accepted';
+        // $application->save();
+        $application->status = '';
+        DB::table('applications')->where('id', $id)->increment('flagid');
+        //$acceptedApplications->flagid += 1;
+        $application->save();
 
-    // Redirect back or to a specific page
-    return redirect()->back()->with('success', 'Application accepted successfully.');
+        // Redirect back or to a specific page
+        return redirect()->back()->with('success', 'Application accepted successfully.');
     }
 
 
@@ -141,22 +149,33 @@ class AdminController extends Controller
         // Find the application by ID
         $application = Application::findOrFail($id);
 
-        $application->status = 'revise';
+        $application->status = 'Revise and resubmit';
         DB::table('applications')->where('id', $id)->decrement('flagid');
         //$acceptedApplications->flagid += 1;
         $application->save();
 
         // Save the revision message
         $message = $request->input('message');
+        $userName = $request->user()->name;
+        $userRole = $request->user()->role; 
 
         $revision = new Revision();
-        $revision->applicationid = $application->id;
+        $revision->application_id = $application->id;
         $revision->message = $message;
+        $revision->user_name = $userName;
+        $revision->user_role = $userRole;
         $revision->save();
 
+        // Retrieve the revision messages
+        $revisionMessages = DB::table('revisions')->get();
+
         // Redirect back or to a specific page
-        return redirect()->back()->with('success', 'Application recommended successfully.');
+        return redirect()->back()->with([
+            'success' => 'Application recommended successfully.',
+            'revisionMessages' => $revisionMessages
+        ]);
     }
+
 
     public function reject(Request $request, $id)
     {
@@ -170,16 +189,26 @@ class AdminController extends Controller
 
         // Save the rejection message
         $message = $request->input('message');
+        $userName = $request->user()->name;
+        $userRole = $request->user()->role; 
+
 
         $reject = new Rejections();
         $reject->application_id = $application->id;
         $reject->message = $message;
+        $reject->user_name = $userName;
+        $reject->user_role = $userRole;
         $reject->save();
 
-        // Redirect back or to a specific page
-        return redirect()->back()->with('success', 'Application rejected.');
-    }
+        // Retrieve the rejection message
+        $rejectionMessage = DB::table('rejections')->get();
 
+        return redirect()->back()->with([
+            'success' => 'Application rejected.',
+            'rejectionMessage' => $rejectionMessage
+        ]);
+
+    }
 
     public function manageUsers()
     {

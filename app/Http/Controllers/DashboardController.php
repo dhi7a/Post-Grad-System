@@ -10,7 +10,7 @@ use App\Models\PhoneNumbers;
 
 
 
-class DashboardController extends Controller
+class DashboardController extends Controller    
 {
     /**
      * Display a listing of the resource.
@@ -18,6 +18,7 @@ class DashboardController extends Controller
     public function index()
     {
         $user = Auth::user();
+        // dd($user);
 
         if ($user->hasRole('student')) {
             $phone = PhoneNumbers::where('user_id', $user->id)->first();

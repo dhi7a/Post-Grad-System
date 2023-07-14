@@ -60,7 +60,8 @@ class SmsController extends Controller
             ->first();
 
         if ($smsVerification && $request->code == $smsVerification->code) {
-            $smsVerification->updateModel(['status' => 'verified']);
+            $smsVerification->is_verified = True;
+            $smsVerification->save();
 
             return response()->json(['message' => 'verified'], 200);
         } else {

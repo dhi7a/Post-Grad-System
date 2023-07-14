@@ -7,10 +7,9 @@
     </x-slot> --}}
     <div class="container">
         <div class="row justify-content-center">
-            <div class="legend">Department Show</div>
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{ __('Application Details') }}</div>
+                   <h4> <div class="card-header">{{ __('Application Details') }}</div> </h4>
 
                     @if($errors->any())
                     <div class="alert alert-danger" role="alert">
@@ -30,8 +29,8 @@
                         <p><strong>Application Status:</strong> Accepted</p>
 
                             <!-- Additional content for the accepted status -->
-                        @elseif ($application->status == 'Recommended')
-                            <p><strong>Application Status:</strong> Recommended</p>
+                        @elseif ($application->status == 'Revise and resubmit')
+                            <p><strong>Application Status:</strong> Revise and resubmit</p>
                             <!-- Additional content for the recommended status -->
                         @elseif ($application->status == 'Rejected')
                             <p><strong>Application Status:</strong> Rejected</p>
@@ -40,17 +39,24 @@
                             <p><strong>Application Status:</strong> Unknown</p>
                         @endif
                     </div>
-                    <div>
+                    <div class="message-section">
+                        @if($application->status === 'Revise and resubmit')
+                        @foreach($revisionMessages as $revision)
+                        <h4>Revision Messages</h4>
+                            <div class="message">
+                                <p>{{ $revision->message }}</p>
+                            </div>
+                        @endforeach
+                        @endif
+
                         @if($application->status === 'Rejected')
-                            <h4>Rejection Message</h4>
-                            <p>{{ $rejectionMessage ?? 'No rejection message available.' }}</p>
+                        @foreach($rejectionMessage as $rejection)
+                            <h4>Rejection Messages</h4>
+                                <div class="message">
+                                    <p>{{ $rejection->message }}</p>
+                                </div>
+                        @endforeach
                         @endif
-
-                        @if($application->status === 'revise')
-                            <h4>Revision Message</h4>
-                            <p>{{ $revisionMessage ?? 'No revision messages available.' }}</p>
-                        @endif
-
                     </div>
 
 
@@ -60,100 +66,62 @@
                             <h4>Personal Details</h4>
                         </div>
                         <div class="card-body">
-                            <p><strong>Surname:</strong> {{ $personalDetails->surname}}</p>
-                            <p><strong>Forenames:</strong> {{ $personalDetails->forenames }}</p>
-                            <p><strong>Marital Status:</strong> {{ $personalDetails->marital_status }}</p>
-                            <p><strong>Nationality:</strong> {{ $personalDetails->nationality }}</p>
-                            <p><strong>National ID:</strong> {{ $personalDetails->national_id }}</p>
-                            <p><strong>Permanent Residence:</strong> {{ $personalDetails->permanent_residence }}</p>
-                            <p><strong>Passport No:</strong> {{ $personalDetails->passport_no }}</p>
-                            <p><strong>Date of Birth:</strong> {{ $personalDetails->date_of_birth }}</p>
-                            <p><strong>Place of Birth:</strong> {{ $personalDetails->place_of_birth }}</p>
-                            <p><strong>Disabilities:</strong> {{ $personalDetails->disabilities }}</p>
-                            <p><strong>Contact Address:</strong> {{ $personalDetails->contact_address }}</p>
-                            <p><strong>Home Phone:</strong> {{ $personalDetails->home_phone }}</p>
-                            <p><strong>Contact Number:</strong> {{ $personalDetails->contact_number }}</p>
-                            <p><strong>Email:</strong> {{ $personalDetails->email }}</p>
-                            <p><strong>Fax:</strong> {{ $personalDetails->fax }}</p>
-                            <p><strong>Prospective Sponsors:</strong> {{ $personalDetails->prospective_sponsors }}</p>
-                            <p><strong>MSU Staff Dependant:</strong> {{ $personalDetails->msu_staff_dependant }}</p>
-                            <p><strong>MSU Staff Member:</strong> {{ $personalDetails->msu_staff_member }}</p> <br>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Subjects Details</h4>
-                        </div>
-                        <div class="card-body">
-                            @foreach ($subjects as $subject)
-                                <p><strong>Subject Name:</strong> {{ $subject->subject }}</p>
-                                {{-- <p><strong>Subject Code:</strong> {{ $subject->code }}</p> --}}
-                                <p><strong>Subject Grade:</strong> {{ $subject->grade }}</p>
-                                <p><strong>Exam Board:</strong> {{ $subject->exam_board }}</p>
-                                <p><strong>Date:</strong> {{ $subject->date }}</p>
-                                <p><strong>Level:</strong> {{ $subject->level }}</p>
-                                <hr> <!-- Add a horizontal line between each referee's details -->
-                                @endforeach
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <p><strong>Surname:</strong> {{ $personalDetails->surname}}</p>
+                                    <p><strong>Forenames:</strong> {{ $personalDetails->forenames }}</p>
+                                    <p><strong>Marital Status:</strong> {{ $personalDetails->marital_status }}</p>
+                                    <p><strong>Nationality:</strong> {{ $personalDetails->nationality }}</p>
+                                    <p><strong>National ID:</strong> {{ $personalDetails->national_id }}</p>
+                                    <p><strong>Permanent Residence:</strong> {{ $personalDetails->permanent_residence }}</p>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <p><strong>Passport No:</strong> {{ $personalDetails->passport_no }}</p>
+                                    <p><strong>Date of Birth:</strong> {{ $personalDetails->date_of_birth }}</p>
+                                    <p><strong>Place of Birth:</strong> {{ $personalDetails->place_of_birth }}</p>
+                                    <p><strong>Disabilities:</strong> {{ $personalDetails->disabilities }}</p>
+                                    <p><strong>Contact Address:</strong> {{ $personalDetails->contact_address }}</p>
+                                    <p><strong>Home Phone:</strong> {{ $personalDetails->home_phone }}</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p><strong>Contact Number:</strong> {{ $personalDetails->contact_number }}</p>
+                                    <p><strong>Email:</strong> {{ $personalDetails->email }}</p>
+                                    <p><strong>Fax:</strong> {{ $personalDetails->fax }}</p>
+                                    <p><strong>Prospective Sponsors:</strong> {{ $personalDetails->prospective_sponsors }}</p>
+                                    <p><strong>MSU Staff Dependant:</strong> {{ $personalDetails->msu_staff_dependant }}</p>
+                                    <p><strong>MSU Staff Member:</strong> {{ $personalDetails->msu_staff_member }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Diploma Details</h4>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Research Experience Details</h4>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Display Research Experience Details -->
+                                    <p><strong>Description:</strong> {{ $researchExperiences->description }}</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                        <!-- Display Diploma Details -->
-                            <p><strong>Diploma Name:</strong> {{ $diplomas->programme }}</p>
-                            <p><strong>Result:</strong> {{ $diplomas->result }}</p>
-                            <p><strong>Level:</strong> {{ $diplomas->level }}</p>
-                            <p><strong>Date:</strong> {{ $diplomas->date }}</p>
-                            <p><strong>Institution:</strong> {{ $diplomas->institution }}</p> <br>
-                            <!-- Add more diploma details fields as needed -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Relevant Publications Details</h4>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Display Relevant Publications Details -->
+                                    <p><strong>Description:</strong> {{ $relevantPublications->description }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Dissertation Details</h4>
-                        </div>
-                        <div class="card-body">
-                        <!-- Display Dissertation Details -->
-                            <p><strong>Description:</strong> {{ $dissertations->description }}</p> <br>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>University Studies Details</h4>
-                        </div>
-                        <div class="card-body">
-                        <!-- Display University Studies Details -->
-                         <p><strong>Degree:</strong> {{ $universityStudies->programme }}</p>
-                            <p><strong>Class:</strong> {{ $universityStudies->class }}</p>
-                            <p><strong>Institution:</strong> {{ $universityStudies->institution }}</p>
-                            <p><strong>Date:</strong> {{ $universityStudies->date }}</p> <br>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Research Experience Details</h4>
-                        </div>
-                        <div class="card-body">
-                        <!-- Display Research Experience Details -->
-                            <p><strong>Description:</strong> {{ $researchExperiences->description }}</p> <br>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Relevant Publications Details</h4>
-                        </div>
-                        <div class="card-body">
-                        <!-- Display Relevant Publications Details -->
-                            <p><strong>Description:</strong> {{ $relevantPublications->description }}</p> <br>
-                        </div>
-                    </div>
 
                     <div class="card">
                         <div class="card-header">
@@ -185,15 +153,19 @@
                         </div>
                         <div class="card-body">
                             <!-- Display Referees Details -->
-                            @foreach ($referees as $referee)
-                            <p><strong>Name:</strong> {{ $referee->full_name }}</p>
-                            <p><strong>Address:</strong> {{ $referee->address }}</p>
-                            <p><strong>Phone:</strong> {{ $referee->phone }}</p>
-                            <p><strong>Email:</strong> {{ $referee->email }}</p>
-                            <p><strong>Occupation:</strong> {{ $referee->occupation }}</p>
-                            <hr> <!-- Add a horizontal line between each referee's details -->
-                            @endforeach
+                            <div class="row">
+                                @foreach ($referees as $referee)
+                                <div class="col-md-6">
+                                    <p><strong>Name:</strong> {{ $referee->full_name }}</p>
+                                    <p><strong>Address:</strong> {{ $referee->address }}</p>
+                                    <p><strong>Phone:</strong> {{ $referee->phone }}</p>
+                                    <p><strong>Email:</strong> {{ $referee->email }}</p>
+                                    <p><strong>Occupation:</strong> {{ $referee->occupation }}</p>
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
+                    </div>
                     </div>
                     <div class="card">
                         <div class="card-header">
@@ -202,12 +174,9 @@
                         <div class="card-body">
                             <!-- Display Uploaded Documents -->
                             @foreach ($documents as $document)
-                                <p><strong>Document Name:</strong> {{ $document->name }}</p>
-                                <p><strong>File:</strong> <a href="{{ $document->file_url }}">{{ $document->file_name }}</a></p>
-                                <hr> <!-- Add a horizontal line between each document -->
-                                <a href="{{ route('documents.download', ['filename' => 'documents/'.$document->id_documents]) }}">Download ID Documents</a>
-                                <a href="{{ route('documents.download', ['filename' => 'documents/'.$document->certificates]) }}">Download Certificates</a>
-                                <a href="{{ route('documents.download', ['filename' => 'documents/'.$document->dissertation_proposal]) }}">Download Dissertation Proposal</a>
+                                <a href="{{ route('documents.download', ['filename' => 'documents/'.$document->id_documents]) }}">Download ID Documents</a><br>
+                                <a href="{{ route('documents.download', ['filename' => 'documents/'.$document->certificates]) }}">Download Certificates</a><br>
+                                <a href="{{ route('documents.download', ['filename' => 'documents/'.$document->dissertation_proposal]) }}">Download Dissertation Proposal</a><br>
 
                             @endforeach
                         </div>
@@ -259,7 +228,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="recommendModalLabel">Recommendation</h5>
+                <h5 class="modal-title" id="recommendModalLabel">Revise and resubmit</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -288,7 +257,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('faculty.reject', $application->id) }}" method="post">
+            <form action="{{ route('department.reject', $application->id) }}" method="post">
                 @csrf
                 <div class="modal-body">
                     <textarea id="rejectText" name="message" class="form-control" rows="3" placeholder="Enter your rejection reason"></textarea>

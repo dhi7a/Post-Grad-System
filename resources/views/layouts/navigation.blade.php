@@ -62,7 +62,7 @@
             </li>
         @elseif (Auth::user()->hasRole('faculty'))
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-house"></i>
                     <span>Dashboard</span>
                 </a>
@@ -87,7 +87,7 @@
             </li>
         @elseif (Auth::user()->hasRole('department'))
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-house"></i>
                     <span>Dashboard</span>
                 </a>
@@ -112,7 +112,7 @@
             </li>
         @elseif (Auth::user()->hasRole('supervisor'))
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-house"></i>
                     <span>Dashboard</span>
                 </a>

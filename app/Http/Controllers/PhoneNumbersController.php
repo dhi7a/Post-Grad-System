@@ -31,7 +31,7 @@ class PhoneNumbersController extends Controller
         //
         $userId = auth()->user()->id;
         //
-        $validatedData = $request->validate([
+        $request->validate([
             'userid' => 'integer',
             'phone_number' => 'required|string',
             'is_verified' => 'required|string',
