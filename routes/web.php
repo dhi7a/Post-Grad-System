@@ -31,6 +31,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
+use App\Http\Controllers\Accounts\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -161,6 +162,11 @@ Route::group(['middleware' => ['auth', 'role:administrator']], function () {
     // Route::get('/documents', [DocumentsController::class, 'index'])->name('documents.index');
     // Route::post('/documents', [DocumentsController::class, 'store'])->name('documents.store');
     Route::get('/documents/download/{filename}', 'DocumentsController@download')->name('documents.download');
+
+    Route::get('/accounts', [AccountController::class, 'index'])->name('accounts');
+    Route::post('/add-account', [AccountController::class, 'add'])->name('add-accounts');
+    Route::post('/update-account', [AccountController::class, 'update'])->name('update-accounts');
+    Route::post('/delete-account', [AccountController::class, 'delete'])->name('delete-accounts');
 });
 
 // Routes for Department Role
