@@ -10,7 +10,7 @@
                 @csrf
                 <div class="mb-3">
                     <label for="contact_number" class="form-label">{{ __('Phone Number') }}:</label>
-                    <input type="text" id="contact_number" name="contact_number" class="form-control" pattern="\+\d{1,3}\s?\(\d{1,3}\)\s?\d{3}-\d{4}" title="Please enter a phone number in the format +XXX (XXX) XXX-XXXX">
+                    <input type="text" id="contact_number" name="contact_number" class="form-control" pattern="\+\d{1,3}\s?\d{1,3}\s?\d{7}" title="Please enter a phone number in the format +XXX XXX XXXXXXX">
                     @error('contact_number')
                         <div class="error">{{ $message }}</div>
                     @enderror

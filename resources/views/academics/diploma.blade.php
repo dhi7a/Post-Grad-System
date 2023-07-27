@@ -14,7 +14,7 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 
-    <form action="{{ route('diploma.store') }}" method="POST">
+    <form id="diplomaForm" action="{{ route('diploma.store') }}" method="POST">
     @csrf
 
     <div class="col-md-12">
@@ -67,8 +67,8 @@
 
                     <!-- Date -->
                     <div class="col-md-6">
-                        <label for="date">Date:</label>
-                        <input type="date" name="date" value="{{ old('date') }}" class="form-control" required>
+                        <label for="date">Year:</label>
+                        <input type="text" name="date" id="yearInput" value="{{ old('date') }}" class="form-control year-picker" required>
                         @error('date')
                             <span>{{ $message }}</span>
                         @enderror
@@ -87,11 +87,47 @@
                 </div>
                  <!-- Submit Button -->
                  <div class="form-group row mb-0">
-                    <div class="col-md-6 offset-md-4">
+                    <div class="col-md-6">
                         <button type="submit" class="btn btn-primary">
-                            {{ __('Submit Application') }}
+                            {{ __('Next') }}
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-secondary" onclick="skipForm()">
+                            {{ __('Skip') }}
                         </button>
                     </div>
                 </div><br>
-        </form>
+
     </x-app-layout>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const yearInputs = document.querySelectorAll('.year-picker');
+
+            yearInputs.forEach(function(input) {
+                input.addEventListener('input', function() {
+                    const yearValue = parseInt(this.value);
+                    if (!isNaN(yearValue)) {
+                        const currentDate = new Date();
+                        currentDate.setFullYear(yearValue);
+                        const formattedDate = currentDate.toISOString().slice(0, 10);
+                        document.querySelector('[name="date"]').value = formattedDate;
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        function skipForm() {
+            // Remove the 'required' attribute from the form fields
+            document.getElementById('programme').removeAttribute('required');
+            document.getElementById('result').removeAttribute('required');
+            document.getElementById('level').removeAttribute('required');
+            document.getElementById('date').removeAttribute('required');
+            document.getElementById('institution').removeAttribute('required');
+
+            // Manually submit the form
+            document.getElementById('diplomaForm').submit();
+        }
+    </script>
+

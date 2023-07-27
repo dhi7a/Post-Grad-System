@@ -10,7 +10,7 @@ use App\Models\PhoneNumbers;
 
 
 
-class DashboardController extends Controller    
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.

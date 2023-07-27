@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>PGS</title>
+  <title>Research and Innovation</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -58,10 +58,12 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="{{ route('dashboard') }}" class="logo d-flex align-items-center">
-        <span class="d-none d-lg-block">PGS</span>
+        {{-- <span class="d-none d-lg-block">PGS</span> --}}
+        <img src="{{ asset('assets/img/msu1.jpg') }}" alt="" width="50" height="200">
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
+
 
 
 
@@ -163,7 +165,7 @@
   <footer id="footer" class="footer">
 
     <div class="credits">
-        Designed by <b>PGS</b>
+        Designed by <b>Research and Innovation</b>
     </div>
   </footer><!-- End Footer -->
 

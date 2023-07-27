@@ -43,7 +43,7 @@ class SubjectsController extends Controller
             'subject' => 'required|string',
             'grade' => 'required|string',
             'exam_board' => 'required|string',
-            'date' => 'required',
+            // 'date' => 'required',
             'level' => 'required|string',
         ]);
 
@@ -52,7 +52,9 @@ class SubjectsController extends Controller
        $subjects->subject = $request->subject;
        $subjects->grade = $request->grade;
        $subjects->exam_board = $request->exam_board;
-       $subjects->date = $request->date;
+    //    $subjects->date = $request->date;
+       $subjects->date =  $request->input('year');
+
        $subjects->level = $request->level;
 
         $subjects->save();

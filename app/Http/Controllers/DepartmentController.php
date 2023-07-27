@@ -116,7 +116,7 @@ class DepartmentController extends Controller
         $application = Application::findOrFail($id);
 
         $application->status = 'Proceed';
-        $application->flagid = 2; // Set the flagid to 2
+        $application->flagid = 3; // Set the flagid to 3
 
         $application->save();
 
@@ -154,7 +154,7 @@ class DepartmentController extends Controller
 
         // Save the revision message
         $message = $request->input('message');
-        $userName = $request->user()->name; 
+        $userName = $request->user()->name;
         $userRole = $request->user()->role;
 
         $revision = new Revision();
@@ -188,7 +188,7 @@ class DepartmentController extends Controller
 
         // Save the rejection message
         $message = $request->input('message');
-        $userName = $request->user()->name; 
+        $userName = $request->user()->name;
         $userRole = $request->user()->role;
 
         $reject = new Rejections();

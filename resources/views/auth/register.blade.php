@@ -32,10 +32,13 @@
             <div class="row justify-content-center">
                 <div class="col-md-8 d-flex flex-column align-items-center justify-content-center">
 
-                    <div class="d-flex justify-content-center py-4">
+                    <div class="d-flex justify-content-center py-6" style="max-width: 800px; margin: 0 auto;">
                         <a href="/" class="logo d-flex align-items-center w-auto">
-                            <img src="{{ asset('assets/img/msu1.jpg') }}" alt="">
-                            <span class="d-none d-lg-block">PGS</span>
+                            <img src="{{ asset('assets/img/msu1.jpg') }}" alt="" width="50" height="200">
+                            <span class="d-none d-lg-block" style="margin-top: 10px; text-align: center;">
+                                Post Graduate Studies Division<br>
+                                <span style="display: inline-block;">Research and Innovation</span>
+                            </span>
                         </a>
                     </div><!-- End Logo -->
 
@@ -158,7 +161,7 @@
                     </div>
 
                     <div class="credits">
-                        Designed by <b>PGS</b>
+                        Designed by <b>Research and Innovation</b>
                     </div>
 
                 </div>

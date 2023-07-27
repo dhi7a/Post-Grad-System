@@ -19,7 +19,7 @@ class SubjectComponent extends Component
     public $other;
     public $date;
 
-    
+
     public function mount()
     {
         $this->count = Subjects::where('userid', Auth::id())->count();
@@ -29,18 +29,18 @@ class SubjectComponent extends Component
         {
             return redirect()->route('diploma.index')->with('message', 'You have reached the minimum limit of subjects.');
         }
-           
+
     }
     public function render()
     {
         return view('livewire.subject-component');
-       
-           
+
+
     }
 
     public function addSubject()
     {
-        
+
         // Create a new subject
         Subjects::create([
             'userid' => Auth::id(),
@@ -68,7 +68,7 @@ class SubjectComponent extends Component
         $this->exam_board = null;
         $this->subject = null;
 
-                        
+
 
     }
 

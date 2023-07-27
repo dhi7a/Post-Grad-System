@@ -31,7 +31,10 @@ return [
         'user' => [
             'profile' => 'r,u',
         ],
-        
+        'department' => [
+            'profile' => 'r,u',
+        ],
+
     ],
 
     'permissions_map' => [

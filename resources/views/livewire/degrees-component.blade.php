@@ -52,29 +52,53 @@
                         <input type="text" wire:model="institution" value="{{ old('institution') }}" class="form-control" required>
                         @error('institution')
                             <span>{{ $message }}</span>
-                        @enderror
-                    </div>
+                        @enderror <br>
+                    </div> <br>
 
 
                     <!-- Date -->
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <label for="date">Date Of Award:</label>
                         <input type="date" wire:model="date" value="{{ old('date') }}" class="form-control" required>
                         @error('date')
                             <span>{{ $message }}</span>
                         @enderror <br>
                     </div>
-                    <br>
+                    <br> --}}
+                    <!-- Date -->
+                  <!-- Date -->
+                <div class="col-md-6">
+                    <label for="date">Year Of Award:</label>
+                    <select wire:model="date" class="form-control" required>
+                        <option value="">Select Year</option>
+                        <!-- Assuming you want to show years from 1950 to the current year -->
+                        @php
+                        $currentYear = date('Y');
+                        @endphp
+                        @for ($year = $currentYear; $year >= 1950; $year--)
+                            <option value="{{ $year }}">{{ $year }}</option>
+                        @endfor
+                    </select>
+                    @error('date')
+                    <span>{{ $message }}</span>
+                    @enderror
+                </div>
 
-                    <div class="form-group row mb-0">
-                        <div class="col-md-6 offset-md-4">
-                            <button type="button" wire:click.submit="addDegree" class="btn btn-primary">
-                                {{ __('Submit Application') }}
-                            </button>
-                        </div>
-                    </div>
+                      <br>
+
+
                 </div>
             </div>
         </div>
     </form>
+    <div class="form-group row mb-0">
+        <div class="col-md-6 offset-md-4">
+            <button type="button" wire:click.submit="addDegree" class="btn btn-primary">
+                {{ __('Next') }}
+            </button>
+        </div>
+        @if ($count == 2)
+            <a href="{{ route('research-experience.index') }}" class="btn btn-secondary">Skip</a>
+        @endif
+    </div>
 </div>

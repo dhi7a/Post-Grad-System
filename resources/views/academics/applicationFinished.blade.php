@@ -5,9 +5,8 @@
             <br> <b style="color:red; margin-left:10px" > <br>IMPORTANT NOTICE</b> <br>
         </div><br>
         <div>
-            <br> <p  style="margin-left:10px; text-align:justify" >Applications are meant to take 6 - 8 weeks to processes.</p>
-        {{-- <p align="justify"> b.
-            </p> --}}
+            <br> <p  style="margin-left:10px; text-align:justify" >Applications are normally take 20 days to process.</p>
+
         </div>
     </div>
 </x-app-layout>

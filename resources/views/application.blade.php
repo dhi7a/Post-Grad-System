@@ -107,12 +107,12 @@
 
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label for="national_id">National ID No:</label>
+                                        <label for="national_id">National ID No: <i>eg 00-0000000-A-00</i></label>
                                         <input type="text" name="national_id" id="national_id" class="form-control" pattern="\d{2}-\d{7}-[A-Za-z]-\d{2}" title="Please enter a National ID in the format 00-0000000-A-00">
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="passport_no">Passport No:</label>
+                                        <label for="passport_no">Passport No: <i>Indiicate none to skip</i></label>
                                         <input type="text" name="passport_no" id="passport_no" class="form-control">
                                     </div><br>
 
@@ -137,7 +137,7 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label for="place_of_birth">Place of Birth:</label>
+                                        <label for="place_of_birth">Place of Birth: <i>eg Harare,Zimbabwe</i></label>
                                         <input type="text" name="place_of_birth" id="place_of_birth" class="form-control">
                                     </div><br>
                                 </div><br>
@@ -153,7 +153,6 @@
                                                 <option value="">Select Gender</option>
                                                 <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
                                                 <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
-                                                {{-- <option value="other" {{ old('gender') == 'other' ? 'selected' : '' }}>Other</option> --}}
                                             </select>
                                             @error('gender')
                                                 <span class="invalid-feedback" role="alert">
@@ -194,8 +193,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="contact_number">Contact Number:</label>
-                                    <input type="text" name="contact_number" id="contact_number" class="form-control" pattern="\+\d{1,3}\s?\(\d{1,3}\)\s?\d{3}-\d{4}" title="Please enter a phone number in the format +XXX (XXX) XXX-XXXX" required>
+                                    <label for="contact_number">Contact Number: <i>eg +263 012 3456789</i></label>
+                                    <input type="text" name="contact_number" id="contact_number" class="form-control" pattern="\+\d{1,3}\s?\d{1,3}\s?\d{7}" title="Please enter a phone number in the format +XXX XXX XXXXXXX" required>
                                 </div>
                             </div>
 
@@ -209,8 +208,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="home_phone">Home Telephone:</label>
-                                    <input type="text" name="home_phone" id="home_phone" class="form-control" pattern="\+\d{1,3}\s?\(\d{1,3}\)\s?\d{3}-\d{4}" title="Please enter a phone number in the format +XXX (XXX) XXX-XXXX">
+                                    <label for="home_phone">Home Telephone: <i>eg +263 012 3456789</i></label>
+                                    <input type="text" name="home_phone" id="home_phone" class="form-control" pattern="\+\d{1,3}\s?\d{1,3}\s?\d{7}" title="Please enter a phone number in the format +XXX (XXX) XXXXXXX">
                                 </div>
                             </div>
 
@@ -290,7 +289,7 @@
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
                             <button type="submit" class="btn btn-primary">
-                                {{ __('Submit Application') }}
+                                {{ __('Next') }}
                             </button>
                         </div>
                     </div>

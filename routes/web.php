@@ -99,6 +99,7 @@ Route::group(['middleware' => ['auth', 'role:student', 'verified']], function ()
     Route::post('/university-studies', [UniversityStudiesController::class, 'store'])->name('university-studies.store');
     Route::get('/diploma', [DiplomaController::class, 'index'])->name('diploma.index');
     Route::post('/diploma', [DiplomaController::class, 'store'])->name('diploma.store');
+    Route::post('/diploma/skip', [DiplomaController::class, 'skip'])->name('diploma.skip');
     Route::get('/dissertation', [DissertationController::class, 'index'])->name('dissertation.index');
     Route::post('/dissertation', [DissertationController::class, 'store'])->name('dissertation.store');
     Route::get('/employment-experience', [EmploymentExperienceController::class, 'index'])->name('employment-experience.index');

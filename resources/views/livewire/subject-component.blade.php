@@ -20,7 +20,7 @@
                 <div class="card-header">
                     <legend style="color: black;">School Examinations For Which Reults Are known </legend>
                     <p style="color: black;">Indicate 'O' Level Mathematics And English Subjects Only, Then indicate 'A' Level Subjects
-                        <br> <b>(Subjects indicated:{{$count}})</b></p>
+                        <br> <b>(Subjects indicated:{{$count}}) of 5</b></p>
                 </div><br>
                 <div class="card-body">
                     <div class="form-group">
@@ -36,7 +36,7 @@
                                 <div class="col-md-2">
                                     <label for="level">A or O</label>
                                         <select wire:model="level" class="form-control" required>
-                                            <option value="" selected disabled>Select level</option>
+                                            <option value="" selected>Select level</option>
                                             <option value="A level">A level</option>
                                             <option value="O level">O level</option>
                                             <option value="Other">Other</option>
@@ -73,7 +73,7 @@
 
                             <label for="level">Grade/Class</label>
                             <select wire:model="grade" class="form-control" required>
-                                <option value="" selected disabled>Select Grade</option>
+                                <option value="" selected>Select Grade</option>
                                 <option value="A">A</option>
                                 <option value="B">B</option>
                                 <option value="C">C</option>
@@ -101,7 +101,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="button" wire:click.submit="addSubject" class="btn btn-primary">
-                                    {{ __('Submit Application') }}
+                                    {{ __('Next') }}
                                 </button>
                             </div>
                         </div>

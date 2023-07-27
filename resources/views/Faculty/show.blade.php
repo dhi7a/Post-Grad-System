@@ -129,7 +129,6 @@
                         </div>
                         <div class="card-body">
                         <!-- Display Employment Experience Details -->
-                        <h4>Employment Experience Details</h4>
                             <p><strong>Position:</strong> {{ $employmentExperiences->position }}</p>
                             <p><strong>Employer:</strong> {{ $employmentExperiences->employer }}</p>
                             <p><strong>From:</strong> {{ $employmentExperiences->from }}</p>
