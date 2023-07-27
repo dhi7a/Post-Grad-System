@@ -61,14 +61,11 @@
                                                 <td>{{ $account->role }}</td>
                                                 <td>
                                                     <!-- Edit Button -->
-                                                    <a href="{{ route('update-accounts', ['id' => $account->id]) }}" class="btn btn-primary">Edit</a>
+                                                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#editModal{{ $account->id }}">Edit</a>
 
                                                     <!-- Delete Button (Example using a form) -->
-                                                    <form action="{{ route('delete-accounts', ['id' => $account->id]) }}" method="POST" style="display: inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">Delete</button>
-                                                    </form>
+                                                    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ $account->id }}">Delete</a>
+
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -144,21 +141,98 @@
                             </div>
                         </form>
                     </div>
+
+
                 </div>
             </div>
         </div>
     </x-app-layout>
+
+ <!-- Edit Modal -->
+<div class="modal fade" id="editModal{{ $account->id }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel{{ $account->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel{{ $account->id }}">Edit User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Edit Form -->
+                <form action="{{ route('update-accounts', ['id' => $account->id]) }}" method="POST">
+                    @csrf
+                    <!-- Edit Name -->
+                    <div class="form-group">
+                        <label for="edit-name">Name</label>
+                        <input type="text" name="name" id="edit-name" class="form-control" value="{{ $account->name }}" required>
+                    </div>
+                    <!-- Edit Email -->
+                    <div class="form-group">
+                        <label for="edit-email">Email</label>
+                        <input type="email" name="email" id="edit-email" class="form-control" value="{{ $account->email }}" required>
+                    </div>
+                    <!-- Edit Role -->
+                    <div class="form-group">
+                        <label for="edit-role">Role</label>
+                        <select name="role" id="edit-role" class="form-control" required>
+                            <!-- Add options for roles here -->
+                            <option value="admin" @if($account->role === 'admin') selected @endif>Admin</option>
+                            <option value="faculty" @if($account->role === 'faculty') selected @endif>Faculty</option>
+                            <option value="department" @if($account->role === 'department') selected @endif>Department</option>
+                            <option value="dcca" @if($account->role === 'dcca') selected @endif>Dcca</option>
+                            <option value="supervisor" @if($account->role === 'supervisor') selected @endif>Supervisor</option>
+                        </select>
+                    </div>
+                    <!-- Submit Button -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Delete modal -->
+    <div class="modal fade" id="deleteModal{{ $account->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $account->id }}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel{{ $account->id }}">Confirm Deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this user?</p>
+                </div>
+                <div class="modal-footer">
+                    <!-- Add your delete form here -->
+                    <!-- Example: -->
+                    <form action="{{ route('delete-accounts', ['id' => $account->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 <!-- Include jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- Include Bootstrap JavaScript -->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
 
     <!-- Bootstrap JS and Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-EUfzfdCfcEfe4O7aaAcscPbqowCyODelK6bS5yfWJzxIooIUzX/z2zmlr38LdjfS" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-rYkO8Va8e/c2C4zF3Pp8Cd1gsVvlvMhzRHCdCZy8XTWGRXP+x3i9Sti8M2I4ikBM" crossorigin="anonymous"></script>
 </body>
 </html>
