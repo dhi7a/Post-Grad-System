@@ -21,6 +21,12 @@ return [
             'users' => 'c,r,u,d',
             'profile' => 'r,u',
         ],
+        'department' => [
+            'profile' => 'r,u',
+        ],
+        'dcca' => [
+            'profile' => 'r,u',
+        ],
         'supervisor' => [
             'users' => 'c,r,u,d',
             'profile' => 'r,u',
@@ -29,9 +35,6 @@ return [
             'profile' => 'r,u',
         ],
         'user' => [
-            'profile' => 'r,u',
-        ],
-        'department' => [
             'profile' => 'r,u',
         ],
 
