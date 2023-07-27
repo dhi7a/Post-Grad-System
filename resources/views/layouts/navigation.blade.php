@@ -10,9 +10,9 @@
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
+                <a class="nav-link collapsed" href="{{ route('accounts')}}">
                     <i class="bi bi-bookmark-dash"></i>
-                    <span>uno</span>
+                    <span>Accounts</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
