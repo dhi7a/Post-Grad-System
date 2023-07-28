@@ -24,76 +24,154 @@ use Illuminate\Support\Facades\DB;
 
 
 class AdminController extends Controller
-{
-    //
+// {
+//     //
 
+//     public function index()
+//     {
+//         // code to show dashboard for administrator role
+
+//         $applications = Application::join('personal_details','personal_details.userid','=','applications.userid')
+//         ->join('proposed_field_studies','proposed_field_studies.userid','=','applications.userid')
+//         ->select('applications.id as id','personal_details.forenames','personal_details.surname','proposed_field_studies.description','applications.status')
+//         ->get();
+//         // dd($applications);
+//         return view('admin.index',[
+//             'applications' => $applications
+
+
+//         ]);
+//     }
+
+{
     public function index()
     {
-        // code to show dashboard for administrator role
+        // Code to show dashboard for administrator role
 
-        $applications = Application::join('personal_details','personal_details.userid','=','applications.userid')
-        ->join('proposed_field_studies','proposed_field_studies.userid','=','applications.userid')
-        ->select('applications.id as id','personal_details.forenames','personal_details.surname','proposed_field_studies.description','applications.status')
-        ->get();
-        // dd($applications);
-        return view('admin.index',[
-            'applications' => $applications
+        $totalApplications = Application::count();
+        // $totalReports = Report::count();
+        // $totalUsers = User::count();
 
-
+        return view('admin.dashboard', [
+            'totalApplications' => $totalApplications,
+            // 'totalReports' => $totalReports,
+            // 'totalUsers' => $totalUsers,
         ]);
     }
 
-      public function show($id)
-    {
-        // Retrieve the application by the authenticated user ID
-        $application = Application::find($id);
+    public function show()
+        {
+            // code to show dashboard for administrator role
 
-        // Check if the application exists
-        if ($application) {
-            // Retrieve the associated personal details
-            $personalDetails = PersonalDetails::where('userid', $application->userid)->first();
-            $subjects = Subjects::where('userid', $application->userid)->get();
-            $diplomas = Diploma::where('userid', $application->userid)->first();
-            $dissertations = Dissertation::where('userid', $application->userid)->first();
-            $universityStudies = UniversityStudies::where('userid', $application->userid)->first();
-            $researchExperiences = ResearchExperience::where('userid', $application->userid)->first();
-            $relevantPublications = RelevantPublications::where('userid', $application->userid)->first();
-            $employmentExperiences = EmploymentExperience::where('userid', $application->userid)->first();
-            $proposedFieldStudies = ProposedFieldStudy::where('userid', $application->userid)->first();
-            $referees = Referees::where('userid', $application->userid)->get();
-            $documents = Documents::where('userid', $application->userid)->get();
-            $rejectionMessage = DB::table('rejections')->get();
-            $revisionMessages = DB::table('revisions')->get();
+            $applications = Application::join('personal_details','personal_details.userid','=','applications.userid')
+            ->join('proposed_field_studies','proposed_field_studies.userid','=','applications.userid')
+            ->select('applications.id as id','personal_details.forenames','personal_details.surname','proposed_field_studies.description','applications.status')
+            ->get();
+            // dd($applications);
+            return view('admin.index',[
+                'applications' => $applications
 
 
-
-            // Check if personal details exist
-            if ($personalDetails) {
-                // Return a view with the application and personal details data
-                return view('application.show', [
-                    'application' => $application,
-                    'personalDetails' => $personalDetails,
-                    'subjects' => $subjects,
-                    'diplomas' => $diplomas,
-                    'dissertations' => $dissertations,
-                    'universityStudies' => $universityStudies,
-                    'researchExperiences' => $researchExperiences,
-                    'relevantPublications' => $relevantPublications,
-                    'employmentExperiences' => $employmentExperiences,
-                    'proposedFieldStudies' => $proposedFieldStudies,
-                    'referees' => $referees,
-                    'documents' => $documents,
-                    'rejectionMessage' => $rejectionMessage,
-                    'revisionMessages' => $revisionMessages,
-
-
-                ]);
-            }
+            ]);
         }
 
-        // Redirect to a page with an error message
-        return redirect()->route('dashboard')->with('error', 'Application not found.');
-    }
+    //   public function show($id)
+    // {
+    //     // Retrieve the application by the authenticated user ID
+    //     $application = Application::find($id);
+
+    //     // Check if the application exists
+    //     if ($application) {
+    //         // Retrieve the associated personal details
+    //         $personalDetails = PersonalDetails::where('userid', $application->userid)->first();
+    //         $subjects = Subjects::where('userid', $application->userid)->get();
+    //         $diplomas = Diploma::where('userid', $application->userid)->first();
+    //         $dissertations = Dissertation::where('userid', $application->userid)->first();
+    //         $universityStudies = UniversityStudies::where('userid', $application->userid)->first();
+    //         $researchExperiences = ResearchExperience::where('userid', $application->userid)->first();
+    //         $relevantPublications = RelevantPublications::where('userid', $application->userid)->first();
+    //         $employmentExperiences = EmploymentExperience::where('userid', $application->userid)->first();
+    //         $proposedFieldStudies = ProposedFieldStudy::where('userid', $application->userid)->first();
+    //         $referees = Referees::where('userid', $application->userid)->get();
+    //         $documents = Documents::where('userid', $application->userid)->get();
+    //         $rejectionMessage = DB::table('rejections')->get();
+    //         $revisionMessages = DB::table('revisions')->get();
+
+
+
+    //         // Check if personal details exist
+    //         if ($personalDetails) {
+    //             // Return a view with the application and personal details data
+    //             return view('application.show', [
+    //                 'application' => $application,
+    //                 'personalDetails' => $personalDetails,
+    //                 'subjects' => $subjects,
+    //                 'diplomas' => $diplomas,
+    //                 'dissertations' => $dissertations,
+    //                 'universityStudies' => $universityStudies,
+    //                 'researchExperiences' => $researchExperiences,
+    //                 'relevantPublications' => $relevantPublications,
+    //                 'employmentExperiences' => $employmentExperiences,
+    //                 'proposedFieldStudies' => $proposedFieldStudies,
+    //                 'referees' => $referees,
+    //                 'documents' => $documents,
+    //                 'rejectionMessage' => $rejectionMessage,
+    //                 'revisionMessages' => $revisionMessages,
+
+
+    //             ]);
+    //         }
+    //     }
+
+    //     // Redirect to a page with an error message
+    //     return redirect()->route('dashboard')->with('error', 'Application not found.');
+    // }
+
+    // public function show($id)
+    // {
+    //     // Retrieve the application by the ID and eager load the associated data
+    //     $application = Application::with([
+    //         'personalDetails',
+    //         'subjects',
+    //         'diploma',
+    //         'dissertations',
+    //         'universityStudies',
+    //         'researchExperiences',
+    //         'relevantPublications',
+    //         'employmentExperiences',
+    //         'proposedFieldStudies',
+    //         'referees',
+    //         'documents',
+    //     ])->find($id);
+
+    //     if ($application) {
+    //         // Retrieve rejection and revision messages
+    //         $rejectionMessage = DB::table('rejections')->get();
+    //         $revisionMessages = DB::table('revisions')->get();
+
+    //         // Pass the retrieved application and associated data to the view
+    //         // return view('application.show', [
+    //         return view('admin.index', [
+    //             'application' => $application,
+    //             'personalDetails' => $application->personalDetails,
+    //             'subjects' => $application->subjects,
+    //             'diplomas' => $application->diploma,
+    //             'dissertations' => $application->dissertations,
+    //             'universityStudies' => $application->universityStudies,
+    //             'researchExperiences' => $application->researchExperiences,
+    //             'relevantPublications' => $application->relevantPublications,
+    //             'employmentExperiences' => $application->employmentExperiences,
+    //             'proposedFieldStudies' => $application->proposedFieldStudies,
+    //             'referees' => $application->referees,
+    //             'documents' => $application->documents,
+    //             'rejectionMessage' => $rejectionMessage,
+    //             'revisionMessages' => $revisionMessages,
+    //         ]);
+    //     }
+
+    //     return redirect()->route('dashboard')->with('error', 'Application not found.');
+    // }
+
 
 
     public function accept($id)
@@ -157,7 +235,7 @@ class AdminController extends Controller
         // Save the revision message
         $message = $request->input('message');
         $userName = $request->user()->name;
-        $userRole = $request->user()->role; 
+        $userRole = $request->user()->role;
 
         $revision = new Revision();
         $revision->application_id = $application->id;
@@ -190,7 +268,7 @@ class AdminController extends Controller
         // Save the rejection message
         $message = $request->input('message');
         $userName = $request->user()->name;
-        $userRole = $request->user()->role; 
+        $userRole = $request->user()->role;
 
 
         $reject = new Rejections();

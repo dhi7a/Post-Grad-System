@@ -149,7 +149,10 @@ Route::group(['middleware' => ['auth', 'role:faculty']], function () {
 // Routes for Administrator Role
 Route::group(['middleware' => ['auth', 'role:administrator']], function () {
     Route::get('admin', 'App\Http\Controllers\AdminController@index')->name('admin-dashboard');
-    Route::get('application/show/{id}', 'App\Http\Controllers\AdminController@show')->name('application.show');
+    Route::get('applications', 'App\Http\Controllers\AdminController@show')->name('applications');
+    // Route::get('/admin/application/{id}', [AdminController::class, 'show'])->name('admin.application.show');
+
+    // Route::get('application/show/{id}', 'App\Http\Controllers\AdminController@show')->name('application.show');
     Route::get('/application/{id}/accept', [AdminController::class, 'accept'])->name('application.accept');
     Route::get('/application/{id}/proceed', [AdminController::class, 'proceed'])->name('application.proceed');
     Route::post('/application/{id}/proceed', [AdminController::class, 'proceed'])->name('application.proceed');

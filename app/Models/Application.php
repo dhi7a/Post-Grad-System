@@ -33,6 +33,34 @@ class Application extends Model
         'prospective_sponsors',
         'msu_staff_dependant',
         'msu_staff_member',
-        
+
     ];
+
+    public function personalDetails()
+    {
+        return $this->hasOne(PersonalDetails::class, 'userid', 'userid');
+    }
+
+    public function subjects()
+    {
+        return $this->hasMany(Subjects::class, 'userid', 'userid');
+    }
+
+    public function diploma()
+    {
+        return $this->hasOne(Diploma::class, 'userid', 'userid');
+    }
+
+    // Define other relationships for dissertations, university studies, etc. if they exist
+    // ...
+
+    public function referees()
+    {
+        return $this->hasMany(Referees::class, 'userid', 'userid');
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Documents::class, 'userid', 'userid');
+    }
 }
