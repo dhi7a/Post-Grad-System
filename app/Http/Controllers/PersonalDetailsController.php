@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\PersonalDetails;
 use App\Models\PhoneNumbers;
+use App\Models\Programme;
 use Illuminate\Http\Request;
 
 class PersonalDetailsController extends Controller
@@ -14,7 +15,8 @@ class PersonalDetailsController extends Controller
      */
     public function index()
     {
-        //
+        $programmes = Programme::all();
+        return view('student.application', compact('programmes'));
     }
 
     /**

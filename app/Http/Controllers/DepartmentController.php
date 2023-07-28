@@ -7,7 +7,9 @@ use App\Models\PersonalDetails;
 use App\Models\Diploma;
 use App\Models\Dissertation;
 use App\Models\Documents;
+use App\Models\Department;
 use App\Models\EmploymentExperience;
+use App\Models\Faculty;
 use App\Models\ProposedFieldStudy;
 use App\Models\Referees;
 use App\Models\RelevantPublications;
@@ -207,6 +209,39 @@ class DepartmentController extends Controller
         ]);
 
     }
+
+    public function departments()
+    {
+        $departments = Department::with('faculty')->get();
+        $faculties = Faculty::all();
+        return view('admin.departments', compact('departments', 'faculties'));
+
+    }
+
+
+
+public function store(Request $request)
+{
+    $validatedData = $request->validate([
+        'name' => 'required|unique:departments|max:255',
+        'facultyid' => 'required|exists:faculties,id', // Make sure the faculty_id exists in the faculties table
+    ]);
+
+    Department::create([
+        'name' => $validatedData['name'],
+        'facultyid' => $validatedData['facultyid'],
+    ]);
+
+    return redirect()->route('departments.index')->with('success', 'Department added successfully.');
 }
+
+
+
+
+
+
+}
+
+
 
 

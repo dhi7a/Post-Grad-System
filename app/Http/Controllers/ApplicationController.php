@@ -8,6 +8,7 @@ use App\Models\Diploma;
 use App\Models\Dissertation;
 use App\Models\Documents;
 use App\Models\EmploymentExperience;
+use App\Models\Programme;
 use App\Models\ProposedFieldStudy;
 use App\Models\Referees;
 use App\Models\RelevantPublications;
@@ -21,7 +22,8 @@ use Illuminate\Support\Facades\DB;
 
 class ApplicationController extends Controller
 {
-    public function index()
+
+public function index()
     {
         // $exist1 = Application::where('userid', Auth::user()->id)->first();
         $exist2 = Diploma::where('userid', Auth::user()->id)->first();
@@ -55,7 +57,6 @@ class ApplicationController extends Controller
         // return view('apply');
     }
 
-
     public function store(Request $request)
     {
         // Validate the form data
@@ -81,7 +82,9 @@ class ApplicationController extends Controller
 
     public function create()
     {
-        return view('application');
+        // return view('application');
+        $programmes = Programme::all();
+        return view('application', compact('programmes'));
     }
 
 

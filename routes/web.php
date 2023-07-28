@@ -170,6 +170,8 @@ Route::group(['middleware' => ['auth', 'role:administrator']], function () {
     Route::post('/add-account', [AccountController::class, 'add'])->name('add-accounts');
     Route::post('/update-account', [AccountController::class, 'update'])->name('update-accounts');
     Route::post('/delete-account', [AccountController::class, 'delete'])->name('delete-accounts');
+    Route::get('/departments', [DepartmentController::class, 'departments'])->name('departments.index');
+    Route::post('/departments', [DepartmentController::class, 'store'])->name('departments.store');
 });
 
 // Routes for Department Role
@@ -184,6 +186,7 @@ Route::group(['middleware' => ['auth', 'role:administrator']], function () {
         Route::post('/department-accept/{id}', 'App\Http\Controllers\DepartmentController@accept')->name('department.accept');
         Route::post('/department.recommend/{id}', 'App\Http\Controllers\DepartmentController@recommend')->name('department.recommend');
         Route::post('/department.reject/{id}', 'App\Http\Controllers\DepartmentController@reject')->name('department.reject');
+
     });
 
 

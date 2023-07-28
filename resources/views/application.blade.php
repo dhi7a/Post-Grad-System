@@ -37,10 +37,17 @@
                                 <legend>Programme Details</legend>
                             </div><br>
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label for="programme">Programme:</label>
-                                    <input type="text" id="programme" name="programme" class="form-control" style="color:black" required>
-                                </div><br>
+                                <div class="form-group" id="programme">
+                                    <label for="programme">Programme</label>
+                                    <select name="programme" id="programme" class="form-control">
+                                        <option selected disabled>Select Programme</option>
+                                        @foreach ($programmes as $programme)
+                                            <option value="{{ $programme->id }}">{{ $programme->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <br>
                                 <div class="form-group">
                                     <label for="degree">Degree:</label><br>
                                     <div class="form-check form-check-inline">

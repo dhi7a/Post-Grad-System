@@ -175,7 +175,7 @@
                             @foreach ($documents as $document)
                                 {{-- <p><strong>Document Name:</strong> {{ $document->name }}</p>
                                 <p><strong>File:</strong> <a href="{{ $document->file_url }}">{{ $document->file_name }}</a></p> --}}
-                               
+
                                 <a href="{{ route('documents.download', ['filename' => 'documents/'.$document->id_documents]) }}">Download ID Documents</a><br>
                                 <a href="{{ route('documents.download', ['filename' => 'documents/'.$document->certificates]) }}">Download Certificates</a><br>
                                 <a href="{{ route('documents.download', ['filename' => 'documents/'.$document->dissertation_proposal]) }}">Download Dissertation Proposal</a><br>
