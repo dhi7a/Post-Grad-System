@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Accounts;
 
 use App\Http\Controllers\Controller;
+use App\Models\Department;
+use App\Models\Faculty;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\LinkRole;
@@ -15,9 +17,13 @@ class AccountController extends Controller
 {
     public function index()
     {
-        $accounts = User::all();
+        $accounts = User::with('roles')->get();
+        $departments = Department::all();
+        $faculties = Faculty::all();
         return view('accounts.accounts',[
             'accounts' => $accounts,
+            'departments' => $departments,
+            'faculties' => $faculties
         ]);
     }
 
