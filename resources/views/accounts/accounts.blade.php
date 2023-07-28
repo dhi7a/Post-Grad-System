@@ -77,76 +77,6 @@
 
                                                 </td>
                                             </tr>
-                                            <div class="modal fade" id="editModal{{ $account->id }}" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Update Account</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <form action="{{ route('update-accounts') }}" method="POST">
-                                                                @csrf
-                                                                <div class="form-group">
-                                                                    <label for="name">Name</label>
-                                                                    <input type="text" name="name" value="" class="form-control" required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="email">Email</label>
-                                                                    <input type="email" name="email" id="email" class="form-control" required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="password">Password</label>
-                                                                    <input type="password" name="password" id="password" class="form-control" required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="password_confirmation">Confirm Password</label>
-                                                                    <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="role">Role</label>
-                                                                    <select id="selectOption" name="role" id="role" class="form-control" required>
-                                                                        <!-- Add options for roles here -->
-                                                                        <option value="administrator">Admin</option>
-                                                                        {{-- <option value="user">User</option> --}}
-                                                                        <option value="faculty">Faculty</option>
-                                                                        <option value="department">Department</option>
-                                                                        <option value="dcca">Dcca</option>
-                                                                        <option value="supervisor">Supervisor</option>
-
-                                                                    </select>
-                                                                </div>
-                                                                <div class="form-group" id="hiddenDepartment" style="display: none;">
-                                                                    <label for="departmentid">Department</label>
-                                                                    <select name="departmentid" id="departmentid" class="form-control">
-                                                                        <option selected disabled>Select Department</option>
-                                                                        @foreach ($departments as $department)
-                                                                            <option value="{{ $department->id }}">{{ $department->name }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
-                                                                <div class="form-group" id="hiddenFaculty" style="display: none;">
-                                                                    <label for="facultyid">Faculty</label>
-                                                                    <select name="facultyid" id="facultyid" class="form-control">
-                                                                        <option selected disabled>Select Faculty</option>
-                                                                        @foreach ($faculties as $faculty)
-                                                                            <option value="{{ $faculty->id }}">{{ $faculty->name }}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button type="submit" class="btn btn-primary">Add User</button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-
-
-                                                    </div>
-                                                </div>
-                                            </div>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -225,27 +155,29 @@
                 </div>
             </div>
         </div>
-    </x-app-layout>
-<script>
-  document.getElementById('selectOption').addEventListener('change', function() {
-    var selectedValue = this.value;
-    var hiddenDepartment = document.getElementById('hiddenDepartment');
-    var hiddenFaculty = document.getElementById('hiddenFaculty');
+        <script>
+            document.getElementById('selectOption').addEventListener('change', function() {
+              var selectedValue = this.value;
+              var hiddenDepartment = document.getElementById('hiddenDepartment');
+              var hiddenFaculty = document.getElementById('hiddenFaculty');
 
-    if (selectedValue === 'department') {
-      hiddenDepartment.style.display = 'block';
-      hiddenFaculty.style.display = 'none';
-    }else if (selectedValue === 'faculty') {
-      hiddenFaculty.style.display = 'block';
-      hiddenDepartment.style.display = 'none';
-    } else {
-      hiddenDepartment.style.display = 'none';
-      hiddenFaculty.style.display = 'none';
-    }
-  });
-</script>
+              if (selectedValue === 'department') {
+                hiddenDepartment.style.display = 'block';
+                hiddenFaculty.style.display = 'none';
+              }else if (selectedValue === 'faculty') {
+                hiddenFaculty.style.display = 'block';
+                hiddenDepartment.style.display = 'none';
+              } else {
+                hiddenDepartment.style.display = 'none';
+                hiddenFaculty.style.display = 'none';
+              }
+            });
+          </script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-rYkO8Va8e/c2C4zF3Pp8Cd1gsVvlvMhzRHCdCZy8XTWGRXP+x3i9Sti8M2I4ikBM" crossorigin="anonymous"></script>
+
+</x-app-layout>
 
 
