@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header" style="margin-left: 20px;">{{ __('Admin Dashboard') }}</div>
+                    <div class="card-header" style="margin-left: 20px;">{{ __('Applications') }}</div>
                     @if($errors->any())
                     <div class="alert alert-danger" role="alert">
                         <ul>
@@ -20,7 +20,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <p class="welcome-message">Welcome, {{ Auth::user()->name }}!</p>
+                        {{-- <p class="welcome-message">Welcome, {{ Auth::user()->name }}!</p> --}}
                     </div>
                     <div class="card">
                         <table class="table">

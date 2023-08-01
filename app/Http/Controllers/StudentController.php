@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Auth;
 class StudentController extends Controller
 {
     //
-   
+
     public function index()
     {
         $exist1 = PersonalDetails::where('userid', Auth::user()->id)->first();
@@ -40,7 +40,7 @@ class StudentController extends Controller
         {
             return redirect()->route('finished.index');
         }
-        
+
         return view('student.index');
     }
 

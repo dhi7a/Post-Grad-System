@@ -15,8 +15,9 @@ class PersonalDetailsController extends Controller
      */
     public function index()
     {
+
         $programmes = Programme::all();
-        return view('student.application', compact('programmes'));
+        return view('student.application', compact('steps','programmes'));
     }
 
     /**

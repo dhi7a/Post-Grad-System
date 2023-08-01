@@ -36,13 +36,17 @@
             <!-- Recent Activities Tile -->
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">{{ __('Recent Activities') }}</div>
+                    <div class="card-header">{{ __('Departments') }}</div>
                     <div class="card-body">
-                        <ul>
-                            {{-- @foreach ($recentApplications as $application)
-                                <li>Submitted Application by {{ $application->applicant_name }} on {{ $application->created_at }}</li>
-                            @endforeach --}}
-                        </ul>
+                        <a href="{{route('departments.index')}}">View Departments</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">{{ __('Faculties') }}</div>
+                    <div class="card-body">
+                        <a href="{{route('faculties.index')}}">View Faculties</a>
                     </div>
                 </div>
             </div>

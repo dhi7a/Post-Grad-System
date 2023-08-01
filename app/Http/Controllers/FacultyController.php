@@ -8,6 +8,7 @@ use App\Models\Diploma;
 use App\Models\Dissertation;
 use App\Models\Documents;
 use App\Models\EmploymentExperience;
+use App\Models\Faculty;
 use App\Models\ProposedFieldStudy;
 use App\Models\Referees;
 use App\Models\RelevantPublications;
@@ -199,4 +200,27 @@ class FacultyController extends Controller
         ]);
 
     }
+
+    public function faculties()
+    {
+        $faculties = Faculty::all();
+        return view('admin.faculties', compact('faculties'));
+
+    }
+
+
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|unique:faculties|max:255',
+        ]);
+
+        Faculty::create([
+            'name' => $validatedData['name'],
+        ]);
+
+        return redirect()->route('faculties.index')->with('success', 'Faculty added successfully.');
+    }
+
 }

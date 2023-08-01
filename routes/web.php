@@ -85,7 +85,7 @@ Route::group(['middleware' => ['auth', 'role:user']], function () {
 });
 
 // Routes for Student Role
-// Route::group(['middleware' => ['auth', 'role:student', 'verified', 'verified.number']], function () {
+
 Route::group(['middleware' => ['auth', 'role:student', 'verified']], function () {
     // Route::get('/Student', 'App\Http\Controllers\StudentController@index')->middleware(['verified.number'])->name('student-dashboard');
     Route::get('/Student', 'App\Http\Controllers\StudentController@index')->name('student-dashboard');
@@ -172,6 +172,9 @@ Route::group(['middleware' => ['auth', 'role:administrator']], function () {
     Route::post('/delete-account', [AccountController::class, 'delete'])->name('delete-accounts');
     Route::get('/departments', [DepartmentController::class, 'departments'])->name('departments.index');
     Route::post('/departments', [DepartmentController::class, 'store'])->name('departments.store');
+    Route::get('/faculties', [FacultyController::class, 'faculties'])->name('faculties.index');
+    Route::post('/faculties', [FacultyController::class, 'store'])->name('faculties.store');
+
 });
 
 // Routes for Department Role

@@ -25,6 +25,19 @@ class ApplicationController extends Controller
 
 public function index()
     {
+        $steps = [
+            'Personal Details',
+            'Subjects',
+            'Diploma',
+            'University Studies',
+            'Research Experience',
+            'Relevant Publications',
+            'Employment Details',
+            'Proposed Field of Study',
+            'Dissertation or Thesis Topic',
+            'Referees',
+            'Documents',
+        ];
         // $exist1 = Application::where('userid', Auth::user()->id)->first();
         $exist2 = Diploma::where('userid', Auth::user()->id)->first();
         $exist3 = Dissertation::where('userid', Auth::user()->id)->first();
@@ -52,9 +65,8 @@ public function index()
             return redirect()->route('finished.index');
         }
 
-        return view('student.index');
+        return view('student.index', compact('steps'));
 
-        // return view('apply');
     }
 
     public function store(Request $request)
@@ -82,9 +94,24 @@ public function index()
 
     public function create()
     {
-        // return view('application');
+        $steps = [
+            'Personal Details',
+            'Subjects',
+            'Diploma',
+            'University Studies',
+            'Research Experience',
+            'Relevant Publications',
+            'Employment Details',
+            'Proposed Field of Study',
+            'Dissertation or Thesis Topic',
+            'Referees',
+            'Documents',
+        ];
+
+        $currentStep = 0;
+
         $programmes = Programme::all();
-        return view('application', compact('programmes'));
+        return view('application', compact('steps','currentStep', 'programmes'));
     }
 
 
