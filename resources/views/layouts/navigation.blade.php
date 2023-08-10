@@ -16,7 +16,7 @@
                 </a>
             </li><!-- End Profile Page Nav -->
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#">
                 <i class="bi bi-cart4"></i>
                 <span>dos</span>
@@ -28,7 +28,7 @@
                 <i class="bi bi-card-list"></i>
                 <span>tres</span>
                 </a>
-            </li><!-- End Contact Page Nav -->
+            </li><!-- End Contact Page Nav --> --}}
 
             <!-- End Register Page Nav -->
 

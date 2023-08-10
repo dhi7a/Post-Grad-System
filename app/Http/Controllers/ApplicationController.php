@@ -114,6 +114,17 @@ public function index()
         return view('application', compact('steps','currentStep', 'programmes'));
     }
 
-
+    public function showApplicationStatus($id)
+    {
+        $application = Application::find($id);
+        if ($application) {
+            $status = $application->getStatus();
+            // You can pass the status variable to the view or do anything else you want to do with it
+            return view('application_status', ['status' => $status]);
+        } else {
+            // Handle the case when the application is not found
+            return redirect()->route('applications.index')->with('error', 'Application not found.');
+        }
+    }
 
 }

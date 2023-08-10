@@ -1,5 +1,9 @@
 <div>
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
+     <!-- Progress bar -->
+     <div class="progress mb-4">
+        <div class="progress-bar" role="progressbar" style="width: 89%; " aria-valuenow="9" aria-valuemin="0" aria-valuemax="100">Step 10 of 11</div>
+    </div>
     <div class="alert alert-primary alert-dismissible fade show" role="alert" style="padding: 1.5rem; border-radius: 0.5rem;">
         <strong>Step 10 of 11:</strong> This is the tenth step of the application process. The last stretch.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

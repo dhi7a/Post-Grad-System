@@ -4,6 +4,10 @@
         {{ Session::get('success')}}
     </div>
     @endif
+    <!-- Progress bar -->
+    <div class="progress mb-4">
+        <div class="progress-bar" role="progressbar" style="width: 37%; " aria-valuenow="9" aria-valuemin="0" aria-valuemax="100">Step 4 of 11</div>
+    </div>
     <div class="alert alert-primary alert-dismissible fade show" role="alert" style="padding: 1.5rem; border-radius: 0.5rem;">
         <strong>Step 4 of 11:</strong> This is the fourth step in your application process.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -55,18 +59,6 @@
                         @enderror <br>
                     </div> <br>
 
-
-                    <!-- Date -->
-                    {{-- <div class="col-md-6">
-                        <label for="date">Date Of Award:</label>
-                        <input type="date" wire:model="date" value="{{ old('date') }}" class="form-control" required>
-                        @error('date')
-                            <span>{{ $message }}</span>
-                        @enderror <br>
-                    </div>
-                    <br> --}}
-                    <!-- Date -->
-                  <!-- Date -->
                 <div class="col-md-6">
                     <label for="date">Year Of Award:</label>
                     <select wire:model="date" class="form-control" required>

@@ -17,6 +17,8 @@ use App\Models\Subjects;
 use App\Models\UniversityStudies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class StudentController extends Controller
 {
@@ -44,6 +46,120 @@ class StudentController extends Controller
         return view('student.index');
     }
 
+    public function viewApplication($id)
+        {
+            // Retrieve the application by the given ID and belonging to the authenticated user
+            $application = Application::where('userid', Auth::id())->find($id);
+
+
+            // Check if the application exists and belongs to the authenticated user
+            if ($application) {
+                // Retrieve the associated personal details and other related data
+                $personalDetails = PersonalDetails::where('userid', $application->userid)->first();
+                $subjects = Subjects::where('userid', $application->userid)->get();
+                $diplomas = Diploma::where('userid', $application->userid)->first();
+                $dissertations = Dissertation::where('userid', $application->userid)->first();
+                $universityStudies = UniversityStudies::where('userid', $application->userid)->first();
+                $researchExperiences = ResearchExperience::where('userid', $application->userid)->first();
+                $relevantPublications = RelevantPublications::where('userid', $application->userid)->first();
+                $employmentExperiences = EmploymentExperience::where('userid', $application->userid)->first();
+                $proposedFieldStudies = ProposedFieldStudy::where('userid', $application->userid)->first();
+                $referees = Referees::where('userid', $application->userid)->get();
+                $documents = Documents::where('userid', $application->userid)->get();
+                $rejectionMessage = DB::table('rejections')->get();
+                $revisionMessages = DB::table('revisions')->get();
+
+
+                // Return a view with the application and related data
+                return view('student.viewApplication', [
+                    'application' => $application,
+                    'personalDetails' => $personalDetails,
+                    'subjects' => $subjects,
+                    'diplomas' => $diplomas,
+                    'dissertations' => $dissertations,
+                    'universityStudies' => $universityStudies,
+                    'researchExperiences' => $researchExperiences,
+                    'relevantPublications' => $relevantPublications,
+                    'employmentExperiences' => $employmentExperiences,
+                    'proposedFieldStudies' => $proposedFieldStudies,
+                    'referees' => $referees,
+                    'documents' => $documents,
+                    'rejectionMessage' => $rejectionMessage,
+                    'revisionMessages' => $revisionMessages,
+                    // ... Add other related data to the view
+                ]);
+            }
+
+            // Redirect to a page with an error message
+            return redirect()->route('dashboard')->with('error', 'Application not found.');
+        }
+
+    public function editApplication($id)
+        {
+            // Retrieve the application by the given ID and belonging to the authenticated user
+            $application = Application::where('userid', Auth::id())->find($id);
+
+            // Check if the application exists and belongs to the authenticated user
+            if ($application) {
+                // Retrieve the associated personal details and other related data
+                $personalDetails = PersonalDetails::where('userid', $application->userid)->first();
+                $subjects = Subjects::where('userid', $application->userid)->get();
+                $diplomas = Diploma::where('userid', $application->userid)->first();
+                $dissertations = Dissertation::where('userid', $application->userid)->first();
+                $universityStudies = UniversityStudies::where('userid', $application->userid)->first();
+                $researchExperiences = ResearchExperience::where('userid', $application->userid)->first();
+                $relevantPublications = RelevantPublications::where('userid', $application->userid)->first();
+                $employmentExperiences = EmploymentExperience::where('userid', $application->userid)->first();
+                $proposedFieldStudies = ProposedFieldStudy::where('userid', $application->userid)->first();
+                $referees = Referees::where('userid', $application->userid)->get();
+                $documents = Documents::where('userid', $application->userid)->get();
+                // ... Retrieve other related data
+
+                // Return a view with the application and related data for editing
+                return view('student.editApplication', [
+                    'application' => $application,
+                    'personalDetails' => $personalDetails,
+                    'subjects' => $subjects,
+                    'diplomas' => $diplomas,
+                    'dissertations' => $dissertations,
+                    'universityStudies' => $universityStudies,
+                    'researchExperiences' => $researchExperiences,
+                    'relevantPublications' => $relevantPublications,
+                    'employmentExperiences' => $employmentExperiences,
+                    'proposedFieldStudies' => $proposedFieldStudies,
+                    'referees' => $referees,
+                    'documents' => $documents,
+                    // 'rejectionMessage' => $rejectionMessage,
+                    // 'revisionMessages' => $revisionMessages,
+                    // ... Include other related data for editing
+                ]);
+            }
+
+            // Redirect to a page with an error message
+            return redirect()->route('dashboard')->with('error', 'Application not found.');
+        }
+
+    public function updateApplication(Request $request, $id)
+        {
+            // Retrieve the application by the given ID and belonging to the authenticated user
+            $application = Application::where('userid', Auth::id())->find($id);
+
+            // Check if the application exists and belongs to the authenticated user
+            if ($application) {
+                // Update application data based on the submitted form data in $request
+                // Save updated data to the database
+
+                // Redirect back to the application view or dashboard with a success message
+                return redirect()->route('viewApplication', $id)->with('success', 'Application updated successfully.');
+            }
+
+            // Redirect to a page with an error message
+            return redirect()->route('dashboard')->with('error', 'Application not found.');
+        }
+
+
+
+
     public function editProfile()
     {
         // code to edit profile for student role
@@ -51,6 +167,6 @@ class StudentController extends Controller
 
     public function downloads()
     {
-        return view('student.downloads');
+        return view('finished.index');
     }
 }

@@ -118,9 +118,15 @@ Route::group(['middleware' => ['auth', 'role:student', 'verified']], function ()
     Route::get('/subjects', [SubjectsController::class, 'index'])->name('subjects.index');
     Route::post('/subjects', [SubjectsController::class, 'store'])->name('subjects.store');
     Route::get('/finished', [ApplicationFinishedController::class, 'index'])->name('finished.index');
+    Route::get('/view-application/{id}', [StudentController::class, 'viewApplication'])->name('view-application');
+    Route::get('/application/{id}/edit', [StudentController::class, 'editApplication'])->name('editApplication');
+    Route::post('/application/{id}/update', [StudentController::class, 'updateApplication'])->name('updateApplication');
+
+
     Route::get('/documents', [DocumentsController::class, 'index'])->name('documents.index');
     Route::post('/documents', [DocumentsController::class, 'store'])->name('documents.store');
     // Route::get('/documents/download/{filename}', [DocumentsController::class, 'download'])->name('documents.download');
+    Route::get('/applications/{id}/status', 'ApplicationFinishedController@showApplicationStatus')->name('applications.status');
 
 });
 
@@ -150,9 +156,9 @@ Route::group(['middleware' => ['auth', 'role:faculty']], function () {
 Route::group(['middleware' => ['auth', 'role:administrator']], function () {
     Route::get('admin', 'App\Http\Controllers\AdminController@index')->name('admin-dashboard');
     Route::get('applications', 'App\Http\Controllers\AdminController@show')->name('applications');
-    // Route::get('/admin/application/{id}', [AdminController::class, 'show'])->name('admin.application.show');
+    Route::get('applications', 'App\Http\Controllers\AdminController@applications')->name('applications');
 
-    // Route::get('application/show/{id}', 'App\Http\Controllers\AdminController@show')->name('application.show');
+    Route::get('application/show/{id}', 'App\Http\Controllers\AdminController@show')->name('application.show');
     Route::get('/application/{id}/accept', [AdminController::class, 'accept'])->name('application.accept');
     Route::get('/application/{id}/proceed', [AdminController::class, 'proceed'])->name('application.proceed');
     Route::post('/application/{id}/proceed', [AdminController::class, 'proceed'])->name('application.proceed');

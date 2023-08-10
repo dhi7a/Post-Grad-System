@@ -9,6 +9,11 @@
     </div>
 @endif
 
+<!-- Progress bar -->
+<div class="progress mb-4">
+    <div class="progress-bar" role="progressbar" style="width: 25%; " aria-valuenow="9" aria-valuemin="0" aria-valuemax="100">Step 3 of 11</div>
+</div>
+
 <div class="alert alert-primary alert-dismissible fade show" role="alert" style="padding: 1.5rem; border-radius: 0.5rem;">
     <strong>Step 3 of 11:</strong> This is the third step of the application process. You are almost half way there.
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -68,10 +73,8 @@
                     <!-- Date -->
                     <div class="col-md-6">
                         <label for="date">Year:</label>
-                        <input type="text" name="date" id="yearInput" value="{{ old('date') }}" class="form-control year-picker" required>
-                        @error('date')
-                            <span>{{ $message }}</span>
-                        @enderror
+                            <input type="date" name="date_of_birth" id="date_of_birth" class="form-control" max="{{ date('Y-m-d', strtotime('-21 years')) }}">
+                        </div>
                     </div><br>
                 </div><br>
 

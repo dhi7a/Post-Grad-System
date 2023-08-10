@@ -183,48 +183,10 @@
                             @endforeach
                         </div>
                     </div>
-
-                    <div class="row justify-content-center mt-4">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <br>
-                                    <form method="POST" action="{{ route('application.proceed', $application->id) }}" class="d-inline-block">
-                                        @csrf
-                                        <button type="submit" class="btn btn-success">Recommend Accepting</button>
-                                    </form>
-
-                                    <form method="POST" action="{{ route('application.recommend', $application->id) }}" class="d-inline-block">
-                                        @csrf
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#recommendModal">Revise and resubmit</button>
-                                    </form>
-
-                                    <form method="POST" action="{{ route('application.reject', $application->id) }}" class="d-inline-block">
-                                        @csrf
-                                        {{-- <button type="submit" class="btn btn-danger">Reject</button> --}}
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#rejectModal">Reject</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        {{-- <h4>Application Status: {{ $status }}</h4>
-                        <!-- Display other application details if needed -->
-
-                        <div class="progress-bar-container">
-                            <div class="progress-bar">
-                                <div class="progress" style="width: {{ $progressPercentage }}%"></div>
-                            </div>
-                            {{-- <div class="progress-labels">
-                                <span class="{{ $status == 'Admin side' ? 'active' : '' }}">Admin side</span>
-                                <span class="{{ $status == 'Faculty' ? 'active' : '' }}">Faculty</span>
-                                <span class="{{ $status == 'Department' ? 'active' : '' }}">Department</span>
-                                <span class="{{ $status == 'DCCa (final stage)' ? 'active' : '' }}">DCCa (final stage)</span>
-                            </div> --}}
-                        </div>
-                    </div>
                 </div>
+                @if(Auth::id() === $application->userid) {{-- Show edit button only for the owner --}}
+                <a href="{{ route('editApplication', $application->id) }}" class="btn btn-primary">Edit Application</a>
+            @endif
             </div>
         </div>
     </div>
@@ -238,77 +200,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </x-app-layout>
-
-<!-- Recommendation Modal -->
-<!-- Recommendation Modal -->
-<div class="modal fade" id="recommendModal" tabindex="-1" role="dialog" aria-labelledby="recommendModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="recommendModalLabel">Revise and resubmit</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="{{route ('application.revise', $application->id) }}" method="post">
-                @csrf
-                <div class="modal-body">
-                    <textarea id="recommendationText" name="message" class="form-control" rows="3" placeholder="Enter your recommendation"></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    {{-- <button type="button" class="btn btn-primary" onclick="sendRecommendation()">Send</button> --}}
-                    <button type="submit" class="btn btn-primary">Send</button>
-                </div>
-              </form>
-        </div>
-    </div>
-</div>
-
-{{-- new --}}
-<div class="modal fade" id="recommendModal" tabindex="-1" role="dialog" aria-labelledby="recommendModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="recommendModalLabel">Recommendation</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <textarea id="recommendationText" class="form-control" rows="3" placeholder="Enter your recommendation"></textarea>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary" onclick="sendRecommendation()">Send</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="rejectModalLabel">Reject Application</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="{{ route('application.reject', $application->id) }}" method="post">
-                @csrf
-                <div class="modal-body">
-                    <textarea id="rejectText" name="message" class="form-control" rows="3" placeholder="Enter your rejection reason"></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Reject</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
 
 <!-- Include jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -12,7 +12,7 @@ class CreateApplicationsTable extends Migration
             $table->id();
             $table->bigInteger('userid');
             $table->bigInteger('programmeid');
-            // $table->integer('flag');
+            $table->integer('flagid');
             $table->string('status')->default('pending');
             // $table->string('flag')
             $table->timestamps();

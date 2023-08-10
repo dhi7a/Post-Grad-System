@@ -4,6 +4,10 @@
         {{ Session::get('success')}}
     </div>
     @endif
+    <!-- Progress bar -->
+    <div class="progress mb-4">
+        <div class="progress-bar" role="progressbar" style="width: 60%; " aria-valuenow="9" aria-valuemin="0" aria-valuemax="100">Step 7 of 11</div>
+    </div>
     <div class="alert alert-primary alert-dismissible fade show" role="alert" style="padding: 1.5rem; border-radius: 0.5rem;">
         {{-- <strong>Step 8 of 11:</strong> This is the eighth step of the application process. Almost there. --}}
         <strong>Step 7 of 11:</strong> This is the seventh step of the application process.

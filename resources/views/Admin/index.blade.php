@@ -40,7 +40,7 @@
                                         <td>{{ $application->id }}</td>
                                         <td>{{ $application->forenames }}</td>
                                         <td>{{ $application->surname }}</td>
-                                        <td>{{ $application->description }}</td>
+                                        <td>{{ $application->faculty }}</td>
                                         <td>
                                             <a href="{{ route('application.show',$application->id)}}">View Full Application</a>
                                         {{-- <a href="{{ route('apply', ['id' => $application->id]) }}">View Full Application</a> --}}

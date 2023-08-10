@@ -43,7 +43,7 @@ class DiplomaController extends Controller
             'programme' => 'nullable|string',
             'result' => 'nullable|string',
             'level' => 'nullable|string',
-            // 'date' => 'nullable|string',
+            'date' => 'nullable|string',
             'year' => 'nullable|string',
             'institution' => 'nullable|string',
         ]);
@@ -57,8 +57,8 @@ class DiplomaController extends Controller
         $diploma->result = $request->input('result');
         $diploma->level = $request->input('level');
         $diploma->institution = $request->input('institution');
-        // $diploma->date = $request->input('date'); // Save the complete date value in the 'date' field if needed.
-        $diploma->date =  $request->input('year'); // Store the extracted year value
+        $diploma->date = $request->input('date'); // Save the complete date value in the 'date' field if needed.
+        // $diploma->date =  $request->input('year'); // Store the extracted year value
         $diploma->save();
 
         // return redirect()->next()->with('Success', 'diploma details saved successfully.');

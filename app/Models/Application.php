@@ -37,31 +37,47 @@ class Application extends Model
 
     ];
 
-    // public function personalDetails()
-    // {
-    //     return $this->hasOne(PersonalDetails::class, 'userid', 'userid');
-    // }
+    public function getStatus()
+    {
+        switch ($this->flagid) {
+            case 1:
+                return 'Admin';
+            case 2:
+                return 'Faculty';
+            case 3:
+                return 'Department';
+            case 4:
+                return 'DCCA';
+            default:
+                return 'Unknown';
+        }
 
-    // public function subjects()
-    // {
-    //     return $this->hasMany(Subjects::class, 'userid', 'userid');
-    // }
+        // public function personalDetails()
+        // {
+        //     return $this->hasOne(PersonalDetails::class, 'userid', 'userid');
+        // }
 
-    // public function diploma()
-    // {
-    //     return $this->hasOne(Diploma::class, 'userid', 'userid');
-    // }
+        // public function subjects()
+        // {
+        //     return $this->hasMany(Subjects::class, 'userid', 'userid');
+        // }
 
-    // // Define other relationships for dissertations, university studies, etc. if they exist
-    // // ...
+        // public function diploma()
+        // {
+        //     return $this->hasOne(Diploma::class, 'userid', 'userid');
+        // }
 
-    // public function referees()
-    // {
-    //     return $this->hasMany(Referees::class, 'userid', 'userid');
-    // }
+        // // Define other relationships for dissertations, university studies, etc. if they exist
+        // // ...
 
-    // public function documents()
-    // {
-    //     return $this->hasMany(Documents::class, 'userid', 'userid');
-    // }
+        // public function referees()
+        // {
+        //     return $this->hasMany(Referees::class, 'userid', 'userid');
+        // }
+
+        // public function documents()
+        // {
+        //     return $this->hasMany(Documents::class, 'userid', 'userid');
+        // }
+    }
 }

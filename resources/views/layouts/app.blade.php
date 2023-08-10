@@ -169,7 +169,7 @@
   <!-- ======= Sidebar ======= -->
   @include('layouts.navigation')
   <!-- End Sidebar-->
-
+ 
   <main id="main" class="main">
     {{ $slot }}
   </main><!-- End #main -->
