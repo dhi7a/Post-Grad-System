@@ -150,7 +150,7 @@
                                             <div class="form-group row">
                                                 <label for="gender" class="col-sm-4">Gender:</label>
                                                 <div class="col-sm-4">
-                                                    <select id="gender" @error('gender') is-invalid @enderror" name="gender" required autocomplete="gender" class="form-control">
+                                                    <select id="gender" @error('gender') is-invalid @enderror name="gender" required autocomplete="gender" class="form-control">
                                                         <option value="">Select Gender</option>
                                                         <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
                                                         <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female</option>
